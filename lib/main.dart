@@ -19,7 +19,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: Routes.SplashScreen,
       getPages: AppRoutes.routes,
-
+      
+      //Fraon
     );
   }
 }
