@@ -5,6 +5,7 @@ import 'package:psychology/routes/routes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
+  //please help me
 }
 
 class MyApp extends StatelessWidget {
