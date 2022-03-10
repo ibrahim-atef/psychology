@@ -9,13 +9,14 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment(0.0, -1.0),
               end: Alignment(0, 1.2),
               colors: [
             Color(0xff5599ff),
             Color(0xff5e2ef3),
+                //updated
 
           ])),
       child: Center(
