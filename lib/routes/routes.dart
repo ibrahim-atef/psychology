@@ -1,7 +1,6 @@
 
 import 'package:get/get.dart';
 import 'package:psychology/controller/bindings/splash_binding.dart';
- import 'package:psychology/controller/controllers/splash_controller.dart';
 import 'package:psychology/view/screens/on_boarding_screen.dart';
 import 'package:psychology/view/screens/splash_screen.dart';
 
