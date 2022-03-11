@@ -15,14 +15,31 @@ class SplashScreen extends StatelessWidget {
               end: Alignment(0, 1.2),
               colors: [
             Color(0xff5599ff),
-            Color(0xff5e2ef3),
-                //updated
-
+            Color(0xff5e2ef4),
+            //updated
           ])),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Image.asset("assets/images/splash.png"),SizedBox(height: 140,)],
+          children: [
+            SizedBox(
+                width: MediaQuery.of(context).size.width * .75,
+                child: Image.asset(
+                  "assets/images/appicon.png",
+                  fit: BoxFit.cover,
+                )),
+            const SizedBox(
+              height: 50,
+            ),
+            const Text(
+              "Psychology",
+              style: TextStyle(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 30,
+                  color: Colors.white,decoration: TextDecoration.none),
+            ),
+
+          ],
         ),
       ),
     );
