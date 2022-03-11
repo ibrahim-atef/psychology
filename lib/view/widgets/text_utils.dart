@@ -14,7 +14,7 @@ class KTextUtils extends StatelessWidget {
           fontSize: size,
           color: color,
           fontWeight:fontWeight ,
-          decoration:textDecoration
+          decoration:textDecoration,
         ));
   }
 

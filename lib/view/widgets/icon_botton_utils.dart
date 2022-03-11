@@ -5,13 +5,13 @@ class KIconButtom extends StatelessWidget {
   IconData icon;
   Color color;
   double size;
-  Function function;
+  Function() function;
 
 
   @override
   Widget build(BuildContext context) {
     return  IconButton(
-        onPressed: ()=>function,
+        onPressed:  function,
         icon: Icon(
           icon,
           color: color,

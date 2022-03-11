@@ -2,8 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AppIconAndName extends StatelessWidget {
-  const AppIconAndName({Key? key}) : super(key: key);
-
+ Color color;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -30,15 +29,19 @@ class AppIconAndName extends StatelessWidget {
           children: [
             Text(
               "psychology",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800,color: color),
             ),
             Text(
               "Keep Talking..",
-              style: TextStyle(fontSize: 14),
+              style: TextStyle(fontSize: 14,color: color),
             ),
           ],
         )
       ],
     );
   }
+
+ AppIconAndName({
+    required this.color,
+  });
 }

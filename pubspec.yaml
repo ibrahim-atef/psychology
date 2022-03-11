@@ -37,6 +37,9 @@ dependencies:
   get:
   lottie: ^1.2.2
   smooth_page_indicator: ^1.0.0+2
+  google_sign_in:
+  firebase_auth:
+  firebase_core:
 
 dev_dependencies:
   flutter_test:

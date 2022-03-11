@@ -6,7 +6,6 @@ import 'package:psychology/controller/controllers/splash_controller.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class PageViewImages extends StatelessWidget {
-
   final controller = Get.find<SplashController>();
 
   @override
@@ -15,60 +14,57 @@ class PageViewImages extends StatelessWidget {
     var width = MediaQuery.of(context).size.width;
     return GetBuilder<SplashController>(
       builder: (_) {
-        return Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                child: Container(
-                  child: PageView.builder(
-                    onPageChanged: (val) {
-                      controller.checkController();
-                      val==2?controller.isLast.value = true:false;
-
-
-                    },
-                    scrollDirection: Axis.horizontal,
-                    controller: controller.pageeController.value,
-                    itemCount: controller.lottieViewList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Column(
-                        children: [
-                          Container(
-                              width: width * .7,
-                              height: height * .242,
-                              child: Lottie.asset(
-                                controller.lottieViewList[index],
-                                fit: BoxFit.cover,
-                              )),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 20, vertical: 0),
-                            child: Text(controller.pageViewSubTitle[index],
-                                style: TextStyle(
-                                    fontSize: 17, fontWeight: FontWeight.w700),
-                                textAlign: TextAlign.justify,
-                                maxLines: 2),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Expanded(flex: 9,
+              child: Container(
+                child: PageView.builder(
+                  onPageChanged: (val) {
+                    controller.checkController();
+                    val == 2 ? controller.isLast.value = true : false;
+                  },
+                  scrollDirection: Axis.horizontal,
+                  controller: controller.pageeController.value,
+                  itemCount: controller.lottieViewList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [
+                        Container(
+                            width: width * .7,
+                            height: height * .242,
+                            child: Lottie.asset(
+                              controller.lottieViewList[index],
+                              fit: BoxFit.cover,
+                            )),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 0),
+                          child: Text(controller.pageViewSubTitle[index],
+                              style: TextStyle(
+                                  fontSize: 17, fontWeight: FontWeight.w700),
+                              textAlign: TextAlign.center,
+                              maxLines: 2),
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
-              SmoothPageIndicator(
-                  controller: controller.pageeController.value,
-                  // pageeController.value
-                  count: controller.lottieViewList.length,
-                  effect: JumpingDotEffect(
-                      dotWidth: 9, dotHeight: 9, verticalOffset: 0.0),
-                  // your preferred effect
-                  onDotClicked: (index) {},),
-            ],
-          ),
+            ),
+            SmoothPageIndicator(
+              controller: controller.pageeController.value,
+              // pageeController.value
+              count: controller.lottieViewList.length,
+              effect: JumpingDotEffect(
+                  dotWidth: 9, dotHeight: 9, verticalOffset: 0.0),
+              // your preferred effect
+              onDotClicked: (index) {},
+            ),
+          ],
         );
       },
     );
