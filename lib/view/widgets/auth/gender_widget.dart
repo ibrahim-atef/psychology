@@ -57,10 +57,10 @@ class GenderWidget extends StatelessWidget {
                 ),
               ),
               Row(
-                children: [
+                children: const [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: const Text(
+                    padding: EdgeInsets.all(3.0),
+                    child: Text(
                       "Gender",
                       style: TextStyle(
                           fontWeight: FontWeight.w700, color: Colors.white),

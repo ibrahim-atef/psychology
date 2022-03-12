@@ -17,8 +17,9 @@ class PageViewImages extends StatelessWidget {
         return Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            Expanded(flex: 9,
-              child: Container(
+            Expanded(
+              flex: 9,
+              child: Container(height: height*.45,
                 child: PageView.builder(
                   onPageChanged: (val) {
                     controller.checkController();
@@ -32,22 +33,25 @@ class PageViewImages extends StatelessWidget {
                       children: [
                         Container(
                             width: width * .7,
-                            height: height * .242,
+                            height: height * .27,
                             child: Lottie.asset(
                               controller.lottieViewList[index],
                               fit: BoxFit.cover,
                             )),
                         SizedBox(
-                          height: 10,
+                          height: 20,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20, vertical: 0),
-                          child: Text(controller.pageViewSubTitle[index],
-                              style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.w700),
-                              textAlign: TextAlign.center,
-                              maxLines: 2),
+                        Container(
+                          height:height*.065,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 0),
+                            child: Text(controller.pageViewSubTitle[index],
+                                style: TextStyle(
+                                    fontSize: 17, fontWeight: FontWeight.w700),
+                                textAlign: TextAlign.center,
+                                maxLines: 2),
+                          ),
                         ),
                       ],
                     );
@@ -55,14 +59,17 @@ class PageViewImages extends StatelessWidget {
                 ),
               ),
             ),
-            SmoothPageIndicator(
-              controller: controller.pageeController.value,
-              // pageeController.value
-              count: controller.lottieViewList.length,
-              effect: JumpingDotEffect(
-                  dotWidth: 9, dotHeight: 9, verticalOffset: 0.0),
-              // your preferred effect
-              onDotClicked: (index) {},
+            Expanded(
+              flex: 1,
+              child: SmoothPageIndicator(
+                controller: controller.pageeController.value,
+                // pageeController.value
+                count: controller.lottieViewList.length,
+                effect: JumpingDotEffect(
+                    dotWidth: 9, dotHeight: 9, verticalOffset: 0.0),
+                // your preferred effect
+                onDotClicked: (index) {},
+              ),
             ),
           ],
         );

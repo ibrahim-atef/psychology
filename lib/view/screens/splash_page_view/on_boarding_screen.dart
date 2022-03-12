@@ -24,7 +24,7 @@ class OnBoardingScreen extends StatelessWidget {
             SizedBox(
               height: height * .12,
             ),
-            SizedBox(height: height * .33, child: PageViewImages()),
+            SizedBox(height: height * .43, child: PageViewImages()),
             Spacer(),
             GetBuilder<SplashController>(
               builder: (_) {

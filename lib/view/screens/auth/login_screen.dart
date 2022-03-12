@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
- import 'package:psychology/utils/themes.dart';
+import 'package:psychology/utils/themes.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
- import 'package:psychology/view/widgets/on_boarding_widgets/app_icon_and_name.dart';
+import 'package:psychology/view/widgets/on_boarding_widgets/app_icon_and_name.dart';
 
-import '../../routes/routes.dart';
-import '../widgets/auth/auth_text_from_field.dart';
-import '../widgets/text_utils.dart';
+import '../../../routes/routes.dart';
+import '../../widgets/auth/auth_text_from_field.dart';
+import '../../widgets/text_utils.dart';
 
 class LoginScreen extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();
@@ -19,47 +19,20 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      body: Stack(
-        children: [
-          //اللون الاول
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              // gradient: LinearGradient(
-              //     begin: Alignment(0.0, -1.0),
-              //     end: Alignment(0, 1.2),
-              //     colors: [
-              //       Color(0xff5599ff),
-              //       Color(0xff5e2ef3),
-              //
-              //     ]),
-              color: Color(0xffaf8bff),
-              borderRadius:
-                  BorderRadius.only(bottomLeft: Radius.circular(1200)),
-            ),
-          ),
-          //اللون التاني والتالت
-          Container(
-            height: MediaQuery.of(context).size.height / 1.2,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment(0.0, -1.0),
-                  end: Alignment(0, 1.2),
-                  colors: [
-                    mainColor,   mainColor2,
-
-                  ]),
-              borderRadius:
-                  BorderRadius.only(bottomLeft: Radius.circular(1200)),
-            ),
-          ),
-
-          //باقي الصفحة
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+    return Container(
+      width: width,
+      height: height,
+      decoration: const BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(
+                "assets/images/background.jpg",
+              ),
+              fit: BoxFit.cover)),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -102,7 +75,8 @@ class LoginScreen extends StatelessWidget {
                 // نص ال login
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       KTextUtils(
                         text: "Login",
@@ -131,8 +105,8 @@ class LoginScreen extends StatelessWidget {
                         hintText: 'Password',
                         textInputType: TextInputType.text,
                       ),
-
-                      Row(mainAxisAlignment: MainAxisAlignment.end,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           TextButton(
                               onPressed: () {},
@@ -150,9 +124,10 @@ class LoginScreen extends StatelessWidget {
                 ),
 
                 SizedBox(
-                  height: height*.1,
+                  height: height * .1,
                 ),
-                Row(mainAxisAlignment: MainAxisAlignment.center,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     AuthButtom(
                         onPressed: () {},
@@ -164,7 +139,8 @@ class LoginScreen extends StatelessWidget {
                   height: 30,
                 ),
                 // نص sign up
-                Row(mainAxisAlignment: MainAxisAlignment.center,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     KTextUtils(
                       text: "Don’t have an account?",
@@ -189,7 +165,7 @@ class LoginScreen extends StatelessWidget {
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }

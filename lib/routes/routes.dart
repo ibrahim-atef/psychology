@@ -1,11 +1,10 @@
 import 'package:get/get.dart';
 import 'package:psychology/controller/bindings/splash_binding.dart';
-import 'package:psychology/controller/controllers/splash_controller.dart';
-import 'package:psychology/view/screens/doctor_register_screen.dart';
-import 'package:psychology/view/screens/login_screen.dart';
-import 'package:psychology/view/screens/on_boarding_screen.dart';
-import 'package:psychology/view/screens/patient_register_screen.dart';
-import 'package:psychology/view/screens/splash_screen.dart';
+ import 'package:psychology/view/screens/auth/doctor_register_screen.dart';
+import 'package:psychology/view/screens/auth/login_screen.dart';
+import 'package:psychology/view/screens/splash_page_view/on_boarding_screen.dart';
+import 'package:psychology/view/screens/auth/patient_register_screen.dart';
+import 'package:psychology/view/screens/splash_page_view/splash_screen.dart';
 
 class AppRoutes {
   static final routes = [
@@ -24,7 +23,8 @@ class AppRoutes {
     GetPage(
       name: Routes.patientRegisterScreen,
       page: () => PatientRegisterScreen(),
-    ), GetPage(
+    ),
+    GetPage(
       name: Routes.doctorRegisterScreen,
       page: () => DoctorRegisterScreen(),
     ),
