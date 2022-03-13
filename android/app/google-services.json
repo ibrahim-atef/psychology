@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "94117002492-krnfgp64uaqejb5ivfmsn2bhd19gmejo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.psychology",
+            "certificate_hash": "59fa16da36eae8ae7ae6ff803911e2f91e893c25"
+          }
+        },
+        {
           "client_id": "94117002492-o1l4ojmj4l7hkgt87cqsdemvlr0kneso.apps.googleusercontent.com",
           "client_type": 3
         }
