@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:psychology/utils/themes.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
 import 'package:psychology/view/widgets/on_boarding_widgets/app_icon_and_name.dart';
 
@@ -36,7 +34,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 50),
+             const   SizedBox(height: 50),  // afroto
                 // الايكون back
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
