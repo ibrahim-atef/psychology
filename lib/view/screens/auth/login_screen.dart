@@ -3,13 +3,16 @@ import 'package:get/get.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
 import 'package:psychology/view/widgets/on_boarding_widgets/app_icon_and_name.dart';
 
+import '../../../controller/controllers/auth_controller.dart';
 import '../../../routes/routes.dart';
 import '../../widgets/auth/auth_text_from_field.dart';
 import '../../widgets/text_utils.dart';
 
 class LoginScreen extends StatelessWidget {
+  final formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final controller = Get.find<AuthController>();
 
   LoginScreen({Key? key}) : super(key: key);
 
@@ -34,7 +37,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-             const   SizedBox(height: 50),  // afroto
+                const SizedBox(height: 50), // afroto
                 // الايكون back
                 // Row(
                 //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,29 +82,37 @@ class LoginScreen extends StatelessWidget {
                       KTextUtils(
                         text: "Login",
                         size: 30,
-                        color: Color(0xffffffff),
+                        color: const Color(0xffffffff),
                         fontWeight: FontWeight.bold,
                         textDecoration: TextDecoration.none,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
-                      AuthTextFromField(
-                        controller: emailController,
-                        obscureText: false,
-                        validator: () {},
-                        hintText: 'Email',
-                        textInputType: TextInputType.text,
+                      GetBuilder<AuthController>(
+                        builder: (_) {
+                          return AuthTextFromField(
+                            controller: emailController,
+                            obscureText: false,
+                            validator: () {},
+                            hintText: 'Email',
+                            textInputType: TextInputType.text,
+                          );
+                        },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
-                      AuthTextFromField(
-                        controller: passwordController,
-                        obscureText: false,
-                        validator: () {},
-                        hintText: 'Password',
-                        textInputType: TextInputType.text,
+                      GetBuilder<AuthController>(
+                        builder: (_) {
+                          return AuthTextFromField(
+                            controller: passwordController,
+                            obscureText: false,
+                            validator: () {},
+                            hintText: 'Password',
+                            textInputType: TextInputType.text,
+                          );
+                        },
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
@@ -127,13 +138,22 @@ class LoginScreen extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    AuthButtom(
-                        onPressed: () {},
-                        text: "Login",
-                        width: MediaQuery.of(context).size.width / 1.3),
+                    GetBuilder<AuthController>(builder: (_) {
+                      return AuthButton(
+                          onPressed: () {
+                             String email = emailController.text.trim();
+                            String password = passwordController.text;
+
+
+                            controller.Register(
+                                email: email, password: password);
+                          },
+                          text: "Login",
+                          width: MediaQuery.of(context).size.width / 1.3);
+                    }),
                   ],
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 // نص sign up

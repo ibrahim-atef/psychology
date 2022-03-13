@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:psychology/controller/bindings/auth_binding.dart';
 import 'package:psychology/controller/bindings/splash_binding.dart';
  import 'package:psychology/view/screens/auth/doctor_register_screen.dart';
 import 'package:psychology/view/screens/auth/login_screen.dart';
@@ -19,6 +20,8 @@ class AppRoutes {
     GetPage(
       name: Routes.loginScreen,
       page: () => LoginScreen(),
+      //testing auth
+      binding: AuthBinding(),
     ),
     GetPage(
       name: Routes.patientRegisterScreen,

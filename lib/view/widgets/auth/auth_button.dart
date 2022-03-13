@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class AuthButtom extends StatelessWidget {
-  final Function onPressed;
+class AuthButton extends StatelessWidget {
+  final Function() onPressed;
   final String text;
   final double width;
 
-  const AuthButtom(
+  const AuthButton(
       {Key? key,
       required this.onPressed,
       required this.text,
@@ -17,7 +17,7 @@ class AuthButtom extends StatelessWidget {
     var height = MediaQuery.of(context).size.height;
 
     return GestureDetector(
-      onTap: onPressed(),
+      onTap: onPressed,
       child: Container(
         height: height * .06,
         width: width,

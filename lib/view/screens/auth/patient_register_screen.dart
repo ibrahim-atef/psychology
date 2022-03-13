@@ -147,7 +147,7 @@ class PatientRegisterScreen extends StatelessWidget {
                     SizedBox(
                       height: 25,
                     ),
-                    AuthButtom(
+                    AuthButton(
                         onPressed: () {}, text: "Sign Up", width: width * .5),
 
                     SizedBox(
