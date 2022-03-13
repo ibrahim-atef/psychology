@@ -146,6 +146,8 @@ class AuthController extends GetxController {
       print("1111111111111111111111111111111111111111111$error");
     }
   }
+  //////////////////////////////////////////////////////////////////////reset  ///////////////////////////
+
   void resetPassWord(String email) async {
     try {
       await auth.sendPasswordResetEmail(email: email);
