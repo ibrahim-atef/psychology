@@ -137,13 +137,10 @@ class ForgotPassword extends StatelessWidget {
                     GetBuilder<AuthController>(builder: (_) {
                       return AuthButton(
                           onPressed: () {
-                            // if (formKey.currentState!.validate()) {
-                            //   String email = emailController.text.trim();
-                            //   String password = passwordController.text;
-                            //
-                            //   controller.Register(
-                            //       email: email, password: password);
-                            // }
+                            if (formKey.currentState!.validate()) {
+                              controller.resetPassWord(
+                                  emailController.text.trim());
+                            }
                           },
                           text: "Reset",
                           width: MediaQuery.of(context).size.width / 1.3);

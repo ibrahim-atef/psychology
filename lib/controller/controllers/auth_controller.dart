@@ -146,4 +146,44 @@ class AuthController extends GetxController {
       print("1111111111111111111111111111111111111111111$error");
     }
   }
+  void resetPassWord(String email) async {
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      update();
+      Get.back();
+      Get.defaultDialog(
+          title: "Reset Password",
+          middleText: "check your gmail messages",
+          textCancel: "Ok",
+          buttonColor: mainColor,
+          cancelTextColor: mainColor2,
+          backgroundColor: white);
+    } on FirebaseAuthException catch (error) {
+      String title = error.code.toString().replaceAll(RegExp('-'), ' ');
+      String message = "";
+      if (error.code == 'user-not-found') {
+        message =
+        "Account does not exists for that $email.. Create your account by signing up..";
+      } else {
+        message = error.message.toString();
+      }
+      Get.defaultDialog(
+          title: title,
+          middleText: message,
+          textCancel: "Ok",
+          buttonColor: mainColor,
+          cancelTextColor: mainColor2,
+          backgroundColor:white);
+    } catch (error) {
+      Get.defaultDialog(
+          title: "Error",
+          middleText: "$error",
+          textCancel: "Ok",
+          buttonColor: mainColor,
+          cancelTextColor: mainColor2,
+          backgroundColor: white);
+      print(error);
+    }
+  }
+
 }
