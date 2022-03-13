@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:psychology/utils/constants.dart';
 
 class AuthTextFromField extends StatelessWidget {
   final TextEditingController controller;
@@ -12,7 +13,8 @@ class AuthTextFromField extends StatelessWidget {
     required this.controller,
     required this.obscureText,
     required this.validator,
-    required this.hintText, required this.textInputType,
+    required this.hintText,
+    required this.textInputType,
   }) : super(key: key);
 
   @override
@@ -26,38 +28,42 @@ class AuthTextFromField extends StatelessWidget {
       keyboardType: textInputType,
       validator: (value) => validator(value),
       decoration: InputDecoration(
-        hintText: hintText,
-        hintStyle: TextStyle(
-          color: Colors.white,
-          fontSize: 16,
-          fontWeight: FontWeight.w400,
-        ),
-        filled: true,
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.white,
+          label: Text(
+            hintText,
+            style: TextStyle(color: white),
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.white,
+          hintText: hintText,
+          hintStyle: TextStyle(
+            color: hentText,
+            fontSize: 16,
+            fontWeight: FontWeight.w400,
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        errorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.white,
+          filled: true,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.white,
+            ),
+            borderRadius: BorderRadius.circular(10),
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        focusedErrorBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Colors.white,
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: hentText,
+            ),
+            borderRadius: BorderRadius.circular(10),
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
+          errorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: Colors.red,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderSide: BorderSide(
+              color: hentText,
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          errorStyle: TextStyle(fontWeight: FontWeight.bold)),
     );
   }
 }

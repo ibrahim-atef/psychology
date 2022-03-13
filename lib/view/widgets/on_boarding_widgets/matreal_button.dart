@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/splash_controller.dart';
-import 'package:psychology/utils/themes.dart';
+import 'package:psychology/utils/constants.dart';
 
 class MatrealBtn extends StatelessWidget {
   final String text;

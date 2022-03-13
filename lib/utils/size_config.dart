@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-class SizeConfig  extends GetxController{
+ class SizeConfig   {
   static double? screenHeight;
   static double? screenWidth;
   static double? defaultSize;
   static Orientation? orientation;
+
 
 
   void init(BuildContext context) {

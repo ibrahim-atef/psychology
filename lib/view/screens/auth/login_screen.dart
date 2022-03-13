@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psychology/utils/my_string.dart';
+import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
+import 'package:psychology/view/widgets/auth/google_auth_widget.dart';
 import 'package:psychology/view/widgets/on_boarding_widgets/app_icon_and_name.dart';
+import 'package:psychology/view/widgets/height_size_box.dart';
 
 import '../../../controller/controllers/auth_controller.dart';
 import '../../../routes/routes.dart';
@@ -76,59 +80,76 @@ class LoginScreen extends StatelessWidget {
                 // نص ال login
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      KTextUtils(
-                        text: "Login",
-                        size: 30,
-                        color: const Color(0xffffffff),
-                        fontWeight: FontWeight.bold,
-                        textDecoration: TextDecoration.none,
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      GetBuilder<AuthController>(
-                        builder: (_) {
-                          return AuthTextFromField(
-                            controller: emailController,
-                            obscureText: false,
-                            validator: () {},
-                            hintText: 'Email',
-                            textInputType: TextInputType.text,
-                          );
-                        },
-                      ),
-                      const SizedBox(
-                        height: 15,
-                      ),
-                      GetBuilder<AuthController>(
-                        builder: (_) {
-                          return AuthTextFromField(
-                            controller: passwordController,
-                            obscureText: false,
-                            validator: () {},
-                            hintText: 'Password',
-                            textInputType: TextInputType.text,
-                          );
-                        },
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          TextButton(
-                              onPressed: () {},
-                              child: KTextUtils(
-                                text: "Forget Password",
-                                size: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400,
-                                textDecoration: TextDecoration.underline,
-                              )),
-                        ],
-                      ),
-                    ],
+                  child: Form(
+                    key: formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        KTextUtils(
+                          text: "Login",
+                          size: 30,
+                          color: const Color(0xffffffff),
+                          fontWeight: FontWeight.bold,
+                          textDecoration: TextDecoration.none,
+                        ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        GetBuilder<AuthController>(
+                          builder: (_) {
+                            return AuthTextFromField(
+                              controller: emailController,
+                              obscureText: false,
+                              validator: (value) {
+                                if (!RegExp(validationEmail).hasMatch(value)) {
+                                  return "Invalid Email";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              hintText: 'Email',
+                              textInputType: TextInputType.text,
+                            );
+                          },
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        GetBuilder<AuthController>(
+                          builder: (_) {
+                            return AuthTextFromField(
+                              controller: passwordController,
+                              obscureText: false,
+                              validator: (value) {
+                                if (value.toString().length < 6) {
+                                  return "Password is too short";
+                                } else {
+                                  return null;
+                                }
+                              },
+                              hintText: 'Password',
+                              textInputType: TextInputType.visiblePassword,
+                            );
+                          },
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            TextButton(
+                                onPressed: () {
+                                  Get.toNamed(Routes.forgotPassword);
+                                },
+                                child: KTextUtils(
+                                  text: "Forget Password",
+                                  size: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w400,
+                                  textDecoration: TextDecoration.underline,
+                                )),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
 
@@ -141,12 +162,12 @@ class LoginScreen extends StatelessWidget {
                     GetBuilder<AuthController>(builder: (_) {
                       return AuthButton(
                           onPressed: () {
-                             String email = emailController.text.trim();
-                            String password = passwordController.text;
-
-
-                            controller.Register(
-                                email: email, password: password);
+                            if (formKey.currentState!.validate()) {
+                              String email = emailController.text.trim();
+                              String password = passwordController.text;
+                              controller.loginUsingFirebase(
+                                  email: email, password: password);
+                            }
                           },
                           text: "Login",
                           width: MediaQuery.of(context).size.width / 1.3);
@@ -179,7 +200,43 @@ class LoginScreen extends StatelessWidget {
                           textDecoration: TextDecoration.underline,
                         ))
                   ],
-                )
+                ),
+                HeightSizeBox(SizeConfig.defaultSize! * .3),
+                Row(
+                  children: const [
+                    Expanded(
+                        child: Divider(
+                      color: Colors.black54,
+                      endIndent: 5,
+                      thickness: .5,
+                    )),
+                    Text(
+                      "Or continue with",
+                      style: TextStyle(
+                          color: Colors.black54,
+                          fontSize: 14.5,
+                          fontWeight: FontWeight.w700),
+                    ),
+                    Expanded(
+                        child: Divider(
+                      color: Colors.black54,
+                      indent: 5,
+                      thickness: .5,
+                    )),
+                  ],
+                ),
+                SizedBox(
+                  height: height * .04,
+                ),
+                GetBuilder<AuthController>(
+                  builder: (_) {
+                    return GoogleAuthImage(
+                      onPressed: () {
+                        controller.googleSignupApp();
+                      },
+                    );
+                  },
+                ),
               ],
             ),
           ),

@@ -28,6 +28,7 @@ class SplashController extends GetxController {
     }
    }
 
+
   List<String> lottieViewList = [
     "assets/animations/0.json",
     "assets/animations/1.json",
