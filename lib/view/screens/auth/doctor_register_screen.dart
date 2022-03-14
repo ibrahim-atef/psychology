@@ -6,11 +6,11 @@ import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
 import 'package:psychology/view/widgets/auth/auth_text_from_field.dart';
 import 'package:psychology/view/widgets/auth/upload_file_doctor.dart';
+import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 import '../../../controller/controllers/auth_controller.dart';
 import '../../widgets/auth/gender_widget.dart';
-import '../../widgets/icon_botton_utils.dart';
-import '../../widgets/text_utils.dart';
+import '../../widgets/utils_widgets/icon_botton_utils.dart';
 
 class DoctorRegisterScreen extends StatelessWidget {
   final TextEditingController nameController = TextEditingController();

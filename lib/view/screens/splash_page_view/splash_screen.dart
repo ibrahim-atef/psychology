@@ -1,6 +1,8 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/splash_controller.dart';
+import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -34,14 +36,24 @@ class SplashScreen extends StatelessWidget {
             const SizedBox(
               height: 50,
             ),
-            const Text(
-              "Psychology",
-              style: TextStyle(
-                  fontWeight: FontWeight.w900,
-                  fontSize: 30,
-                  color: Colors.white,decoration: TextDecoration.none),
-            ),
-
+            // const Text(
+            //   "Psychology",
+            //   style: TextStyle(
+            //       fontWeight: FontWeight.w900,
+            //       fontSize: 30,
+            //       color: Colors.white,
+            //       decoration: TextDecoration.none),
+            // ),
+            AnimatedTextKit(
+              animatedTexts: [
+                WavyAnimatedText('Psychology',
+                    textStyle: const TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 30,
+                        color: white,
+                        decoration: TextDecoration.none)),
+              ],
+            )
           ],
         ),
       ),

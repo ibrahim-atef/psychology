@@ -41,6 +41,7 @@ dependencies:
   firebase_auth:
   firebase_core:
   get_storage: ^2.0.3
+  animated_text_kit:
 
 dev_dependencies:
   flutter_test:

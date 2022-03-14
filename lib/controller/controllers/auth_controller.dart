@@ -28,7 +28,7 @@ class AuthController extends GetxController {
       });
 
       update();
-      Get.offNamed(Routes.mainScreen);
+      Get.offNamed(Routes.patientMainScreen);
     } on FirebaseAuthException catch (error) {
       String title = error.code.toString().replaceAll(RegExp('-'), ' ');
       String message = "";
@@ -81,7 +81,7 @@ class AuthController extends GetxController {
       // authBox.write("auth", isSignedIn);
 
       update();
-      Get.offNamed(Routes.mainScreen);
+      Get.offNamed(Routes.patientMainScreen);
     } on FirebaseAuthException catch (error) {
       String title = error.code.toString().replaceAll(RegExp('-'), ' ');
       String message = "";
@@ -134,7 +134,7 @@ class AuthController extends GetxController {
       isSignedIn = true;
       authBox.write("auth", isSignedIn);
       update();
-      Get.offNamed(Routes.mainScreen);
+      Get.offNamed(Routes.patientMainScreen);
     } catch (error) {
       Get.defaultDialog(
           title: "error",

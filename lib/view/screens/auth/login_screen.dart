@@ -5,12 +5,12 @@ import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
 import 'package:psychology/view/widgets/auth/google_auth_widget.dart';
 import 'package:psychology/view/widgets/on_boarding_widgets/app_icon_and_name.dart';
-import 'package:psychology/view/widgets/height_size_box.dart';
+import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
 
 import '../../../controller/controllers/auth_controller.dart';
 import '../../../routes/routes.dart';
 import '../../widgets/auth/auth_text_from_field.dart';
-import '../../widgets/text_utils.dart';
+import '../../widgets/utils_widgets/text_utils.dart';
 
 class LoginScreen extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
@@ -27,7 +27,7 @@ class LoginScreen extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      decoration: const BoxDecoration(
+      decoration: const BoxDecoration(color: Colors.transparent,
           image: DecorationImage(
               image: AssetImage(
                 "assets/images/background.jpg",

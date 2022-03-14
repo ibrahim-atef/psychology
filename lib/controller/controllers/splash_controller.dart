@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:psychology/routes/routes.dart';
 
@@ -6,13 +7,15 @@ class SplashController extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
-    Future.delayed(Duration(seconds: 3), () {
+    SystemChannels.textInput.invokeMethod('TextInput.hide');
+
+    Future.delayed(const Duration(milliseconds: 3750), () {
       Get.toNamed(Routes.OnBoardingScreen);
     });
     super.onInit();
   }
 
-/////onBoarding logic
+////////////////////////////////////onBoarding logic////////////////////////////////////onBoarding logic
   RxBool isLast = false.obs;
 
   PageController pageController = PageController();
@@ -26,8 +29,7 @@ class SplashController extends GetxController {
       isLast = true.obs;
       update();
     }
-   }
-
+  }
 
   List<String> lottieViewList = [
     "assets/animations/0.json",

@@ -3,13 +3,12 @@ import 'package:get/get.dart';
 import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
-import 'package:psychology/view/widgets/icon_botton_utils.dart';
+import 'package:psychology/view/widgets/utils_widgets/icon_botton_utils.dart';
 import 'package:psychology/view/widgets/on_boarding_widgets/app_icon_and_name.dart';
+import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 import '../../../controller/controllers/auth_controller.dart';
-import '../../../routes/routes.dart';
-import '../../widgets/auth/auth_text_from_field.dart';
-import '../../widgets/text_utils.dart';
+ import '../../widgets/auth/auth_text_from_field.dart';
 
 class ForgotPassword extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
