@@ -134,12 +134,12 @@ class PatientRegisterScreen extends StatelessWidget {
                         controller: phoneController,
                         obscureText: false,
                         validator: (value) {
-                          // if (value.length == 0) {
-                          //   return 'Please enter mobile number';
-                          // } else if (!RegExp(validationPhone).hasMatch(value)) {
-                          //   return 'Please enter valid mobile number';
-                          // }
-                          // return null;
+                          if (value.length == 0) {
+                            return 'Please enter mobile number';
+                          } else if (!RegExp(validationPhone).hasMatch(value)) {
+                            return 'Please enter valid mobile number';
+                          }
+                          return null;
                         },
                         hintText: 'Phone number',
                         textInputType: TextInputType.phone,
@@ -206,10 +206,11 @@ class PatientRegisterScreen extends StatelessWidget {
 
                                   String email = emailController.text.trim();
                                   String password = passwordController.text;
-                                  controller.signUpUsingFirebase(
+                                  String phoneNumber = phoneController.text;
+                                  controller.patientSignUpUsingFirebase(
                                       name: name,
                                       email: email,
-                                      password: password,
+                                      password: password, phoneNumber: phoneNumber,
                                       );
                                 }
                               },

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:psychology/controller/controllers/auth_controller.dart';
 
 class GenderWidget extends StatelessWidget {
-  const GenderWidget({Key? key}) : super(key: key);
+  GenderWidget({Key? key}) : super(key: key);
+  final controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,54 +24,60 @@ class GenderWidget extends StatelessWidget {
               width: 1.3,
             ),
           ),
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  iconSize: 25,
-                  icon: Icon(
-                    Icons.arrow_drop_down,
-                    color: Colors.white,
-                  ),
-                  items: const [
-                    DropdownMenuItem(
-                      child: Text(
-                        "male",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
-                        ),
+          child: GetBuilder<AuthController>(
+            builder: (_) {
+              return Stack(
+                alignment: Alignment.center,
+                children: [
+                  DropdownButtonHideUnderline(
+                    child: DropdownButton<String>(
+                      iconSize: 25,
+                      icon: Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.white,
                       ),
-                      value: "male",
-                    ),
-                    DropdownMenuItem(
-                      child: Text(
-                        "female",
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 16,
+                      items: const [
+                        DropdownMenuItem(
+                          child: Text(
+                            "male",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          value: "male",
                         ),
-                      ),
-                      value: "female",
-                    ),
-                  ],
-                  onChanged: (value) {},
-                ),
-              ),
-              Row(
-                children: const [
-                  Padding(
-                    padding: EdgeInsets.all(3.0),
-                    child: Text(
-                      "Gender",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w700, color: Colors.white),
+                        DropdownMenuItem(
+                          child: Text(
+                            "female",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          value: "female",
+                        ),
+                      ],
+                      onChanged: (value) {
+                        controller.patientGender.value = value!;
+                      },
                     ),
                   ),
+                  Row(
+                    children: const [
+                      Padding(
+                        padding: EdgeInsets.all(3.0),
+                        child: Text(
+                          "Gender",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
-              )
-            ],
+              );
+            },
           ),
         ),
       ],

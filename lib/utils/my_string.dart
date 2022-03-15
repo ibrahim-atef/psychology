@@ -4,18 +4,5 @@ String validationEmail =
 String validationName = r'^[a-z A-Z]+$';
 String validationPhone =  r'(^(?:[+0]9)?[0-9]{10,12}$)' ;
 
-String baseUrl = 'https://fakestoreapi.com';
-
-//fakestoreapi.com/products/categories
-//http://fakestoreapi.com/products/category/electronics
-
-String arabic = 'Arabic 🇸🇦';
-String english = 'English 🇬🇧';
-String france = 'French 🇫🇷';
-
-String ara = 'ar';
-String ene = 'en';
-String frf = 'fr';
-
-
-//laxnoicowincow
+ const String patientsCollectionKey="patients";
+ const String doctorsCollectionKey="doctors";

@@ -133,7 +133,14 @@ class DoctorRegisterScreen extends StatelessWidget {
                       AuthTextFromField(
                         controller: phoneController,
                         obscureText: false,
-                        validator: (value) {},
+                        validator: (value) {
+                          if (value.length == 0) {
+                            return 'Please enter mobile number';
+                          } else if (!RegExp(validationPhone).hasMatch(value)) {
+                            return 'Please enter valid mobile number';
+                          }
+                          return null;
+                        },
                         hintText: 'Phone number',
                         textInputType: TextInputType.phone,
                       ),
@@ -206,10 +213,13 @@ class DoctorRegisterScreen extends StatelessWidget {
 
                                   String email = emailController.text.trim();
                                   String password = passwordController.text;
-                                  controller.signUpUsingFirebase(
+                                  String phoneNumber = phoneController.text;
+
+                                  controller.doctorSignUpUsingFirebase(
                                     name: name,
                                     email: email,
                                     password: password,
+                                    phoneNumber: phoneNumber,
                                   );
                                 }
                               },
