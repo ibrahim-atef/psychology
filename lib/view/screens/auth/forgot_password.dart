@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
@@ -104,7 +105,11 @@ class ForgotPassword extends StatelessWidget {
                         ),
                         GetBuilder<AuthController>(
                           builder: (_) {
-                            return AuthTextFromField(
+                            return AuthTextFromField(     prefixIcon: Icon(
+                              Icons.email_outlined,
+                              color: white,
+                            ),
+                              suffixIcon: Text(""),
                               controller: emailController,
                               obscureText: false,
                               validator: (value) {

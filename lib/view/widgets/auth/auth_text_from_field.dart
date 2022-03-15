@@ -7,6 +7,8 @@ class AuthTextFromField extends StatelessWidget {
   String hintText;
   final Function validator;
   final TextInputType textInputType;
+  final Widget prefixIcon;
+  final Widget suffixIcon;
 
   AuthTextFromField({
     Key? key,
@@ -15,6 +17,8 @@ class AuthTextFromField extends StatelessWidget {
     required this.validator,
     required this.hintText,
     required this.textInputType,
+    required this.prefixIcon,
+    required this.suffixIcon,
   }) : super(key: key);
 
   @override
@@ -24,10 +28,13 @@ class AuthTextFromField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       obscureText: obscureText,
-      cursorColor: Colors.black,
+      cursorColor: Colors.white,
+      style: TextStyle(color: mainColor3),
       keyboardType: textInputType,
       validator: (value) => validator(value),
       decoration: InputDecoration(
+          prefixIcon: prefixIcon,
+          suffixIcon: suffixIcon,
           label: Text(
             hintText,
             style: TextStyle(color: white),

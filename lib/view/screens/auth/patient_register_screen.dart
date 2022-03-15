@@ -68,7 +68,7 @@ class PatientRegisterScreen extends StatelessWidget {
               // الصورة
               ProfileImagePicking(),
               SizedBox(
-                height: height * .01 ,
+                height: height * .01,
               ),
               //النص
               Padding(
@@ -99,6 +99,11 @@ class PatientRegisterScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       AuthTextFromField(
+                        prefixIcon: Icon(
+                          Icons.account_circle_outlined,
+                          color: white,
+                        ),
+                        suffixIcon: Text(""),
                         controller: nameController,
                         obscureText: false,
                         validator: (value) {
@@ -111,7 +116,7 @@ class PatientRegisterScreen extends StatelessWidget {
                             return null;
                           }
                         },
-                        hintText: "User Name",
+                        hintText: "Full Name",
                         textInputType: TextInputType.name,
                       ),
                       SizedBox(
@@ -120,6 +125,11 @@ class PatientRegisterScreen extends StatelessWidget {
 
                       //Phone number
                       AuthTextFromField(
+                        prefixIcon: Icon(
+                          Icons.phone_android,
+                          color: white,
+                        ),
+                        suffixIcon: Text(""),
                         controller: phoneController,
                         obscureText: false,
                         validator: (value) {
@@ -140,6 +150,11 @@ class PatientRegisterScreen extends StatelessWidget {
                       GetBuilder<AuthController>(
                         builder: (_) {
                           return AuthTextFromField(
+                            prefixIcon: Icon(
+                              Icons.email_outlined,
+                              color: white,
+                            ),
+                            suffixIcon: Text(""),
                             controller: emailController,
                             obscureText: false,
                             validator: (value) {
@@ -165,8 +180,21 @@ class PatientRegisterScreen extends StatelessWidget {
                       GetBuilder<AuthController>(
                         builder: (_) {
                           return AuthTextFromField(
+                            prefixIcon: Icon(
+                              Icons.lock_outline_rounded,
+                              color: white,
+                            ),
+                            suffixIcon:IconButton(
+                              onPressed: () {
+                                controller.visibility();
+                              },
+                              icon: controller.isVisibilty
+                                  ? Icon(Icons.visibility_off)
+                                  : Icon(Icons.visibility),
+                              color: mainColor3,
+                            ),
                             controller: passwordController,
-                            obscureText: false,
+                            obscureText:controller.isVisibilty ? false : true,
                             validator: (value) {
                               if (value.toString().length < 6) {
                                 return "Password is too short";
@@ -217,10 +245,12 @@ class PatientRegisterScreen extends StatelessWidget {
                         height: height * .01,
                       ),
                       GoogleAuthImage(
-                        onPressed: () {controller. googleSignupApp();},
+                        onPressed: () {
+                          controller.googleSignupApp();
+                        },
                       ),
                       SizedBox(
-                        height: height * .02,
+                        height: height * .0,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,

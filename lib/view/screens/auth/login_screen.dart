@@ -87,6 +87,11 @@ class LoginScreen extends StatelessWidget {
                         GetBuilder<AuthController>(
                           builder: (_) {
                             return AuthTextFromField(
+                              prefixIcon: Icon(
+                                Icons.email_outlined,
+                                color: white,
+                              ),
+                              suffixIcon: Text(""),
                               controller: emailController,
                               obscureText: false,
                               validator: (value) {
@@ -107,8 +112,21 @@ class LoginScreen extends StatelessWidget {
                         GetBuilder<AuthController>(
                           builder: (_) {
                             return AuthTextFromField(
+                              prefixIcon: Icon(
+                                Icons.lock_outline_rounded,
+                                color: white,
+                              ),
+                              suffixIcon: IconButton(
+                                onPressed: () {
+                                  controller.visibility();
+                                },
+                                icon: controller.isVisibilty
+                                    ? Icon(Icons.visibility_off)
+                                    : Icon(Icons.visibility),
+                                color: mainColor3,
+                              ),
                               controller: passwordController,
-                              obscureText: false,
+                              obscureText: controller.isVisibilty ? false : true,
                               validator: (value) {
                                 if (value.toString().length < 6) {
                                   return "Password is too short";

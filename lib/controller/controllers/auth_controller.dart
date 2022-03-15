@@ -20,7 +20,12 @@ class AuthController extends GetxController {
   var patientGender = "".obs;
 
   var isSignedIn = false;
-
+  bool isVisibilty = false;
+///////////////////passwordVisibilty///////////////////////
+  void visibility() {
+    isVisibilty = !isVisibilty;
+    update();
+  }
   //////////////////////////////get doctor Identity///////////////////////////////
 
   File? identityImage;

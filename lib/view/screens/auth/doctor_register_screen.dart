@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
 
 import 'package:psychology/view/widgets/auth/auth_button.dart';
@@ -111,6 +112,11 @@ class DoctorRegisterScreen extends StatelessWidget {
                         },
                         hintText: 'Full Name',
                         textInputType: TextInputType.text,
+                        suffixIcon: Text(""),
+                        prefixIcon: Icon(
+                          Icons.account_circle_outlined,
+                          color: white,
+                        ),
                       ),
 
                       SizedBox(
@@ -120,6 +126,10 @@ class DoctorRegisterScreen extends StatelessWidget {
                       AuthTextFromField(
                         controller: phoneController,
                         obscureText: false,
+                        prefixIcon: Icon(
+                          Icons.phone_android,
+                          color: white,
+                        ),
                         validator: (value) {
                           if (value.length == 0) {
                             return 'Please enter mobile number';
@@ -130,6 +140,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                         },
                         hintText: 'Phone number',
                         textInputType: TextInputType.phone,
+                        suffixIcon: Text(""),
                       ),
                       SizedBox(
                         height: 10,
@@ -152,6 +163,11 @@ class DoctorRegisterScreen extends StatelessWidget {
                             },
                             hintText: 'Email',
                             textInputType: TextInputType.emailAddress,
+                            prefixIcon: Icon(
+                              Icons.email_outlined,
+                              color: white,
+                            ),
+                            suffixIcon: Text(""),
                           );
                         },
                       ),
@@ -162,8 +178,21 @@ class DoctorRegisterScreen extends StatelessWidget {
                       GetBuilder<AuthController>(
                         builder: (_) {
                           return AuthTextFromField(
+                            prefixIcon: Icon(
+                              Icons.lock_outline_rounded,
+                              color: white,
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                controller.visibility();
+                              },
+                              icon: controller.isVisibilty
+                                  ? Icon(Icons.visibility_off)
+                                  : Icon(Icons.visibility),
+                              color: mainColor3,
+                            ),
                             controller: passwordController,
-                            obscureText: false,
+                            obscureText:controller.isVisibilty ? false : true,
                             validator: (value) {
                               if (value.toString().length < 6) {
                                 return "Password is too short";
@@ -188,7 +217,7 @@ class DoctorRegisterScreen extends StatelessWidget {
                               return UploadFileDoctor(
                                 onPressed: () {
                                   controller.getIdentityImage();
-                                 },
+                                },
                               );
                             },
                           )
