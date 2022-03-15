@@ -10,6 +10,7 @@ import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 import '../../../controller/controllers/auth_controller.dart';
 import '../../widgets/auth/gender_widget.dart';
+import '../../widgets/auth/profile_image_picking.dart';
 import '../../widgets/utils_widgets/icon_botton_utils.dart';
 
 class DoctorRegisterScreen extends StatelessWidget {
@@ -60,24 +61,10 @@ class DoctorRegisterScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: height * .02,
+                height: height * .01,
               ),
               // الصورة
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: width * .25,
-                    width: width * .25,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/profile.png"),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              ProfileImagePicking(),
               SizedBox(
                 height: height * .015,
               ),
@@ -196,8 +183,14 @@ class DoctorRegisterScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           GenderWidget(),
-                          UploadFileDoctor(
-                            onPressed: () {},
+                          GetBuilder<AuthController>(
+                            builder: (_) {
+                              return UploadFileDoctor(
+                                onPressed: () {
+                                  controller.getIdentityImage();
+                                 },
+                              );
+                            },
                           )
                         ],
                       ),

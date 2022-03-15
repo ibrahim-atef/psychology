@@ -5,6 +5,7 @@ import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
 import 'package:psychology/view/widgets/auth/google_auth_widget.dart';
+import 'package:psychology/view/widgets/auth/or_continue_with_widget.dart';
 import 'package:psychology/view/widgets/on_boarding_widgets/app_icon_and_name.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
 
@@ -29,7 +30,6 @@ class LoginScreen extends StatelessWidget {
       width: width,
       height: height,
       decoration: const BoxDecoration(
-          color: Colors.transparent,
           image: DecorationImage(
               image: AssetImage(
                 "assets/images/background.jpg",
@@ -44,20 +44,7 @@ class LoginScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 50), // afroto
-                // الايكون back
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //   children: [
-                //     SizedBox(
-                //       width: 200,
-                //     ),
-                //     KIconButtom(
-                //         icon: Icons.arrow_back_ios,
-                //         color: Colors.white,
-                //         size: 50,
-                //         function: () {Get.back();})
-                //   ],
-                // ),
+
                 // الصورة والنص
                 AppIconAndName(
                   color: Colors.white,
@@ -204,29 +191,7 @@ class LoginScreen extends StatelessWidget {
                   ],
                 ),
                 HeightSizeBox(SizeConfig.defaultSize! * .3),
-                Row(
-                  children: const [
-                    Expanded(
-                        child: Divider(
-                      color: Colors.black54,
-                      endIndent: 5,
-                      thickness: .5,
-                    )),
-                    Text(
-                      "Or continue with",
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 14.5,
-                          fontWeight: FontWeight.w700),
-                    ),
-                    Expanded(
-                        child: Divider(
-                      color: Colors.black54,
-                      indent: 5,
-                      thickness: .5,
-                    )),
-                  ],
-                ),
+                const OrContinueWith(),
                 SizedBox(
                   height: height * .04,
                 ),
@@ -234,8 +199,7 @@ class LoginScreen extends StatelessWidget {
                   builder: (_) {
                     return GoogleAuthImage(
                       onPressed: () {
-            controller.checkDoctorOrPatientAuth();
-
+                        controller.checkDoctorOrPatientAuth();
                       },
                     );
                   },

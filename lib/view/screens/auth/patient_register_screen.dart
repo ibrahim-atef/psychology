@@ -9,6 +9,8 @@ import 'package:psychology/view/widgets/auth/auth_button.dart';
 import 'package:psychology/view/widgets/auth/auth_text_from_field.dart';
 import 'package:psychology/view/widgets/auth/gender_widget.dart';
 import 'package:psychology/view/widgets/auth/google_auth_widget.dart';
+import 'package:psychology/view/widgets/auth/or_continue_with_widget.dart';
+import 'package:psychology/view/widgets/auth/profile_image_picking.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 import '../../../controller/controllers/auth_controller.dart';
 import '../../widgets/utils_widgets/icon_botton_utils.dart';
@@ -61,52 +63,12 @@ class PatientRegisterScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: height * .02,
+                height: height * .001,
               ),
               // الصورة
-              GetBuilder<AuthController>(
-                builder: (_) {
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: ClipRRect(borderRadius: BorderRadius.circular(100),
-                              child: Container(
-                                height: width * .25,
-                                width: width * .25,
-
-                                child: controller.image == null
-                                    ? Image.asset("assets/images/profile.png")
-                                    : Image.file(
-                                        controller.image!,
-                                        fit: BoxFit.cover,
-                                      ),
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                              bottom: 9,
-                              right: 9,
-                              child: IconButton(
-                                onPressed: () {
-                                  controller.getImage();
-                                },
-                                icon: Icon(
-                                  Icons.add_a_photo_outlined,
-                                  color: white,
-                                ),
-                              ))
-                        ],
-                      ),
-                    ],
-                  );
-                },
-              ),
+              ProfileImagePicking(),
               SizedBox(
-                height: height * .015,
+                height: height * .01 ,
               ),
               //النص
               Padding(
@@ -250,34 +212,12 @@ class PatientRegisterScreen extends StatelessWidget {
                       SizedBox(
                         height: height * .01,
                       ),
-                      Row(
-                        children: const [
-                          Expanded(
-                              child: Divider(
-                            color: Colors.black54,
-                            endIndent: 5,
-                            thickness: .5,
-                          )),
-                          Text(
-                            "Or continue with",
-                            style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 14.5,
-                                fontWeight: FontWeight.w700),
-                          ),
-                          Expanded(
-                              child: Divider(
-                            color: Colors.black54,
-                            indent: 5,
-                            thickness: .5,
-                          )),
-                        ],
-                      ),
+                      OrContinueWith(),
                       SizedBox(
                         height: height * .01,
                       ),
                       GoogleAuthImage(
-                        onPressed: () {},
+                        onPressed: () {controller. googleSignupApp();},
                       ),
                       SizedBox(
                         height: height * .02,

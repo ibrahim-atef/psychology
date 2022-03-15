@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,6 @@ import 'package:psychology/routes/routes.dart';
 import 'package:psychology/services/firestorage_methods.dart';
 import 'package:psychology/services/firestore_methods.dart';
 import 'package:psychology/utils/constants.dart';
-import 'package:psychology/utils/my_string.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController {
@@ -23,15 +21,30 @@ class AuthController extends GetxController {
 
   var isSignedIn = false;
 
+  //////////////////////////////get doctor Identity///////////////////////////////
+
+  File? identityImage;
+
+  getIdentityImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      identityImage = File(pickedFile.path);
+      update();
+    } else {
+      print("No identity Selected");
+    }
+    update();
+  }
+
   ////////////////////////////getting user image//////////////////////////////////////////////////
 
   final ImagePicker picker = ImagePicker();
-  File? image;
+  File? profileImage;
 
   getImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);
     if (pickedFile != null) {
-      image = File(pickedFile.path);
+      profileImage = File(pickedFile.path);
       update();
     } else {
       print("No Image Selected");
@@ -60,14 +73,13 @@ class AuthController extends GetxController {
         //     patientGender.value,
         //     patientsCollectionKey,
         //     false);
-        FireStorageMethods().uploadPatientImage(
+        FireStorageMethods().uploadPatientImageAndInfo(
             value.user!.uid,
-            image!,
+            profileImage!,
             name,
             email,
             phoneNumber,
             patientGender.value,
-            patientsCollectionKey,
             false);
       });
 
@@ -109,7 +121,9 @@ class AuthController extends GetxController {
       );
       print(error);
     }
-  } //////////////////////////////////ال sign up doctor//////////////////////////////////////////////////////////////////////////
+  }
+
+  //////////////////////////////////ال sign up doctor//////////////////////////////////////////////////////////////////////////
 
   void doctorSignUpUsingFirebase({
     required String name,
@@ -122,14 +136,14 @@ class AuthController extends GetxController {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
         auth.currentUser!.updateDisplayName(name);
-        PatientFireStoreMethods().insertInfoFireStorage(
+        FireStorageMethods().uploadDoctorImageAndInfo(
+            value.user!.uid,
+            profileImage!,
+            identityImage!,
             name,
             email,
-            value.user!.uid,
-            "profileUrl",
             phoneNumber,
             patientGender.value,
-            doctorsCollectionKey,
             false);
       });
 
@@ -207,7 +221,7 @@ class AuthController extends GetxController {
                 child: const Text(
                   "Doctor",
                   style:
-                      TextStyle(fontWeight: FontWeight.bold, color: mainColor2),
+                  TextStyle(fontWeight: FontWeight.bold, color: mainColor2),
                 ),
               )),
           TextButton(
@@ -228,7 +242,7 @@ class AuthController extends GetxController {
                 child: const Text(
                   "Patient",
                   style:
-                      TextStyle(fontWeight: FontWeight.bold, color: mainColor2),
+                  TextStyle(fontWeight: FontWeight.bold, color: mainColor2),
                 ),
               )),
         ],
@@ -263,7 +277,7 @@ class AuthController extends GetxController {
       String message = "";
       if (error.code == 'user-not-found') {
         message =
-            "Account does not exists for that $email.. Create your account by signing up..";
+        "Account does not exists for that $email.. Create your account by signing up..";
       } else if (error.code == 'wrong-password') {
         message = "Invalid Password... PLease try again!";
       } else {
@@ -298,7 +312,7 @@ class AuthController extends GetxController {
       displayUserEmail.value = googleUser.email;
 
       final GoogleSignInAuthentication? googleAuth =
-          await googleUser.authentication;
+      await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -306,14 +320,13 @@ class AuthController extends GetxController {
       );
 
       await auth.signInWithCredential(credential).then((value) {
-        PatientFireStoreMethods().insertInfoFireStorage(
+        FireStoreMethods().insertPatientInfoFireStorage(
             value.user!.displayName!,
             value.user!.email,
             value.user!.uid,
             value.user!.photoURL,
             value.user!.phoneNumber,
             "",
-            patientsCollectionKey,
             false);
       });
 
@@ -352,7 +365,7 @@ class AuthController extends GetxController {
       String message = "";
       if (error.code == 'user-not-found') {
         message =
-            "Account does not exists for that $email.. Create your account by signing up..";
+        "Account does not exists for that $email.. Create your account by signing up..";
       } else {
         message = error.message.toString();
       }

@@ -3,7 +3,7 @@ import 'package:psychology/utils/constants.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 class UploadFileDoctor extends StatelessWidget {
-  final Function onPressed;
+  final Function() onPressed;
 
   const UploadFileDoctor({Key? key, required this.onPressed}) : super(key: key);
 
@@ -20,7 +20,7 @@ class UploadFileDoctor extends StatelessWidget {
             fontWeight: FontWeight.w400,
             textDecoration: TextDecoration.none),
         InkWell(
-          onTap: onPressed(),
+          onTap: onPressed,
           child: Container(
             alignment: Alignment.center,
             width: width * .3,
