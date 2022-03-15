@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:psychology/utils/my_string.dart';
 
 class PatientFireStoreMethods {
   Future<void> insertInfoFireStorage(String displayName, email, uid, profileUrl,

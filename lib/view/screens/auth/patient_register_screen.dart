@@ -1,9 +1,10 @@
- import 'package:flutter/cupertino.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
+import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
 import 'package:psychology/view/widgets/auth/auth_text_from_field.dart';
 import 'package:psychology/view/widgets/auth/gender_widget.dart';
@@ -63,20 +64,46 @@ class PatientRegisterScreen extends StatelessWidget {
                 height: height * .02,
               ),
               // الصورة
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: width * .25,
-                    width: width * .25,
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage("assets/images/profile.png"),
-                        fit: BoxFit.fill,
+              GetBuilder<AuthController>(
+                builder: (_) {
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: ClipRRect(borderRadius: BorderRadius.circular(100),
+                              child: Container(
+                                height: width * .25,
+                                width: width * .25,
+
+                                child: controller.image == null
+                                    ? Image.asset("assets/images/profile.png")
+                                    : Image.file(
+                                        controller.image!,
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                              bottom: 9,
+                              right: 9,
+                              child: IconButton(
+                                onPressed: () {
+                                  controller.getImage();
+                                },
+                                icon: Icon(
+                                  Icons.add_a_photo_outlined,
+                                  color: white,
+                                ),
+                              ))
+                        ],
                       ),
-                    ),
-                  ),
-                ],
+                    ],
+                  );
+                },
               ),
               SizedBox(
                 height: height * .015,
@@ -208,10 +235,11 @@ class PatientRegisterScreen extends StatelessWidget {
                                   String password = passwordController.text;
                                   String phoneNumber = phoneController.text;
                                   controller.patientSignUpUsingFirebase(
-                                      name: name,
-                                      email: email,
-                                      password: password, phoneNumber: phoneNumber,
-                                      );
+                                    name: name,
+                                    email: email,
+                                    password: password,
+                                    phoneNumber: phoneNumber,
+                                  );
                                 }
                               },
                               text: "Sign Up",

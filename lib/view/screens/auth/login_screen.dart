@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
@@ -27,7 +28,8 @@ class LoginScreen extends StatelessWidget {
     return Container(
       width: width,
       height: height,
-      decoration: const BoxDecoration(color: Colors.transparent,
+      decoration: const BoxDecoration(
+          color: Colors.transparent,
           image: DecorationImage(
               image: AssetImage(
                 "assets/images/background.jpg",
@@ -232,7 +234,8 @@ class LoginScreen extends StatelessWidget {
                   builder: (_) {
                     return GoogleAuthImage(
                       onPressed: () {
-                        controller.googleSignupApp();
+            controller.checkDoctorOrPatientAuth();
+
                       },
                     );
                   },

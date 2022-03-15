@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:psychology/routes/routes.dart';
-import 'package:psychology/services/patient_firestore_methods.dart';
+import 'package:psychology/services/firestorage_methods.dart';
+import 'package:psychology/services/firestore_methods.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -17,6 +22,22 @@ class AuthController extends GetxController {
   var patientGender = "".obs;
 
   var isSignedIn = false;
+
+  ////////////////////////////getting user image//////////////////////////////////////////////////
+
+  final ImagePicker picker = ImagePicker();
+  File? image;
+
+  getImage() async {
+    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      image = File(pickedFile.path);
+      update();
+    } else {
+      print("No Image Selected");
+    }
+    update();
+  }
 
 //////////////////////////////////ال sign up patient//////////////////////////////////////////////////////////////////////////
   void patientSignUpUsingFirebase({
@@ -30,14 +51,24 @@ class AuthController extends GetxController {
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
         auth.currentUser!.updateDisplayName(name);
-        PatientFireStoreMethods().insertInfoFireStorage(
+        // PatientFireStoreMethods().insertInfoFireStorage(
+        //     name,
+        //     email,
+        //     value.user!.uid,
+        //     "profileUrl",
+        //     phoneNumber,
+        //     patientGender.value,
+        //     patientsCollectionKey,
+        //     false);
+        FireStorageMethods().uploadPatientImage(
+            value.user!.uid,
+            image!,
             name,
             email,
-            value.user!.uid,
-            "profileUrl",
             phoneNumber,
             patientGender.value,
-            patientsCollectionKey,false);
+            patientsCollectionKey,
+            false);
       });
 
       update();
@@ -98,7 +129,8 @@ class AuthController extends GetxController {
             "profileUrl",
             phoneNumber,
             patientGender.value,
-            doctorsCollectionKey,false);
+            doctorsCollectionKey,
+            false);
       });
 
       update();
@@ -139,6 +171,76 @@ class AuthController extends GetxController {
       );
       print(error);
     }
+  }
+
+  /////////////////////////////////////////check doctor or patient auth////////////////////////////////////////
+  void checkDoctorOrPatientAuth() {
+    Get.defaultDialog(
+        title: "Login",
+        middleText: "Register as?",
+        // textCancel: "Doctor",
+        // textConfirm: "Patient",
+        // onCancel: () async{
+        //       Get.back();
+        //       gotodoctor();
+        //   await Get.toNamed(Routes.doctorRegisterScreen);
+        //
+        //   update();
+
+        //    },
+        actions: [
+          TextButton(
+              onPressed: () {
+                Get.back();
+                Get.toNamed(Routes.doctorRegisterScreen);
+              },
+              child: Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: mainColor.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: mainColor2,
+                    width: 2,
+                  ),
+                ),
+                child: const Text(
+                  "Doctor",
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, color: mainColor2),
+                ),
+              )),
+          TextButton(
+              onPressed: () {
+                Get.back();
+                googleSignupApp();
+              },
+              child: Container(
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: mainColor.withOpacity(.1),
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: mainColor2,
+                    width: 2,
+                  ),
+                ),
+                child: const Text(
+                  "Patient",
+                  style:
+                      TextStyle(fontWeight: FontWeight.bold, color: mainColor2),
+                ),
+              )),
+        ],
+        // onConfirm: () {
+        //   googleSignupApp();
+        // },
+        buttonColor: mainColor2,
+        titleStyle: TextStyle(color: mainColor2),
+        middleTextStyle: TextStyle(color: mainColor2),
+        cancelTextColor: mainColor2,
+        confirmTextColor: white,
+        backgroundColor: white);
   }
 
 //////////////////////////////////////////////////////////////////////login with firebase///////////////////////////
@@ -211,7 +313,8 @@ class AuthController extends GetxController {
             value.user!.photoURL,
             value.user!.phoneNumber,
             "",
-            patientsCollectionKey,false);
+            patientsCollectionKey,
+            false);
       });
 
       isSignedIn = true;
