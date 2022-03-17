@@ -12,6 +12,8 @@ import 'package:image_picker/image_picker.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
+
+  ////////////////////////////////////////////////
   final GetStorage authBox = GetStorage();
   var googleSignin = GoogleSignIn();
   var displayUserName = ''.obs;
@@ -21,11 +23,13 @@ class AuthController extends GetxController {
 
   var isSignedIn = false;
   bool isVisibilty = false;
+
 ///////////////////passwordVisibilty///////////////////////
   void visibility() {
     isVisibilty = !isVisibilty;
     update();
   }
+
   //////////////////////////////get doctor Identity///////////////////////////////
 
   File? identityImage;
@@ -87,6 +91,8 @@ class AuthController extends GetxController {
             patientGender.value,
             false);
       });
+      isSignedIn = true;
+      authBox.write("auth", isSignedIn);
 
       update();
       Get.offNamed(Routes.patientMainScreen);
@@ -226,7 +232,7 @@ class AuthController extends GetxController {
                 child: const Text(
                   "Doctor",
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, color: mainColor2),
+                      TextStyle(fontWeight: FontWeight.bold, color: mainColor2),
                 ),
               )),
           TextButton(
@@ -247,7 +253,7 @@ class AuthController extends GetxController {
                 child: const Text(
                   "Patient",
                   style:
-                  TextStyle(fontWeight: FontWeight.bold, color: mainColor2),
+                      TextStyle(fontWeight: FontWeight.bold, color: mainColor2),
                 ),
               )),
         ],
@@ -272,8 +278,8 @@ class AuthController extends GetxController {
       await auth.signInWithEmailAndPassword(email: email, password: password);
       // .then((value) =>
       // displayUserName.value = auth.currentUser!.displayName!);
-      // isSignedIn = true;
-      // authBox.write("auth", isSignedIn);
+      isSignedIn = true;
+      authBox.write("auth", isSignedIn);
 
       update();
       Get.offNamed(Routes.patientMainScreen);
@@ -282,7 +288,7 @@ class AuthController extends GetxController {
       String message = "";
       if (error.code == 'user-not-found') {
         message =
-        "Account does not exists for that $email.. Create your account by signing up..";
+            "Account does not exists for that $email.. Create your account by signing up..";
       } else if (error.code == 'wrong-password') {
         message = "Invalid Password... PLease try again!";
       } else {
@@ -317,7 +323,7 @@ class AuthController extends GetxController {
       displayUserEmail.value = googleUser.email;
 
       final GoogleSignInAuthentication? googleAuth =
-      await googleUser.authentication;
+          await googleUser.authentication;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -370,7 +376,7 @@ class AuthController extends GetxController {
       String message = "";
       if (error.code == 'user-not-found') {
         message =
-        "Account does not exists for that $email.. Create your account by signing up..";
+            "Account does not exists for that $email.. Create your account by signing up..";
       } else {
         message = error.message.toString();
       }
@@ -390,6 +396,29 @@ class AuthController extends GetxController {
           cancelTextColor: mainColor2,
           backgroundColor: white);
       print(error);
+    }
+  }
+
+  ////////////////////////////////signOut//////////////////////////////////////
+  void signOutFromApp() async {
+    try {
+      await auth.signOut();
+      await googleSignin.signOut();
+      displayUserName.value = "";
+      displayUserPhoto.value = "";
+      displayUserEmail.value = "";
+      isSignedIn = false;
+      authBox.remove("auth");
+      update();
+      Get.offAllNamed(Routes.loginScreen);
+    } catch (error) {
+      Get.defaultDialog(
+          title: "Error",
+          middleText: "$error",
+          textCancel: "Ok",
+          buttonColor: Colors.grey,
+          cancelTextColor: Colors.black,
+          backgroundColor: Colors.grey.shade200);
     }
   }
 }

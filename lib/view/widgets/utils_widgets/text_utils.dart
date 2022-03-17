@@ -9,9 +9,9 @@ class KTextUtils extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(text,
+    return Text(text,maxLines: 2,
         style: TextStyle(
-          fontSize: size,
+          fontSize: size,overflow: TextOverflow.ellipsis,
           color: color,
           fontWeight:fontWeight ,
           decoration:textDecoration,

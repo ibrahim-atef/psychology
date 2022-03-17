@@ -8,7 +8,7 @@ class PatientChatScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text("PatientChatScreen"),
+        child: Text("ChatScreen"),
       ),
     );
   }

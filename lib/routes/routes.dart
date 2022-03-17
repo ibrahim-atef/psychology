@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:psychology/controller/bindings/auth_binding.dart';
+import 'package:psychology/controller/bindings/main_patient_binding.dart';
 import 'package:psychology/controller/bindings/splash_binding.dart';
 import 'package:psychology/view/screens/auth/doctor_register_screen.dart';
 import 'package:psychology/view/screens/auth/forgot_password.dart';
@@ -27,30 +28,25 @@ class AppRoutes {
       binding: AuthBinding(),
     ),
     GetPage(
-      name: Routes.patientRegisterScreen,
-      page: () => PatientRegisterScreen(),
-      binding: AuthBinding()
-    ),
+        name: Routes.patientRegisterScreen,
+        page: () => PatientRegisterScreen(),
+        binding: AuthBinding()),
     GetPage(
-      name: Routes.doctorRegisterScreen,
-      page: () => DoctorRegisterScreen(),
-        binding: AuthBinding()
-
-    ),
+        name: Routes.doctorRegisterScreen,
+        page: () => DoctorRegisterScreen(),
+        binding: AuthBinding()),
     GetPage(
-      name: Routes.patientMainScreen,
-      page: () => PatientMainScreen(),
-      binding: AuthBinding()
-    ),   GetPage(
-      name: Routes.doctorMainScreen,
-      page: () => DoctorMainScreen(),
-      binding: AuthBinding()
-    ),
+        name: Routes.patientMainScreen,
+        page: () => PatientMainScreen(),
+        bindings: [AuthBinding(), MainPatientBinding()]),
     GetPage(
-      name: Routes.forgotPassword,
-      page: () => ForgotPassword(),
-      binding: AuthBinding()
-    ),
+        name: Routes.doctorMainScreen,
+        page: () => DoctorMainScreen(),
+        binding: AuthBinding()),
+    GetPage(
+        name: Routes.forgotPassword,
+        page: () => ForgotPassword(),
+        binding: AuthBinding()),
   ];
 }
 
