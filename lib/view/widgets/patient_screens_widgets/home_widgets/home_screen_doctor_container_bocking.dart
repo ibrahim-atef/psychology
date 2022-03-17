@@ -12,6 +12,7 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
     return SizedBox(
       width: SizeConfig.defaultSize! * 12,
       child: Card(
+
         elevation: 4,
         child: Row(
           children: [
@@ -82,8 +83,8 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       KTextUtils(
-                          text: "\$200EGP",
-                          size: 14,
+                          text: " \$ 200EGP",
+                          size: SizeConfig.defaultSize! *0.58,
                           color: black,
                           fontWeight: FontWeight.w600,
                           textDecoration: TextDecoration.none),
