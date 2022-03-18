@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:psychology/utils/constants.dart';
+import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/Divider_widget.dart';
+import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/online._doctors_list.dart';
 
 import '../../widgets/patient_screens_widgets/home_widgets/popular_doctors_list_view.dart';
 import '../../widgets/patient_screens_widgets/home_widgets/user_image_and_name.dart';
@@ -9,7 +11,8 @@ class PatientHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: homeBackGroundColor,
+    return Scaffold(
+      backgroundColor: homeBackGroundColor,
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
@@ -24,12 +27,13 @@ class PatientHomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
-        child: Column(mainAxisAlignment: MainAxisAlignment.start,
-          children: [
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children:  [
             UserImageAndName(),
             PopularDoctorsListView(),
-
-
+            DividerWidget(),
+            DoctorOnlineList(),
           ],
         ),
       ),
