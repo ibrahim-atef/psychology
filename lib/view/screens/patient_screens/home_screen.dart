@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/Divider_widget.dart';
+import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/more_thera_Grid_view_widget.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/online._doctors_list.dart';
 
 import '../../widgets/patient_screens_widgets/home_widgets/popular_doctors_list_view.dart';
@@ -30,10 +31,13 @@ class PatientHomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children:  [
-            UserImageAndName(),
-            PopularDoctorsListView(),
-            DividerWidget(),
-            DoctorOnlineList(),
+            // UserImageAndName(),
+            // PopularDoctorsListView(),
+            // DividerWidget(),
+            // DoctorOnlineList(),
+            // DividerWidget(),
+            MoreTherapistsGridViewWidget()
+
           ],
         ),
       ),

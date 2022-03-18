@@ -11,7 +11,7 @@ class DividerWidget extends StatelessWidget {
       color: black,
       indent: 50,
       endIndent: 50,
-      thickness: 0.6,
+      thickness: 0.5,
     );
   }
 }

@@ -10,9 +10,8 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: SizeConfig.defaultSize! * 12,
-      child: Card(
-
+      width: SizeConfig.defaultSize! * 13,
+       child: Card(
         elevation: 4,
         child: Row(
           children: [
@@ -25,7 +24,7 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                   width: SizeConfig.defaultSize! * 4,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      image:const DecorationImage(
+                      image: const DecorationImage(
                           image: NetworkImage(
                             "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
                           ),
@@ -84,7 +83,7 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                     children: [
                       KTextUtils(
                           text: " \$ 200EGP",
-                          size: SizeConfig.defaultSize! *0.58,
+                          size: SizeConfig.defaultSize! * 0.58,
                           color: black,
                           fontWeight: FontWeight.w600,
                           textDecoration: TextDecoration.none),
@@ -93,13 +92,13 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                         height: SizeConfig.defaultSize! * 1.2,
                         width: SizeConfig.defaultSize! * 4.2,
                         child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
+                            style: ElevatedButton.styleFrom(padding: EdgeInsets.all(0),
                               primary: mainColor2, // background
                             ),
                             onPressed: () {},
                             child: KTextUtils(
                                 text: "Bock Now",
-                                size: 10,
+                                size: SizeConfig.defaultSize!*.7,
                                 color: white,
                                 fontWeight: FontWeight.w800,
                                 textDecoration: TextDecoration.none)),

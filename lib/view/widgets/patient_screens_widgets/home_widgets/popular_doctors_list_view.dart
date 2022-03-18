@@ -23,7 +23,7 @@ class PopularDoctorsListView extends StatelessWidget {
               children: [
                 KTextUtils(
                     text: "Popular Doctors",
-                    size: 17,
+                    size: SizeConfig.defaultSize! * 1.05,
                     color: black,
                     fontWeight: FontWeight.w800,
                     textDecoration: TextDecoration.none),
@@ -42,7 +42,7 @@ class PopularDoctorsListView extends StatelessWidget {
           SizedBox(height: 5,),
           Container(
             width: SizeConfig.screenWidth,
-            height: SizeConfig.defaultSize! * 6.5,
+            height: SizeConfig.defaultSize! * 7.8,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
