@@ -30,13 +30,15 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
         SizedBox(
           height: 1,
         ),
-        SizedBox(height: SizeConfig.screenHeight!*.5,
+        SizedBox(
+          height: SizeConfig.screenHeight! * .05,
           child: Expanded(
-            child: GridView.builder(
+            child: ListView.builder(
+                shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                itemCount: 10,
-                gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    childAspectRatio:1.2, maxCrossAxisExtent: 200),
+                itemCount: 3,
+                // gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                //     childAspectRatio: 1, maxCrossAxisExtent: 200),
                 itemBuilder: (context, index) {
                   return HomeScreenDoctorContainerBocking();
                 }),

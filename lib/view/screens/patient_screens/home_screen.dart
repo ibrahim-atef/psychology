@@ -31,12 +31,13 @@ class PatientHomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children:  [
-            // UserImageAndName(),
-            // PopularDoctorsListView(),
-            // DividerWidget(),
-            // DoctorOnlineList(),
-            // DividerWidget(),
-            MoreTherapistsGridViewWidget()
+
+            UserImageAndName(),
+            PopularDoctorsListView(),
+            DividerWidget(),
+            DoctorOnlineList(),
+            DividerWidget(),
+            MoreTherapistsGridViewWidget(),
 
           ],
         ),
