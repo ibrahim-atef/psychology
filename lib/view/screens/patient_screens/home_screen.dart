@@ -28,8 +28,8 @@ class PatientHomeScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+        child: ListView (
+         // mainAxisAlignment: MainAxisAlignment.start,
           children:  [
 
             UserImageAndName(),
