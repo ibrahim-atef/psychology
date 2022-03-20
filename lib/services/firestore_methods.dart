@@ -5,11 +5,11 @@ import 'package:psychology/utils/my_string.dart';
 class FireStoreMethods {
   CollectionReference doctors =
       FirebaseFirestore.instance.collection(doctorsCollectionKey);
-
+  CollectionReference patients =
+  FirebaseFirestore.instance.collection(patientsCollectionKey);
   Future<void> insertPatientInfoFireStorage(String displayName, email, uid,
       profileUrl, phoneNumber, gender, isDoctor) async {
-    CollectionReference patients =
-        FirebaseFirestore.instance.collection(patientsCollectionKey);
+
 
     patients.doc(uid).set({
       'displayName': displayName,
@@ -18,8 +18,7 @@ class FireStoreMethods {
       "profileUrl": profileUrl,
       "phoneNumber": phoneNumber,
       "gender": gender,
-      "isDoctor": isDoctor,
-      "registerDate": DateTime.now()
+       "registerDate": DateTime.now()
     });
     return;
   }

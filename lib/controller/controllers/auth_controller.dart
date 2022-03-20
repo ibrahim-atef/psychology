@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,6 +10,7 @@ import 'package:psychology/services/firestorage_methods.dart';
 import 'package:psychology/services/firestore_methods.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:psychology/utils/my_string.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -17,12 +19,20 @@ class AuthController extends GetxController {
   final GetStorage authBox = GetStorage();
   var googleSignin = GoogleSignIn();
   var displayUserName = ''.obs;
+  var displayUserId = "".obs;
+
   var displayUserPhoto = "".obs;
   var displayUserEmail = "".obs;
   var patientGender = "".obs;
 
   var isSignedIn = false;
   bool isVisibilty = false;
+
+  CollectionReference patientsCollection =
+      FirebaseFirestore.instance.collection(patientsCollectionKey);
+
+  CollectionReference doctorsCollection =
+      FirebaseFirestore.instance.collection(doctorsCollectionKey);
 
 ///////////////////passwordVisibilty///////////////////////
   void visibility() {
@@ -71,7 +81,7 @@ class AuthController extends GetxController {
     try {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) {
+          .then((value) async {
         auth.currentUser!.updateDisplayName(name);
         // PatientFireStoreMethods().insertInfoFireStorage(
         //     name,
@@ -82,6 +92,7 @@ class AuthController extends GetxController {
         //     patientGender.value,
         //     patientsCollectionKey,
         //     false);
+         update();
         FireStorageMethods().uploadPatientImageAndInfo(
             value.user!.uid,
             profileImage!,
@@ -90,9 +101,10 @@ class AuthController extends GetxController {
             phoneNumber,
             patientGender.value,
             false);
-      });
+       });
       isSignedIn = true;
       authBox.write("auth", isSignedIn);
+    await  authBox.write("uid", auth.currentUser!.uid);
 
       update();
       Get.offNamed(Routes.patientMainScreen);
@@ -275,11 +287,15 @@ class AuthController extends GetxController {
     required String password,
   }) async {
     try {
-      await auth.signInWithEmailAndPassword(email: email, password: password);
-      // .then((value) =>
-      // displayUserName.value = auth.currentUser!.displayName!);
+      await auth
+          .signInWithEmailAndPassword(email: email, password: password)
+          .then((value) {
+        displayUserName.value = auth.currentUser!.displayName!;
+        authBox.write("uid", value.user!.uid.toString());
+      });
       isSignedIn = true;
-      authBox.write("auth", isSignedIn);
+      await authBox.write("auth", isSignedIn);
+//      displayUserId.value = await GetStorage().read("uid");
 
       update();
       Get.offNamed(Routes.patientMainScreen);
@@ -409,6 +425,7 @@ class AuthController extends GetxController {
       displayUserEmail.value = "";
       isSignedIn = false;
       authBox.remove("auth");
+      authBox.remove("uid");
       update();
       Get.offAllNamed(Routes.loginScreen);
     } catch (error) {

@@ -10,6 +10,7 @@ import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 import '../../../../utils/constants.dart';
 
+
 class PopularDoctorsListView extends StatelessWidget {
   PopularDoctorsListView({Key? key}) : super(key: key);
   final controller = Get.put(PatientHomeScreenController());
