@@ -9,9 +9,9 @@ class DividerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Divider(
       color: black,
-      indent: 50,
-      endIndent: 50,
-      thickness: 0.5,
+      indent: 40,
+      endIndent: 40,
+      thickness: 0.4,
     );
   }
 }

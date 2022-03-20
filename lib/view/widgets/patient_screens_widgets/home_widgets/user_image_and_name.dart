@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 
 import 'package:psychology/services/firestore_methods.dart';
 import 'package:psychology/utils/constants.dart';
@@ -8,7 +9,8 @@ import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 class UserImageAndName extends StatelessWidget {
-  String uid;
+  String uid= GetStorage().read("uid");
+
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,6 @@ class UserImageAndName extends StatelessWidget {
         stream: FireStoreMethods().patients.doc(uid).snapshots(),
         builder:
             (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-
           try {
             if (snapshot.hasData) {
               Map<String, dynamic> data =
@@ -28,6 +29,7 @@ class UserImageAndName extends StatelessWidget {
                 children: [
                   ClipRRect(
                     child: Card(
+                      elevation: 4,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(45)),
                       child: Container(
@@ -75,7 +77,6 @@ class UserImageAndName extends StatelessWidget {
               return SizedBox();
             }
           } catch (e) {
-
             return SizedBox();
           }
         },
@@ -83,7 +84,5 @@ class UserImageAndName extends StatelessWidget {
     );
   }
 
-  UserImageAndName({
-    required this.uid,
-  });
+
 }

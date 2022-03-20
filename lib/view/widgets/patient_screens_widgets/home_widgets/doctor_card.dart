@@ -5,28 +5,38 @@ import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 class DoctorCard extends StatelessWidget {
-  const DoctorCard({Key? key}) : super(key: key);
+  String name;
+  String description;
+  String imageUrl;
+
+  DoctorCard({
+    required this.name,
+    required this.description,
+    required this.imageUrl,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: SizeConfig.screenWidth,
       child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 4,
         child: Row(
           children: [
             ClipRRect(
-              child: Card(
+              child: Card(elevation:
+                4,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
                 child: Container(
                   height: SizeConfig.defaultSize! * 7,
-                  width: SizeConfig.defaultSize! * 8,
+                  width: SizeConfig.defaultSize! * 7,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      image: const DecorationImage(
+                      image: DecorationImage(
                           image: NetworkImage(
-                            "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+                            imageUrl,
                           ),
                           fit: BoxFit.cover)),
                 ),
@@ -43,7 +53,7 @@ class DoctorCard extends StatelessWidget {
                 SizedBox(
                   width: SizeConfig.defaultSize! * 8,
                   child: KTextUtils(
-                      text: "Ibrahim Atef",
+                      text: name,
                       size: 18,
                       color: black,
                       fontWeight: FontWeight.w700,
@@ -54,17 +64,27 @@ class DoctorCard extends StatelessWidget {
                 ),
                 SizedBox(
                   width: SizeConfig.defaultSize! * 8,
-                  child: const Text(
-                    "IbrahimAtefIbrahim AtefIbrahim AtefIbrahim AtefIbrahim AtefIbrahimIbrahim AtefIAtefIbrahim AtefIbrahim AtefIbrahimIbrahim AtefIbrahim AtefIbrahim AtefIbrahim Atef",
+                  child: Text(
+                    description +
+                        description +
+                        description +
+                        description +
+                        description +
+                        description +
+                        description +
+                        description +
+                        description,
                     style: TextStyle(
                       fontSize: 10,
                       color: grey,
-                      fontWeight: FontWeight.w600,overflow: TextOverflow.ellipsis,
-                    ),maxLines: 3,
+                      fontWeight: FontWeight.w600,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 3,
                   ),
                 ),
                 SizedBox(
-                  height: SizeConfig.defaultSize!*.5,
+                  height: SizeConfig.defaultSize! * .5,
                 ),
                 SizedBox(
                   width: SizeConfig.defaultSize! * 8,

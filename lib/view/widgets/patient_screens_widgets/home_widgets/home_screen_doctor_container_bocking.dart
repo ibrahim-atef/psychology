@@ -14,16 +14,18 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
     return SizedBox(
       width: SizeConfig.defaultSize! * 13,
       child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         elevation: 4,
         child: Row(
           children: [
             ClipRRect(
               child: Card(
+                elevation: 5,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15)),
                 child: Container(
                   height: SizeConfig.defaultSize! * 7,
-                  width: SizeConfig.defaultSize! * 4,
+                  width: SizeConfig.defaultSize! * 5,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       image: DecorationImage(
@@ -34,32 +36,54 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                 ),
               ),
             ),
+            SizedBox(
+              width: SizeConfig.defaultSize! * .2,
+            ),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   height: 5,
                 ),
-                KTextUtils(
-                    text: name,
-                    size: 18,
-                    color: black,
-                    fontWeight: FontWeight.w700,
-                    textDecoration: TextDecoration.none),
-                SizedBox(
-                  height: 5,
+                Container(
+                  height: SizeConfig.defaultSize! * 1.84,
+                  width: SizeConfig.defaultSize! * 6.8,
+                  child: Text(
+                    "Dr. $name",
+                    style: const TextStyle(
+                      fontSize: 17,
+                      color: black,
+                      fontWeight: FontWeight.w900,
+                    ),
+                    softWrap: true,
+                  ),
                 ),
                 SizedBox(
-                  width: SizeConfig.defaultSize! * 4.5,
-                  child: KTextUtils(
-                      text: description,
-                        size: 10,
+                  height: 2,
+                ),
+                SizedBox(
+                  width: SizeConfig.defaultSize! * 6.8,
+                  child: Text(
+                    description +
+                        description +
+                        description +
+                        description +
+                        description +
+                        description +
+                        description +
+                        description +
+                        description +
+                        description,
+                    style: const TextStyle(
+                      fontSize: 10,
                       color: grey,
                       fontWeight: FontWeight.w600,
-                      textDecoration: TextDecoration.none),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    maxLines: 4,
+                  ),
                 ),
-                SizedBox(
-                  height: SizeConfig.defaultSize,
-                ),
+                Spacer(),
                 SizedBox(
                   width: SizeConfig.defaultSize! * 4.5,
                   child: Row(
@@ -75,39 +99,39 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: SizeConfig.defaultSize,
                 ),
-                SizedBox(
-                  width: SizeConfig.defaultSize! * 7,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      KTextUtils(
-                          text: " \$ 200EGP",
-                          size: SizeConfig.defaultSize! * 0.58,
-                          color: black,
-                          fontWeight: FontWeight.w600,
-                          textDecoration: TextDecoration.none),
-                      Spacer(),
-                      SizedBox(
-                        height: SizeConfig.defaultSize! * 1.2,
-                        width: SizeConfig.defaultSize! * 4.2,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.all(0),
-                              primary: mainColor2, // background
-                            ),
-                            onPressed: () {},
-                            child: KTextUtils(
-                                text: "Bock Now",
-                                size: SizeConfig.defaultSize! * .7,
-                                color: white,
-                                fontWeight: FontWeight.w800,
-                                textDecoration: TextDecoration.none)),
-                      )
-                    ],
-                  ),
-                ),
+                // SizedBox(
+                //   width: SizeConfig.defaultSize! * 7,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       KTextUtils(
+                //           text: " \$ 200EGP",
+                //           size: SizeConfig.defaultSize! * 0.58,
+                //           color: black,
+                //           fontWeight: FontWeight.w600,
+                //           textDecoration: TextDecoration.none),
+                //       Spacer(),
+                //       SizedBox(
+                //         height: SizeConfig.defaultSize! * 1.2,
+                //         width: SizeConfig.defaultSize! * 4.2,
+                //         child: ElevatedButton(
+                //             style: ElevatedButton.styleFrom(
+                //               padding: EdgeInsets.all(0),
+                //               primary: mainColor2, // background
+                //             ),
+                //             onPressed: () {},
+                //             child: KTextUtils(
+                //                 text: "Bock Now",
+                //                 size: SizeConfig.defaultSize! * .7,
+                //                 color: white,
+                //                 fontWeight: FontWeight.w800,
+                //                 textDecoration: TextDecoration.none)),
+                //       )
+                //     ],
+                //   ),
+                // ),
               ],
             )
           ],

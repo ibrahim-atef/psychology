@@ -8,6 +8,6 @@ const Color mainColor4=Color(0xff548CFF);
 const Color white=Color(0xffffffff);
 const Color black=Colors.black87;
 const Color hentText=Colors.white54;
-const Color homeBackGroundColor=Colors.white54;
+const Color homeBackGroundColor=Color(0xffFEF9EF);
 const Color darkGrey=Color(0xff393E46);
 const Color grey=Colors.grey;

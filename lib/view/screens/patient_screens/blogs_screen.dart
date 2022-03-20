@@ -9,7 +9,7 @@ class BlogsScreen extends StatefulWidget {
 }
 
 class _BlogsScreenState extends State<BlogsScreen> {
-  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection(doctorsCollectionKey).snapshots();
+  final Stream<QuerySnapshot> _usersStream = FirebaseFirestore.instance.collection(patientsCollectionKey).snapshots();
 
   @override
   Widget build(BuildContext context) {

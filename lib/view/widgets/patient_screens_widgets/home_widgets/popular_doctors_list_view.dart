@@ -51,7 +51,7 @@ class PopularDoctorsListView extends StatelessWidget {
           ),
           Container(
             width: SizeConfig.screenWidth,
-            height: SizeConfig.defaultSize! * 7.8,
+            height: SizeConfig.defaultSize! * 7.1,
             child: GetBuilder<PatientHomeScreenController>(
               builder: (_) {
                 return StreamBuilder<QuerySnapshot>(
