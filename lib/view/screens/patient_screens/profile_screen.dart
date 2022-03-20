@@ -1,14 +1,25 @@
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:psychology/controller/controllers/auth_controller.dart';
 
 class PatientProfileScreen extends StatelessWidget {
-  const PatientProfileScreen({Key? key}) : super(key: key);
+    PatientProfileScreen({Key? key}) : super(key: key);
+  final controller = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Center(
-        child: InkWell(child: Text("LogOut")),
+        child: GetBuilder<AuthController>(
+          builder: (_) {
+            return InkWell(
+                onTap: () {
+                  controller.signOutFromApp();
+                },
+                child: Text("LogOut"));
+          },
+        ),
       ),
     );
   }

@@ -7,10 +7,10 @@ import 'package:psychology/view/screens/patient_screens/profile_screen.dart';
 
 class MainPatientController extends GetxController {
   List<Widget> screens = [
-    const PatientHomeScreen(),
-    const PatientChatScreen(),
-    const BlogsScreen(),
-    const PatientProfileScreen(),
+     PatientHomeScreen(),
+     PatientChatScreen(),
+     BlogsScreen(),
+      PatientProfileScreen(),
   ];
   int bottomSelectedIndex = 0;
   PageController pageController = PageController();
