@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
+import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/doctor_card.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/home_screen_doctor_container_bocking.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
@@ -40,7 +41,7 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
               // gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
               //     childAspectRatio: 1, maxCrossAxisExtent: 200),
               itemBuilder: (context, index) {
-                return HomeScreenDoctorContainerBocking();
+                return DoctorCard();
               }),
         )
       ],

@@ -11,7 +11,7 @@ class KTextUtils extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(text,maxLines: 2,
         style: TextStyle(
-          fontSize: size,overflow: TextOverflow.ellipsis,
+          fontSize: size,
           color: color,
           fontWeight:fontWeight ,
           decoration:textDecoration,
