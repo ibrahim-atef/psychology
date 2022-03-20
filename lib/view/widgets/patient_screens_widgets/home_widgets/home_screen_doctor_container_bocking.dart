@@ -5,13 +5,15 @@ import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 class HomeScreenDoctorContainerBocking extends StatelessWidget {
-  const HomeScreenDoctorContainerBocking({Key? key}) : super(key: key);
+  String name;
+  String description;
+  String imageUrl;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: SizeConfig.defaultSize! * 13,
-       child: Card(
+      child: Card(
         elevation: 4,
         child: Row(
           children: [
@@ -24,9 +26,9 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                   width: SizeConfig.defaultSize! * 4,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      image: const DecorationImage(
+                      image: DecorationImage(
                           image: NetworkImage(
-                            "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
+                            imageUrl,
                           ),
                           fit: BoxFit.cover)),
                 ),
@@ -38,7 +40,7 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                   height: 5,
                 ),
                 KTextUtils(
-                    text: "Ibrahim Atef",
+                    text: name,
                     size: 18,
                     color: black,
                     fontWeight: FontWeight.w700,
@@ -49,9 +51,8 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                 SizedBox(
                   width: SizeConfig.defaultSize! * 4.5,
                   child: KTextUtils(
-                      text:
-                          "IbrahimAtefIbrahim AtefIbrahim AtefIbrahim AtefIbrahim AtefIbrahim Atef",
-                      size: 10,
+                      text: description,
+                        size: 10,
                       color: grey,
                       fontWeight: FontWeight.w600,
                       textDecoration: TextDecoration.none),
@@ -92,13 +93,14 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                         height: SizeConfig.defaultSize! * 1.2,
                         width: SizeConfig.defaultSize! * 4.2,
                         child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(padding: EdgeInsets.all(0),
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.all(0),
                               primary: mainColor2, // background
                             ),
                             onPressed: () {},
                             child: KTextUtils(
                                 text: "Bock Now",
-                                size: SizeConfig.defaultSize!*.7,
+                                size: SizeConfig.defaultSize! * .7,
                                 color: white,
                                 fontWeight: FontWeight.w800,
                                 textDecoration: TextDecoration.none)),
@@ -121,4 +123,10 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
       size: 12,
     );
   }
+
+  HomeScreenDoctorContainerBocking({
+    required this.name,
+    required this.description,
+    required this.imageUrl,
+  });
 }
