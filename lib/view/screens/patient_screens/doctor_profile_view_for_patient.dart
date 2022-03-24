@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:psychology/controller/controllers/pateint_home_screen_controller.dart';
+ import 'package:psychology/controller/controllers/patient_home_screen_controller.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
-import 'package:psychology/view/widgets/auth/auth_button.dart';
-import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
+ import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/reviews_and_sissions_widget.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tabs_widgets.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
@@ -16,7 +15,7 @@ class DoctorProfileViewForPatient extends StatelessWidget {
   String imageUrl = Get.arguments[1];
   String name = Get.arguments[2];
   String description = Get.arguments[3];
-  final controller = Get.find<PateintHomeScreenController>();
+  final controller = Get.find<PatientHomeScreenController>();
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +50,7 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                     ],
                   ),
                 ),
-                GetBuilder<PateintHomeScreenController>(
+                GetBuilder<PatientHomeScreenController>(
                   builder: (_) {
                     return SizedBox(
                         width: SizeConfig.screenWidth,
