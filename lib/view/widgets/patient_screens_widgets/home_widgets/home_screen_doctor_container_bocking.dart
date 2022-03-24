@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
@@ -8,6 +10,7 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
   String name;
   String description;
   String imageUrl;
+  String uid;
 
   @override
   Widget build(BuildContext context) {
@@ -18,21 +21,27 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
         elevation: 4,
         child: Row(
           children: [
-            ClipRRect(
-              child: Card(
-                elevation: 5,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-                child: Container(
-                  height: SizeConfig.defaultSize! * 7,
-                  width: SizeConfig.defaultSize! * 5,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                            imageUrl,
-                          ),
-                          fit: BoxFit.cover)),
+            InkWell(
+              onTap: () {
+                Get.toNamed(Routes.doctorProfileViewForPatient,
+                    arguments: [uid, imageUrl, name, description]);
+              },
+              child: ClipRRect(
+                child: Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Container(
+                    height: SizeConfig.defaultSize! * 7,
+                    width: SizeConfig.defaultSize! * 5,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                              imageUrl,
+                            ),
+                            fit: BoxFit.cover)),
+                  ),
                 ),
               ),
             ),
@@ -46,12 +55,12 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                   height: 5,
                 ),
                 Container(
-                  height: SizeConfig.defaultSize! * 1.84,
+                  height: SizeConfig.defaultSize! * 2,
                   width: SizeConfig.defaultSize! * 6.8,
                   child: Text(
                     "Dr. $name",
-                    style: const TextStyle(
-                      fontSize: 17,
+                    style: TextStyle(
+                      fontSize: SizeConfig.defaultSize! * .9,
                       color: black,
                       fontWeight: FontWeight.w900,
                     ),
@@ -80,7 +89,7 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    maxLines: 4,
+                    maxLines: 3,
                   ),
                 ),
                 Spacer(),
@@ -152,5 +161,6 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
     required this.name,
     required this.description,
     required this.imageUrl,
+    required this.uid,
   });
 }

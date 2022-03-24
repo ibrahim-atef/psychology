@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:psychology/controller/bindings/auth_binding.dart';
 import 'package:psychology/controller/bindings/main_patient_binding.dart';
+import 'package:psychology/controller/bindings/pateint_home_screen_binding.dart';
 import 'package:psychology/controller/bindings/splash_binding.dart';
 import 'package:psychology/view/screens/auth/doctor_register_screen.dart';
 import 'package:psychology/view/screens/auth/forgot_password.dart';
@@ -10,6 +11,8 @@ import 'package:psychology/view/screens/patient_screens/patient_main_screen.dart
 import 'package:psychology/view/screens/splash_page_view/on_boarding_screen.dart';
 import 'package:psychology/view/screens/auth/patient_register_screen.dart';
 import 'package:psychology/view/screens/splash_page_view/splash_screen.dart';
+
+import '../view/screens/patient_screens/doctor_profile_view_for_patient.dart';
 
 class AppRoutes {
   static final routes = [
@@ -42,11 +45,16 @@ class AppRoutes {
     GetPage(
         name: Routes.doctorMainScreen,
         page: () => DoctorMainScreen(),
-        binding: AuthBinding()),
+        bindings: [AuthBinding(), PatientHomeScreenBinding()]),
     GetPage(
         name: Routes.forgotPassword,
         page: () => ForgotPassword(),
         binding: AuthBinding()),
+    GetPage(
+      name: Routes.doctorProfileViewForPatient,
+      page: () => DoctorProfileViewForPatient(),
+      binding: PatientHomeScreenBinding()
+    ),
   ];
 }
 
@@ -59,4 +67,5 @@ class Routes {
   static const patientMainScreen = "/patientMainScreen";
   static const doctorMainScreen = "/doctorMainScreen";
   static const forgotPassword = "/forgotPassword";
+  static const doctorProfileViewForPatient = "/doctorProfileViewForPatient";
 }

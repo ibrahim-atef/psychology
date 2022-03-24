@@ -69,9 +69,11 @@ class PopularDoctorsListView extends StatelessWidget {
                           itemBuilder: (context, index) {
                             return HomeScreenDoctorContainerBocking(
                               imageUrl:
-                                  controller.doctorsList[index].profileUrl,
+                              controller.doctorsList[index].profileUrl,
                               name: controller.doctorsList[index].displayName,
                               description: controller.doctorsList[index].email,
+                              uid
+                              : controller.doctorsList[index].uid,
                             );
                           },
                           itemCount: controller.doctorsList.length,
@@ -80,8 +82,8 @@ class PopularDoctorsListView extends StatelessWidget {
                         return Center(
                             child: Container(
                                 child: CircularProgressIndicator(
-                          color: mainColor,
-                        )));
+                                  color: mainColor,
+                                )));
                       }
                     });
               },

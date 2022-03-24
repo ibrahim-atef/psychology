@@ -53,7 +53,7 @@ class DoctorCard extends StatelessWidget {
                 SizedBox(
                   width: SizeConfig.defaultSize! * 8,
                   child: KTextUtils(
-                      text: name,
+                      text:"Dr. "+ name,
                       size: 18,
                       color: black,
                       fontWeight: FontWeight.w700,
