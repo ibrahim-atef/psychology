@@ -35,7 +35,29 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                   child: Column(
                     children: [
                       HeightSizeBox(SizeConfig.defaultSize! * 2.5),
-                      CirculeImageAvatar(imageUrl: imageUrl),
+                      Row(crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [      Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            IconButton(padding: EdgeInsets.zero,alignment: Alignment.topLeft,
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                icon: Icon(
+                                  Icons.arrow_back_ios_outlined,
+                                  color: black,
+                                  size: 30,
+                                )),
+                          ],
+                        ),
+                          SizedBox(width: SizeConfig.defaultSize!*7.2,),
+                          Container(
+                              height: SizeConfig.defaultSize! * 4.8,
+                              width: SizeConfig.defaultSize! * 4.8,
+                              child: CirculeImageAvatar(imageUrl: imageUrl)),
+                        ],
+                      ),
                       HeightSizeBox(SizeConfig.defaultSize! * .5),
                       KTextUtils(
                           text: "Dr." + name,
