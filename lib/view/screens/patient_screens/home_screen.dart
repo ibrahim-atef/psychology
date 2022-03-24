@@ -16,11 +16,11 @@ class PatientHomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: homeBackGroundColor,
       appBar: AppBar(
-        centerTitle: true,
+        //centerTitle: true,
         title: const Text(
           "Home",
-          style: TextStyle(fontSize: 28,
-            fontWeight: FontWeight.w900,
+          style: TextStyle(fontSize: 25,
+            fontWeight: FontWeight.bold,
             color: white,
           ),
         ),

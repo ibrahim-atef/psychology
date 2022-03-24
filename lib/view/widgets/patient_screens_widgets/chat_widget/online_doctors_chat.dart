@@ -10,7 +10,7 @@ class OnlineDoctorsChat extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(top: 10),
-      height: SizeConfig.defaultSize! * 5,
+      height: SizeConfig.screenWidth! * .105,
       width: SizeConfig.screenWidth!,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
@@ -26,8 +26,8 @@ class OnlineDoctorsChat extends StatelessWidget {
 
 
                 child: Positioned(
-                    bottom: 5,
-                    right: 5,
+                    bottom:SizeConfig.defaultSize!*.07,
+                    right: SizeConfig.defaultSize!*.07,
                     child: Container(decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(
@@ -37,7 +37,7 @@ class OnlineDoctorsChat extends StatelessWidget {
                     ),
                       child: CircleAvatar(
                         backgroundColor: Colors.green.shade300,
-                        maxRadius: SizeConfig.defaultSize! * .45,
+                        maxRadius: SizeConfig.defaultSize! * .4,
                       ),
                     )),
               )

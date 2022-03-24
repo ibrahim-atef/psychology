@@ -36,7 +36,8 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                     children: [
                       HeightSizeBox(SizeConfig.defaultSize! * 2.5),
                       Row(crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [      Column(
+                        children: [
+                          Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -47,14 +48,14 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                                 icon: Icon(
                                   Icons.arrow_back_ios_outlined,
                                   color: black,
-                                  size: 30,
+                                  size: SizeConfig.screenWidth!*.035,
                                 )),
                           ],
                         ),
-                          SizedBox(width: SizeConfig.defaultSize!*7.2,),
+                          SizedBox(width: SizeConfig.screenWidth!*.12,),
                           Container(
-                              height: SizeConfig.defaultSize! * 4.8,
-                              width: SizeConfig.defaultSize! * 4.8,
+                              height: SizeConfig.screenWidth! * .12,
+                              width: SizeConfig.screenWidth! * .12,
                               child: CirculeImageAvatar(imageUrl: imageUrl)),
                         ],
                       ),

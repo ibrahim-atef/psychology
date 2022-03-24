@@ -12,23 +12,33 @@ class PatientChatScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: homeBackGroundColor,
+
+        appBar: AppBar(  elevation: 2,
+      backgroundColor: mainColor2,
+      title: KTextUtils(
+        text: "Messages",
+        size: 25,
+        color: white,
+        fontWeight: FontWeight.bold,
+        textDecoration: TextDecoration.none),),
         body: Padding(
       padding: EdgeInsets.all(10),
       child: Column(
         children: [
-          SizedBox(
-            height: SizeConfig.defaultSize,
-          ),
-          Container(
-            alignment: Alignment.topLeft,
-            margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .9),
-            child: KTextUtils(
-                text: "Messages",
-                size: 25,
-                color: black,
-                fontWeight: FontWeight.bold,
-                textDecoration: TextDecoration.none),
-          ),
+          // SizedBox(
+          //   height: SizeConfig.defaultSize,
+          // ),
+          // Container(
+          //   alignment: Alignment.topLeft,
+          //   margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .9),
+          //   child: KTextUtils(
+          //       text: "Messages",
+          //       size: 25,
+          //       color: black,
+          //       fontWeight: FontWeight.bold,
+          //       textDecoration: TextDecoration.none),
+          // ),
           SearchWidget(),
           Container(
             alignment: Alignment.topLeft,
