@@ -47,12 +47,12 @@ class PatientChatScreen extends StatelessWidget {
 
           Container(
             alignment: Alignment.topLeft,
-            margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .9),
+            margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .8),
             child: KTextUtils(
                 text: "Messages",
                 size: SizeConfig.defaultSize! * 1.2,
-                color: black,
-                fontWeight: FontWeight.w800,
+                color: Colors.black87,
+                fontWeight: FontWeight.w700,
                 textDecoration: TextDecoration.none),
           ),
           ChatListTile()
