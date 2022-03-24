@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
@@ -8,11 +10,13 @@ class DoctorCard extends StatelessWidget {
   String name;
   String description;
   String imageUrl;
+  String uid;
 
   DoctorCard({
     required this.name,
     required this.description,
     required this.imageUrl,
+    required this.uid,
   });
 
   @override
@@ -24,21 +28,26 @@ class DoctorCard extends StatelessWidget {
         elevation: 4,
         child: Row(
           children: [
-            ClipRRect(
-              child: Card(elevation:
-                4,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
-                child: Container(
-                  height: SizeConfig.defaultSize! * 7,
-                  width: SizeConfig.defaultSize! * 7,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      image: DecorationImage(
-                          image: NetworkImage(
-                            imageUrl,
-                          ),
-                          fit: BoxFit.cover)),
+            InkWell( onTap: () {
+              Get.toNamed(Routes.doctorProfileViewForPatient,
+                  arguments: [uid, imageUrl, name, description]);
+            },
+              child: ClipRRect(
+                child: Card(elevation:
+                  4,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Container(
+                    height: SizeConfig.defaultSize! * 7,
+                    width: SizeConfig.defaultSize! * 7,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        image: DecorationImage(
+                            image: NetworkImage(
+                              imageUrl,
+                            ),
+                            fit: BoxFit.cover)),
+                  ),
                 ),
               ),
             ),

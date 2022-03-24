@@ -63,7 +63,7 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
                               imageUrl:
                                   controller.doctorsList[index].profileUrl,
                               name: controller.doctorsList[index].displayName,
-                              description: controller.doctorsList[index].email,
+                              description: controller.doctorsList[index].email, uid:controller.doctorsList[index].uid ,
                             );
                           });
                     } else {

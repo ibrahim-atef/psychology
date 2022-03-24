@@ -14,18 +14,24 @@ class Tabs extends StatelessWidget {
       child: TabBar(
         indicatorColor: Colors.transparent,
         tabs: [
-          KTextUtils(
-              text: "Profile",
-              size: 22,
-              color: mainColor2,
-              fontWeight: FontWeight.w600,
-              textDecoration: TextDecoration.none),
-          KTextUtils(
-              text: "Reviews",
-              size: 22,
-              color: mainColor2,
-              fontWeight: FontWeight.w600,
-              textDecoration: TextDecoration.none),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: KTextUtils(
+                text: "Profile",
+                size: 22,
+                color: mainColor2,
+                fontWeight: FontWeight.w600,
+                textDecoration: TextDecoration.none),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: KTextUtils(
+                text: "Reviews",
+                size: 22,
+                color: mainColor2,
+                fontWeight: FontWeight.w600,
+                textDecoration: TextDecoration.none),
+          ),
         ],
       ),
     );
