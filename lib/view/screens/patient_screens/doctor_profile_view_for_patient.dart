@@ -30,7 +30,7 @@ class DoctorProfileViewForPatient extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  height: SizeConfig.defaultSize! * 17,
+                  height: SizeConfig.defaultSize! * 17.2,
                   decoration: buildBoxDecoration(),
                   child: Column(
                     children: [
@@ -78,7 +78,7 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                     return SizedBox(
                         width: SizeConfig.screenWidth,
                         height: (SizeConfig.screenHeight! -
-                            SizeConfig.defaultSize! * 17),
+                            SizeConfig.defaultSize! * 17.2),
                         child: TabBarView(children: controller.tabScreens));
                   },
                 )

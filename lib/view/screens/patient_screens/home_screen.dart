@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
- import 'package:get_storage/get_storage.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/Divider_widget.dart';
@@ -14,8 +14,8 @@ class PatientHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: homeBackGroundColor,
-      appBar: AppBar(
+        backgroundColor: homeBackGroundColor,
+          appBar: AppBar(
         //centerTitle: true,
         title: const Text(
           "Home",
@@ -27,22 +27,30 @@ class PatientHomeScreen extends StatelessWidget {
         backgroundColor: mainColor2,
         elevation: 2,
       ),
-      body: Padding(
-        padding: EdgeInsets.all(10),
-        child: ListView(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            UserImageAndName(),
-            PopularDoctorsListView(),
+        body: CustomScrollView(
+          slivers: [
+            // SliverAppBar(
+            //   floating: true,
+            //   title: const Text(
+            //   "Home",
+            //   style: TextStyle(fontSize: 25,
+            //     fontWeight: FontWeight.bold,
+            //     color: white,
+            //   ),
+            // ),
+            //   backgroundColor: mainColor2,
+            //   elevation: 2,),
+            SliverToBoxAdapter(child: UserImageAndName()),
+            SliverToBoxAdapter(
+              child: PopularDoctorsListView(),
+            ),
             // DividerWidget(),
             // DoctorOnlineList(),
             // دول هنحطهم ف الشات  هنظهر الدكاتره  الonlineفي الشات بس
 
-            DividerWidget(),
-            MoreTherapistsGridViewWidget(),
-           ],
-        ),
-      ),
-    );
+            SliverToBoxAdapter(child: DividerWidget()),
+            SliverToBoxAdapter(child: MoreTherapistsGridViewWidget()),
+          ],
+        ));
   }
 }
