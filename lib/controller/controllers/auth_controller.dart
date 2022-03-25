@@ -14,7 +14,6 @@ import 'package:psychology/utils/my_string.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
-  final formKey = GlobalKey<FormState>();
   ////////////////////////////////////////////////
   final GetStorage authBox = GetStorage();
   var googleSignin = GoogleSignIn();
@@ -25,8 +24,10 @@ class AuthController extends GetxController {
   var displayUserEmail = "".obs;
   var patientGender = "".obs;
 
+
   var isSignedIn = false;
   bool isVisibilty = false;
+
 
   CollectionReference patientsCollection =
       FirebaseFirestore.instance.collection(patientsCollectionKey);

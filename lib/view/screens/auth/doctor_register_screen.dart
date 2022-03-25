@@ -23,6 +23,7 @@ class DoctorRegisterScreen extends StatelessWidget {
   DoctorRegisterScreen({Key? key}) : super(key: key);
 
   final controller = Get.find<AuthController>();
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,7 @@ class DoctorRegisterScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Form(
-                  key: controller.formKey,
+                  key: formKey,
                   child: Column(
                     children: [
                       AuthTextFromField(
