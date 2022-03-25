@@ -15,18 +15,19 @@ class PatientHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: homeBackGroundColor,
-          appBar: AppBar(
-        //centerTitle: true,
-        title: const Text(
-          "Home",
-          style: TextStyle(fontSize: 25,
-            fontWeight: FontWeight.bold,
-            color: white,
+        appBar: AppBar(
+          //centerTitle: true,
+          title: const Text(
+            "Home",
+            style: TextStyle(
+              fontSize: 25,
+              fontWeight: FontWeight.bold,
+              color: white,
+            ),
           ),
+          backgroundColor: mainColor2,
+          elevation: 2,
         ),
-        backgroundColor: mainColor2,
-        elevation: 2,
-      ),
         body: CustomScrollView(
           slivers: [
             // SliverAppBar(

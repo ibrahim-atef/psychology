@@ -14,7 +14,7 @@ import 'package:psychology/utils/my_string.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
-
+  final formKey = GlobalKey<FormState>();
   ////////////////////////////////////////////////
   final GetStorage authBox = GetStorage();
   var googleSignin = GoogleSignIn();

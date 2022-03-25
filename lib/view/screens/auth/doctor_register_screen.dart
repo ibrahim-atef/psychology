@@ -21,7 +21,7 @@ class DoctorRegisterScreen extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
 
   DoctorRegisterScreen({Key? key}) : super(key: key);
-  final formKey = GlobalKey<FormState>();
+
   final controller = Get.find<AuthController>();
 
   @override
@@ -94,7 +94,7 @@ class DoctorRegisterScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Form(
-                  key: formKey,
+                  key: controller.formKey,
                   child: Column(
                     children: [
                       AuthTextFromField(
