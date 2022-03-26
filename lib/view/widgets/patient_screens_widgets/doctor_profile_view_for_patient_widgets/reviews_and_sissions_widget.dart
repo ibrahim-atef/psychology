@@ -10,6 +10,7 @@ class ReviewsAndSissions extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: SizeConfig.defaultSize! * 2,
+      width: SizeConfig.screenWidth!,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Row(
@@ -21,7 +22,7 @@ class ReviewsAndSissions extends StatelessWidget {
                 Image.asset("assets/images/dollar.png"),
                 KTextUtils(
                     text: "200 EGP",
-                    size: 15,
+                    size: SizeConfig.defaultSize!*.8,
                     color: black,
                     fontWeight: FontWeight.w500,
                     textDecoration: TextDecoration.none)
@@ -34,7 +35,7 @@ class ReviewsAndSissions extends StatelessWidget {
                 Icon(Icons.star_purple500_sharp, color: Colors.orangeAccent),
                 KTextUtils(
                     text: "4.5",
-                    size: 15,
+                    size: SizeConfig.defaultSize!*.8,
                     color: black,
                     fontWeight: FontWeight.w500,
                     textDecoration: TextDecoration.none)
@@ -47,13 +48,13 @@ class ReviewsAndSissions extends StatelessWidget {
                 Icon(Icons.play_arrow_rounded, color: mainColor),
                 KTextUtils(
                     text: "+1000",
-                    size: 15,
+                    size: SizeConfig.defaultSize!*.8,
                     color: black,
                     fontWeight: FontWeight.w500,
                     textDecoration: TextDecoration.none),
                 KTextUtils(
                     text: " Sessions",
-                    size: 13,
+                    size: SizeConfig.defaultSize!*.7,
                     color: grey,
                     fontWeight: FontWeight.w500,
                     textDecoration: TextDecoration.none)
