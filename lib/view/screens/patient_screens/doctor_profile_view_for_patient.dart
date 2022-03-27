@@ -28,55 +28,47 @@ class DoctorProfileViewForPatient extends StatelessWidget {
             return [
               SliverToBoxAdapter(child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 5),
-              child: Center(
+              child: Container(
+                height: SizeConfig.defaultSize! * 17.2,
+                decoration: buildBoxDecoration(),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      height: SizeConfig.defaultSize! * 17.2,
-                      decoration: buildBoxDecoration(),
-                      child: Column(
-                        children: [
-                          HeightSizeBox(SizeConfig.defaultSize! * 2.5),
-                          Row(crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  IconButton(padding: EdgeInsets.zero,alignment: Alignment.topLeft,
-                                      onPressed: () {
-                                        Get.back();
-                                      },
-                                      icon: Icon(
-                                        Icons.arrow_back_ios_outlined,
-                                        color: black,
-                                        size: SizeConfig.screenWidth!*.035,
-                                      )),
-                                ],
-                              ),
-                              SizedBox(width: SizeConfig.screenWidth!*.1,),
-                              Container(
-                                  height: SizeConfig.screenWidth! * .12,
-                                  width: SizeConfig.screenWidth! * .12,
-                                  child: CirculeImageAvatar(imageUrl: imageUrl)),
-                            ],
-                          ),
-                          HeightSizeBox(SizeConfig.defaultSize! * .5),
-                          KTextUtils(
-                              text: "Dr." + name,
-                              size: 21,
-                              color: mainColor2,
-                              fontWeight: FontWeight.w800,
-                              textDecoration: TextDecoration.none),
-                          HeightSizeBox(SizeConfig.defaultSize! * 1.5),
-                          ReviewsAndSissions(),
-                          HeightSizeBox(SizeConfig.defaultSize! * 1),
-                          Tabs()
-                        ],
-                      ),
+                    HeightSizeBox(SizeConfig.defaultSize! * 2.5),
+                    Row(crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            IconButton(padding: EdgeInsets.zero,alignment: Alignment.topLeft,
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                icon: Icon(
+                                  Icons.arrow_back_ios_outlined,
+                                  color: black,
+                                  size: SizeConfig.screenWidth!*.035,
+                                )),
+                          ],
+                        ),
+                        SizedBox(width: SizeConfig.screenWidth!*.1,),
+                        Container(
+                            height: SizeConfig.screenWidth! * .12,
+                            width: SizeConfig.screenWidth! * .12,
+                            child: CirculeImageAvatar(imageUrl: imageUrl)),
+                      ],
                     ),
-
+                    HeightSizeBox(SizeConfig.defaultSize! * .5),
+                    KTextUtils(
+                        text: "Dr." + name,
+                        size: 21,
+                        color: black,
+                        fontWeight: FontWeight.w800,
+                        textDecoration: TextDecoration.none),
+                    HeightSizeBox(SizeConfig.defaultSize! * 1.5),
+                    ReviewsAndSissions(),
+                    HeightSizeBox(SizeConfig.defaultSize! * 1),
+                    Tabs()
                   ],
                 ),
               ),
