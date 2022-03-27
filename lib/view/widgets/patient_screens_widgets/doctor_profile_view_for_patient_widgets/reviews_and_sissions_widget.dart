@@ -13,53 +13,52 @@ class ReviewsAndSissions extends StatelessWidget {
       width: SizeConfig.screenWidth!,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: Row(
+        child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Expanded(flex: 1,
-                child: Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset("assets/images/dollar.png"),
+                SizedBox(width: SizeConfig.defaultSize!*1.5 ,height: SizeConfig.defaultSize!*1.5  ,
+                    child: Image.asset("assets/images/dollar.png",fit: BoxFit.cover,)),
                 KTextUtils(
                     text: "200 EGP",
-                    size: SizeConfig.defaultSize!*.8,
+                    size: SizeConfig.defaultSize! * .8,
                     color: black,
                     fontWeight: FontWeight.w500,
                     textDecoration: TextDecoration.none)
               ],
-            )),
-            Expanded(flex: 1,
-                child: Row(
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.star_purple500_sharp, color: Colors.orangeAccent),
+                Icon(Icons.star_purple500_sharp,
+                    color: Colors.orangeAccent,size: SizeConfig.defaultSize!*1.5,),
                 KTextUtils(
                     text: "4.5",
-                    size: SizeConfig.defaultSize!*.8,
+                    size: SizeConfig.defaultSize! * .8,
                     color: black,
                     fontWeight: FontWeight.w500,
                     textDecoration: TextDecoration.none)
               ],
-            )),
-            Expanded(flex: 1,
-                child: Row(
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.play_arrow_rounded, color: mainColor),
+                Icon(Icons.play_arrow_rounded, color: mainColor,size: SizeConfig.defaultSize!*1.5,),
                 KTextUtils(
                     text: "+1000",
-                    size: SizeConfig.defaultSize!*.8,
+                    size: SizeConfig.defaultSize! * .8,
                     color: black,
                     fontWeight: FontWeight.w500,
                     textDecoration: TextDecoration.none),
                 KTextUtils(
                     text: " Sessions",
-                    size: SizeConfig.defaultSize!*.7,
+                    size: SizeConfig.defaultSize! * .7,
                     color: grey,
                     fontWeight: FontWeight.w500,
                     textDecoration: TextDecoration.none)
               ],
-            )),
+            ),
           ],
         ),
       ),

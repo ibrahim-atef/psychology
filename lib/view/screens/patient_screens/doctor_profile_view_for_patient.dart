@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
- import 'package:psychology/controller/controllers/patient_home_screen_controller.dart';
+import 'package:psychology/controller/controllers/patient_home_screen_controller.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
- import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
+import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/reviews_and_sissions_widget.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tabs_widgets.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
@@ -23,68 +23,72 @@ class DoctorProfileViewForPatient extends StatelessWidget {
       backgroundColor: homeBackGroundColor,
       body: DefaultTabController(
         length: 2,
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 5),
-          child: Center(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: SizeConfig.defaultSize! * 17.2,
-                  decoration: buildBoxDecoration(),
-                  child: Column(
-                    children: [
-                      HeightSizeBox(SizeConfig.defaultSize! * 2.5),
-                      Row(crossAxisAlignment: CrossAxisAlignment.start,
+        child: NestedScrollView(floatHeaderSlivers: true,
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+            return [
+              SliverToBoxAdapter(child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Center(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: SizeConfig.defaultSize! * 17.2,
+                      decoration: buildBoxDecoration(),
+                      child: Column(
                         children: [
-                          Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            IconButton(padding: EdgeInsets.zero,alignment: Alignment.topLeft,
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                icon: Icon(
-                                  Icons.arrow_back_ios_outlined,
-                                  color: black,
-                                  size: SizeConfig.screenWidth!*.035,
-                                )),
-                          ],
-                        ),
-                          SizedBox(width: SizeConfig.screenWidth!*.12,),
-                          Container(
-                              height: SizeConfig.screenWidth! * .12,
-                              width: SizeConfig.screenWidth! * .12,
-                              child: CirculeImageAvatar(imageUrl: imageUrl)),
+                          HeightSizeBox(SizeConfig.defaultSize! * 2.5),
+                          Row(crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  IconButton(padding: EdgeInsets.zero,alignment: Alignment.topLeft,
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_back_ios_outlined,
+                                        color: black,
+                                        size: SizeConfig.screenWidth!*.035,
+                                      )),
+                                ],
+                              ),
+                              SizedBox(width: SizeConfig.screenWidth!*.1,),
+                              Container(
+                                  height: SizeConfig.screenWidth! * .12,
+                                  width: SizeConfig.screenWidth! * .12,
+                                  child: CirculeImageAvatar(imageUrl: imageUrl)),
+                            ],
+                          ),
+                          HeightSizeBox(SizeConfig.defaultSize! * .5),
+                          KTextUtils(
+                              text: "Dr." + name,
+                              size: 21,
+                              color: mainColor2,
+                              fontWeight: FontWeight.w800,
+                              textDecoration: TextDecoration.none),
+                          HeightSizeBox(SizeConfig.defaultSize! * 1.5),
+                          ReviewsAndSissions(),
+                          HeightSizeBox(SizeConfig.defaultSize! * 1),
+                          Tabs()
                         ],
                       ),
-                      HeightSizeBox(SizeConfig.defaultSize! * .5),
-                      KTextUtils(
-                          text: "Dr." + name,
-                          size: 21,
-                          color: mainColor2,
-                          fontWeight: FontWeight.w800,
-                          textDecoration: TextDecoration.none),
-                      HeightSizeBox(SizeConfig.defaultSize! * 1.5),
-                      ReviewsAndSissions(),
-                      HeightSizeBox(SizeConfig.defaultSize! * 1),
-                      Tabs()
-                    ],
-                  ),
+                    ),
+
+                  ],
                 ),
-                GetBuilder<PatientHomeScreenController>(
-                  builder: (_) {
-                    return SizedBox(
-                        width: SizeConfig.screenWidth,
-                        height: (SizeConfig.screenHeight! -
-                            SizeConfig.defaultSize! * 17.2),
-                        child: TabBarView(children: controller.tabScreens));
-                  },
-                )
-              ],
-            ),
-          ),
+              ),
+            ),)];
+          },
+          body:  GetBuilder<PatientHomeScreenController>(
+            builder: (_) {
+              return TabBarView(children: controller.tabScreens);
+            },
+          ) ,
+
+
         ),
       ),
       floatingActionButton: GestureDetector(

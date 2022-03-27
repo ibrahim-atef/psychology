@@ -8,11 +8,14 @@ class OnlineDoctorsChat extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Container(padding: EdgeInsets.symmetric(horizontal: 8),
       margin: EdgeInsets.only(top: 10),
-      height: SizeConfig.screenWidth! * .105,
+      height: SizeConfig.screenWidth! * .10,
       width: SizeConfig.screenWidth!,
       child: ListView.separated(
+        physics: BouncingScrollPhysics(),
+        shrinkWrap: true,
+
         scrollDirection: Axis.horizontal,
         itemCount: 9,
         itemBuilder: (BuildContext context, int index) {

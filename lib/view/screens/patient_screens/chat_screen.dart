@@ -14,62 +14,77 @@ class PatientChatScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: homeBackGroundColor,
 
-        appBar: AppBar(  elevation: 2,
-      backgroundColor: mainColor2,
-      title: KTextUtils(
-        text: "Messages",
-        size: 25,
-        color: white,
-        fontWeight: FontWeight.bold,
-        textDecoration: TextDecoration.none),),
-        body: Padding(
-      padding: EdgeInsets.all(10),
-      child: Column(
-        children: [
-          // SizedBox(
-          //   height: SizeConfig.defaultSize,
-          // ),
-          // Container(
-          //   alignment: Alignment.topLeft,
-          //   margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .9),
-          //   child: KTextUtils(
-          //       text: "Messages",
-          //       size: 25,
-          //       color: black,
-          //       fontWeight: FontWeight.bold,
-          //       textDecoration: TextDecoration.none),
-          // ),
-          SearchWidget(),
-          Container(
-            alignment: Alignment.topLeft,
-            margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .9),
-            child: KTextUtils(
-                text: "Online",
-                size: SizeConfig.defaultSize! * 1.2,
-                color: black,
-                fontWeight: FontWeight.w800,
-                textDecoration: TextDecoration.none),
-          ),
-          OnlineDoctorsChat(),
-          SizedBox(
-            height: SizeConfig.defaultSize,
-          ),
-
-          Container(
-            alignment: Alignment.topLeft,
-            margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .8),
-            child: KTextUtils(
-                text: "Messages",
-                size: SizeConfig.defaultSize! * 1.2,
-                color: Colors.black87,
-                fontWeight: FontWeight.w700,
-                textDecoration: TextDecoration.none),
-          ),
-          ChatListTile()
+      //   appBar: AppBar(  elevation: 2,
+      // backgroundColor: mainColor2,
+      // title: KTextUtils(
+      //   text: "Messages",
+      //   size: 25,
+      //   color: white,
+      //   fontWeight: FontWeight.bold,
+      //   textDecoration: TextDecoration.none),),
+        body: CustomScrollView(
+          slivers: [
+            // SizedBox(
+            //   height: SizeConfig.defaultSize,
+            // ),
+            // Container(
+            //   alignment: Alignment.topLeft,
+            //   margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .9),
+            //   child: KTextUtils(
+            //       text: "Messages",
+            //       size: 25,
+            //       color: black,
+            //       fontWeight: FontWeight.bold,
+            //       textDecoration: TextDecoration.none),
+            // ),
+SliverAppBar( elevation: 2, floating: true,
+          backgroundColor: mainColor2,
+          title: KTextUtils(
+            text: "Messages",
+            size: 25,
+            color: white,
+            fontWeight: FontWeight.bold,
+            textDecoration: TextDecoration.none),),
+            SliverToBoxAdapter(child: SearchWidget()),
 
 
-        ],
-      ),
-    ));
+            SliverToBoxAdapter(
+              child: Container(
+                alignment: Alignment.topLeft,
+                margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .9),
+                child: KTextUtils(
+                    text: "Online",
+                    size: SizeConfig.defaultSize! * 1.2,
+                    color: black,
+                    fontWeight: FontWeight.w800,
+                    textDecoration: TextDecoration.none),
+              ),
+            ),
+            SliverToBoxAdapter(child: OnlineDoctorsChat()),
+            SliverToBoxAdapter(
+              child: SizedBox(
+                height: SizeConfig.defaultSize,
+              ),
+            ),
+
+
+            SliverToBoxAdapter(
+              child: Container(
+                alignment: Alignment.topLeft,
+                margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .8),
+                child: KTextUtils(
+                    text: "Messages",
+                    size: SizeConfig.defaultSize! * 1.2,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w700,
+                    textDecoration: TextDecoration.none),
+              ),
+            ),
+
+            SliverToBoxAdapter(child: ChatListViewChatRoomsList())
+
+
+          ],
+        ));
   }
 }
