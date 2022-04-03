@@ -18,10 +18,10 @@ class ProfileImagePicking extends StatelessWidget {
         return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Stack(
+            Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Container(
@@ -36,18 +36,28 @@ class ProfileImagePicking extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                    bottom: 9,
-                    right: 9,
-                    child: IconButton(
+                Row(
+                  children: [
+                    TextButton.icon(
                       onPressed: () {
                         controller.getImage();
                       },
-                      icon: Icon(
-                        Icons.add_a_photo_outlined,
-                        color: white,
-                      ),
-                    ))
+                      icon:Icon (Icons.add_a_photo_outlined,color: Colors.white,),
+                      label: Text("pick an image",style: TextStyle(color: Colors.white),),
+                    )
+
+                    // IconButton(
+                    //   onPressed: () {
+                    //     controller.getImage();
+                    //   },
+                    //   icon: Icon(
+                    //     Icons.add_a_photo_outlined,
+                    //     color: white,
+                    //   ),
+                    // ),
+                    // Text("pick an image"),
+                  ],
+                )
               ],
             ),
           ],
