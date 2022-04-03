@@ -23,7 +23,7 @@ class AuthController extends GetxController {
   var displayUserPhoto = "".obs;
   var displayUserEmail = "".obs;
   var patientGender = "".obs;
-
+  String gender="Gender";
 
   var isSignedIn = false;
   bool isVisibilty = false;
