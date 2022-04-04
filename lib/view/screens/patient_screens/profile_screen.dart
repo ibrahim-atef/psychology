@@ -19,7 +19,7 @@ class PatientProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor:homeBackGroundColor ,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -35,7 +35,7 @@ class PatientProfileScreen extends StatelessWidget {
                   children: [
                     CirculeImageAvatar(
                       imageUrl: cc.imageUrl,
-                      width: SizeConfig.defaultSize! * 4,
+                      width: SizeConfig.defaultSize! * 5,
                     ),
                     HeightSizeBox(SizeConfig.defaultSize! * .7),
                     KTextUtils(
@@ -173,25 +173,26 @@ class PatientProfileScreen extends StatelessWidget {
     Color? backColor,
     TextStyle? style,
   }) {
-    return InkWell(
-     onTap: onPressed,
-      child: Container(
-        alignment: Alignment.topLeft,
-        width: double.infinity,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10), color: Colors.grey[200]),
-        child: TextButton.icon(
-          onPressed: onPressed,
-          icon: Container(
-              width: SizeConfig.defaultSize! * 2.2,
-              height: SizeConfig.defaultSize! * 2.2,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10), color: backColor),
-              child: Icon(
-                icon,
-                color: iconColor,
-              )),
-          label: Text(label, style: style),
+    return Container(
+      alignment: Alignment.topLeft,
+      width: double.infinity,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10), color: Colors.grey[200]),
+      child: TextButton.icon(
+        onPressed: onPressed,
+        icon: Container(
+            width: SizeConfig.defaultSize! * 2.2,
+            height: SizeConfig.defaultSize! * 2.2,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10), color: backColor),
+            child: Icon(
+              icon,
+              color: iconColor,
+            )),
+        label: Row(
+          children: [
+            Text(label, style: style),
+          ],
         ),
       ),
     );

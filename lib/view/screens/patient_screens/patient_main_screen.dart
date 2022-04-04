@@ -26,6 +26,8 @@ class PatientMainScreen extends StatelessWidget {
               children: controller.screens,
             ),
             bottomNavigationBar: BottomNavigationBar(
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
               backgroundColor: Colors.green,
               currentIndex: controller.bottomSelectedIndex,
               onTap: (index) {
@@ -45,7 +47,7 @@ class PatientMainScreen extends StatelessWidget {
   }
 
   BottomNavigationBarItem buildBottomNavigationBarItem(IconData iconData) {
-    return BottomNavigationBarItem(
+    return BottomNavigationBarItem(backgroundColor: homeBackGroundColor,
       label: "",
       icon: Icon(
         iconData,

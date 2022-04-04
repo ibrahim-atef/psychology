@@ -45,6 +45,7 @@ class PatientHomeScreenController extends GetxController {
     imageUrl = authBox.read(KImageUrl);
     phoneNumber = authBox.read(KPhoneNumber);
     uid = authBox.read(KUid);
+    update();
     getDoctorsInfo();
     super.onInit();
   }

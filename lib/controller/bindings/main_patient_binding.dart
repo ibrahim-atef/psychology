@@ -5,6 +5,6 @@ class MainPatientBinding extends Bindings {
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.put(MainPatientController());
+    Get.put(MainPatientController(),permanent: true);
   }
 }
