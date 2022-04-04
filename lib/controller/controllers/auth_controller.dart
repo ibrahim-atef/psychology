@@ -14,6 +14,7 @@ import 'package:psychology/utils/my_string.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
+  bool isLoading = false;
 
   ////////////////////////////////////////////////
   final GetStorage authBox = GetStorage();
@@ -76,6 +77,7 @@ class AuthController extends GetxController {
     required String phoneNumber,
   }) async {
     try {
+      isLoading=true;
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) async {
@@ -93,21 +95,19 @@ class AuthController extends GetxController {
         //     false);
 
         update();
-        await FireStorageMethods().uploadPatientImageAndInfo(
-            value.user!.uid,
-            profileImage!,
-            name,
-            email,
-            phoneNumber,
-            patientGender.value,
-            false);
+        await FireStorageMethods()
+            .uploadPatientImageAndInfo(value.user!.uid, profileImage!, name,
+                email, phoneNumber, patientGender.value, false)
+            .then((value) {
+          // Get.offNamed(Routes.patientMainScreen);
+          update();
+        });
       });
       isSignedIn = true;
 
       authBox.write("auth", isSignedIn);
 
       update();
-      Get.offNamed(Routes.patientMainScreen);
     } on FirebaseAuthException catch (error) {
       String title = error.code.toString().replaceAll(RegExp('-'), ' ');
       String message = "";

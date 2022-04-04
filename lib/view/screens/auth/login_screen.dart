@@ -176,7 +176,11 @@ class LoginScreen extends StatelessWidget {
                                   email: email, password: password);
                             }
                           },
-                          text: "Login",
+                          text:controller.isLoading==false? Text(
+                            "Login",
+                            style: TextStyle(
+                                fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700),
+                          ):CircularProgressIndicator(color: mainColor,),
                           width: MediaQuery.of(context).size.width / 1.3);
                     }),
                   ],

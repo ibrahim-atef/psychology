@@ -231,7 +231,11 @@ class PatientRegisterScreen extends StatelessWidget {
                                   );
                                 }
                               },
-                              text: "Sign Up",
+                              text:controller.isLoading==false? Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                    fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700),
+                              ):CircularProgressIndicator(color: mainColor,),
                               width: width * .5);
                         },
                       ),

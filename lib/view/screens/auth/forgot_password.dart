@@ -146,7 +146,11 @@ class ForgotPassword extends StatelessWidget {
                                   emailController.text.trim());
                             }
                           },
-                          text: "Reset",
+                          text:controller.isLoading==false? Text(
+                            "Reset",
+                            style: TextStyle(
+                                fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700),
+                          ):CircularProgressIndicator(color: mainColor,),
                           width: MediaQuery.of(context).size.width / 1.3);
                     }),
                   ],

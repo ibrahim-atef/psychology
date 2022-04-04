@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:psychology/controller/controllers/auth_controller.dart';
+import 'package:psychology/routes/routes.dart';
 import 'package:psychology/services/firestore_methods.dart';
 import 'package:psychology/utils/my_string.dart';
 
@@ -15,8 +17,8 @@ class FireStorageMethods {
   firebase_storage.FirebaseStorage storage =
       firebase_storage.FirebaseStorage.instance;
 
-  Future<void>  uploadPatientImageAndInfo(String uid, File file, String displayName,
-      email, phoneNumber, gender, isDoctor)async {
+  Future<void> uploadPatientImageAndInfo(String uid, File file,
+      String displayName, email, phoneNumber, gender, isDoctor) async {
     storage
         .ref()
         .child(
@@ -26,23 +28,24 @@ class FireStorageMethods {
       value.ref.getDownloadURL().then((value) async {
         FireStoreMethods().insertPatientInfoFireStorage(
             displayName, email, uid, value, phoneNumber, gender, isDoctor);
-      //  await auth.currentUser!.updatePhoneNumber(phoneNumber);
+        //  await auth.currentUser!.updatePhoneNumber(phoneNumber);
         await auth.currentUser!.updatePhotoURL(value);
         await auth.currentUser!.updateDisplayName(displayName);
 
-         authBox.write(KEmail, email);
-         authBox.write(KName, displayName);
-         authBox.write(KGender, gender);
-         authBox.write(KIsDoctor, isDoctor);
-         authBox.write(KImageUrl, value);
-         authBox.write(KPhoneNumber, phoneNumber);
-         authBox.write(KUid, uid);
+        authBox.write(KEmail, email);
+        authBox.write(KName, displayName);
+        authBox.write(KGender, gender);
+        authBox.write(KIsDoctor, isDoctor);
+        await authBox.write(KImageUrl, value);
+        authBox.write(KPhoneNumber, phoneNumber);
+        authBox.write(KUid, uid);
+        Get.offNamed(Routes.patientMainScreen);
+        AuthController().isLoading = false;
       }).catchError((onError) {
         print(onError);
-       });
+      });
     }).catchError((error) {
       print("//////////////////////////////$error");
-
     });
   }
 

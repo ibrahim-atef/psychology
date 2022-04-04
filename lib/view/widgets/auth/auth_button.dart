@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AuthButton extends StatelessWidget {
   final Function() onPressed;
-  final String text;
+  final Widget text;
   final double width;
 
   const AuthButton(
@@ -42,11 +42,7 @@ class AuthButton extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Center(
-          child: Text(
-            text,
-            style: TextStyle(
-                fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700),
-          ),
+          child: text,
         ),
       ),
     );
