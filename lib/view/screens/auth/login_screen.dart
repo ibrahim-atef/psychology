@@ -56,7 +56,7 @@ class LoginScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: KTextUtils(
-                    text: "Welcon to Psychology",
+                    text: "Welcome to Psychology",
                     size: 17,
                     color: Color(0xffffffff),
                     fontWeight: FontWeight.normal,
