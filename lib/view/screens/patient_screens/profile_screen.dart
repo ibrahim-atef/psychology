@@ -75,7 +75,7 @@ class PatientProfileScreen extends StatelessWidget {
             buildTextButtonIcon(
               backColor: mainColor,
               onPressed: () {
-                print(GetStorage().read(KUid).toString());
+
               },
               icon: Icons.messenger_outline_outlined,
               iconColor: Colors.white,
@@ -96,7 +96,13 @@ class PatientProfileScreen extends StatelessWidget {
               builder: (_) {
                 return buildTextButtonIcon(
                     onPressed: () {
-                      controller.signOutFromApp();
+                      Get.defaultDialog(onCancel: (){controller.signOutFromApp();},
+                          title: "Logout",textConfirm: "No",
+                          middleText: "Are you sure to Logout...!",confirmTextColor: Colors.white,
+                          textCancel: "Yes",
+                          buttonColor: mainColor2,
+                          cancelTextColor: mainColor2,
+                          backgroundColor: white);
                     },
                     label: "LogOut",
                     icon: Icons.logout,

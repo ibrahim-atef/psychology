@@ -10,6 +10,7 @@ import 'package:psychology/view/widgets/auth/upload_file_doctor.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 import '../../../controller/controllers/auth_controller.dart';
+import '../../../utils/size_config.dart';
 import '../../widgets/auth/gender_widget.dart';
 import '../../widgets/auth/profile_image_picking.dart';
 import '../../widgets/utils_widgets/icon_botton_utils.dart';
@@ -53,13 +54,16 @@ class DoctorRegisterScreen extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  KIconButtom(
+                  GetBuilder<AuthController>(builder: (_) {  return KIconButtom(
+
                       icon: Icons.arrow_back_ios,
                       color: Colors.white,
                       size: 30,
-                      function: () {
+                      function: () {controller.clearImage();
                         Get.back();
-                      })
+                      });},
+
+                  )
                 ],
               ),
               SizedBox(
@@ -250,7 +254,12 @@ class DoctorRegisterScreen extends StatelessWidget {
                                 "Sign Up",
                                 style: TextStyle(
                                     fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700),
-                              ):CircularProgressIndicator(color: mainColor,),
+                              ):SizedBox(
+                                  width: SizeConfig.defaultSize,
+                                  height: SizeConfig.defaultSize,
+                                  child: CircularProgressIndicator(
+                                    color: mainColor,
+                                  )),
                               width: width * .5);
                         },
                       ),

@@ -12,7 +12,8 @@ class ChatRoomListTil extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              height: SizeConfig.defaultSize!*4.2,
+              height: SizeConfig.defaultSize! * 3.8,
+              width: SizeConfig.defaultSize! * 3.8,
               child: Card(
                 elevation: 2,
                 shape: RoundedRectangleBorder(
@@ -27,7 +28,7 @@ class ChatRoomListTil extends StatelessWidget {
               ),
             ),
             SizedBox(
-              width: SizeConfig.defaultSize!*.5,
+              width: SizeConfig.defaultSize! * .5,
             ),
             Expanded(
                 child: Column(
@@ -40,7 +41,8 @@ class ChatRoomListTil extends StatelessWidget {
                 Text(
                   "widget.lastMessagewidget.lastMessagewidget.lastMessage",
                   style: TextStyle(
-                      overflow: TextOverflow.ellipsis, color: Colors.black54),maxLines: 2,
+                      overflow: TextOverflow.ellipsis, color: Colors.black54),
+                  maxLines: 2,
                 ),
               ],
             )),

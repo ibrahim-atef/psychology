@@ -150,7 +150,12 @@ class ForgotPassword extends StatelessWidget {
                             "Reset",
                             style: TextStyle(
                                 fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700),
-                          ):CircularProgressIndicator(color: mainColor,),
+                          ):SizedBox(
+                              width: SizeConfig.defaultSize,
+                              height: SizeConfig.defaultSize,
+                              child: CircularProgressIndicator(
+                                color: mainColor,
+                              )),
                           width: MediaQuery.of(context).size.width / 1.3);
                     }),
                   ],

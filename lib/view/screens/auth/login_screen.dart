@@ -126,7 +126,8 @@ class LoginScreen extends StatelessWidget {
                                 color: mainColor3,
                               ),
                               controller: passwordController,
-                              obscureText: controller.isVisibilty ? false : true,
+                              obscureText:
+                                  controller.isVisibilty ? false : true,
                               validator: (value) {
                                 if (value.toString().length < 6) {
                                   return "Password is too short";
@@ -176,11 +177,20 @@ class LoginScreen extends StatelessWidget {
                                   email: email, password: password);
                             }
                           },
-                          text:controller.isLoading==false? Text(
-                            "Login",
-                            style: TextStyle(
-                                fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700),
-                          ):CircularProgressIndicator(color: mainColor,),
+                          text: controller.isLoading == false
+                              ? Text(
+                                  "Login",
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w700),
+                                )
+                              : SizedBox(
+                              width: SizeConfig.defaultSize,
+                              height: SizeConfig.defaultSize,
+                              child: CircularProgressIndicator(
+                                color: mainColor,
+                              )),
                           width: MediaQuery.of(context).size.width / 1.3);
                     }),
                   ],

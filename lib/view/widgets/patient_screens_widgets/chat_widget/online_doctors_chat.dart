@@ -22,7 +22,7 @@ class OnlineDoctorsChat extends StatelessWidget {
           return Stack(
             children: [
               CirculeImageAvatar(
-                width: SizeConfig.defaultSize!*3.5,
+                width: SizeConfig.defaultSize!*3.7,
                 imageUrl:
                 "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
               ),
@@ -30,8 +30,8 @@ class OnlineDoctorsChat extends StatelessWidget {
 
 
                 child: Positioned(
-                    bottom:SizeConfig.defaultSize!*.07,
-                    right: SizeConfig.defaultSize!*.07,
+                    bottom:SizeConfig.defaultSize!*.1,
+                    right: SizeConfig.defaultSize!*.1,
                     child: Container(decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       border: Border.all(

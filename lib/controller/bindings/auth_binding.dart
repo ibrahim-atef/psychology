@@ -5,7 +5,7 @@ class AuthBinding extends Bindings{
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.put(AuthController());
+    Get.put(AuthController(),permanent: false);
   }
 
 }

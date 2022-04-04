@@ -14,7 +14,7 @@ import 'package:psychology/utils/my_string.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
-  bool isLoading = false;
+  RxBool isLoading = false.obs;
 
   ////////////////////////////////////////////////
   final GetStorage authBox = GetStorage();
@@ -35,6 +35,12 @@ class AuthController extends GetxController {
 ///////////////////passwordVisibilty///////////////////////
   void visibility() {
     isVisibilty = !isVisibilty;
+    update();
+  }
+
+  Future<void> updateLoading() async {
+    isLoading.value = false;
+    print(isLoading.value);
     update();
   }
 
@@ -69,6 +75,12 @@ class AuthController extends GetxController {
     update();
   }
 
+  clearImage() {
+    profileImage = null;
+    identityImage = null;
+    update();
+  }
+
 //////////////////////////////////ال sign up patient//////////////////////////////////////////////////////////////////////////
   void patientSignUpUsingFirebase({
     required String name,
@@ -77,7 +89,7 @@ class AuthController extends GetxController {
     required String phoneNumber,
   }) async {
     try {
-      isLoading=true;
+      isLoading.value = true;
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) async {
@@ -95,13 +107,16 @@ class AuthController extends GetxController {
         //     false);
 
         update();
-        await FireStorageMethods()
-            .uploadPatientImageAndInfo(value.user!.uid, profileImage!, name,
-                email, phoneNumber, patientGender.value, false)
-            .then((value) {
-          // Get.offNamed(Routes.patientMainScreen);
-          update();
-        });
+        await FireStorageMethods().uploadPatientImageAndInfo(
+            value.user!.uid,
+            profileImage!,
+            name,
+            email,
+            phoneNumber,
+            patientGender.value,
+            false);
+        await updateLoading();
+
       });
       isSignedIn = true;
 
@@ -109,6 +124,7 @@ class AuthController extends GetxController {
 
       update();
     } on FirebaseAuthException catch (error) {
+      await updateLoading();
       String title = error.code.toString().replaceAll(RegExp('-'), ' ');
       String message = "";
       if (error.code == 'weak-password') {
@@ -287,6 +303,7 @@ class AuthController extends GetxController {
     required String password,
   }) async {
     try {
+      isLoading.value = true;
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
@@ -295,6 +312,8 @@ class AuthController extends GetxController {
         authBox.write(KImageUrl, value.user!.photoURL.toString());
         authBox.write(KName, value.user!.displayName.toString());
         authBox.write(KEmail, value.user!.email.toString());
+        isLoading.value = false;
+        update();
       });
       isSignedIn = true;
       await authBox.write("auth", isSignedIn);

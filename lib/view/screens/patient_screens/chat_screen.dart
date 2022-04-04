@@ -14,14 +14,14 @@ class PatientChatScreen extends StatelessWidget {
     return Scaffold(
         backgroundColor: homeBackGroundColor,
 
-      //   appBar: AppBar(  elevation: 2,
-      // backgroundColor: mainColor2,
-      // title: KTextUtils(
-      //   text: "Messages",
-      //   size: 25,
-      //   color: white,
-      //   fontWeight: FontWeight.bold,
-      //   textDecoration: TextDecoration.none),),
+        //   appBar: AppBar(  elevation: 2,
+        // backgroundColor: mainColor2,
+        // title: KTextUtils(
+        //   text: "Messages",
+        //   size: 25,
+        //   color: white,
+        //   fontWeight: FontWeight.bold,
+        //   textDecoration: TextDecoration.none),),
         body: CustomScrollView(
           slivers: [
             // SizedBox(
@@ -37,16 +37,22 @@ class PatientChatScreen extends StatelessWidget {
             //       fontWeight: FontWeight.bold,
             //       textDecoration: TextDecoration.none),
             // ),
-SliverAppBar( elevation: 2, floating: true,
-          backgroundColor: mainColor2,
-          title: KTextUtils(
-            text: "Messages",
-            size: 25,
-            color: white,
-            fontWeight: FontWeight.bold,
-            textDecoration: TextDecoration.none),),
+            SliverAppBar(
+              elevation: 2,
+              floating: true,
+              leadingWidth: 0,
+              leading: SizedBox(
+                width: 0,
+              ),
+              backgroundColor: mainColor2,
+              title: KTextUtils(
+                  text: "Messages",
+                  size: 25,
+                  color: white,
+                  fontWeight: FontWeight.bold,
+                  textDecoration: TextDecoration.none),
+            ),
             SliverToBoxAdapter(child: SearchWidget()),
-
 
             SliverToBoxAdapter(
               child: Container(
@@ -67,7 +73,6 @@ SliverAppBar( elevation: 2, floating: true,
               ),
             ),
 
-
             SliverToBoxAdapter(
               child: Container(
                 alignment: Alignment.topLeft,
@@ -82,8 +87,6 @@ SliverAppBar( elevation: 2, floating: true,
             ),
 
             SliverToBoxAdapter(child: ChatListViewChatRoomsList())
-
-
           ],
         ));
   }

@@ -19,14 +19,14 @@ class FireStorageMethods {
 
   Future<void> uploadPatientImageAndInfo(String uid, File file,
       String displayName, email, phoneNumber, gender, isDoctor) async {
-    storage
+    await storage
         .ref()
         .child(
             "$patientsCollectionKey/$uid/${Uri.file(file.path).pathSegments.last}")
         .putFile(file)
         .then((value) {
       value.ref.getDownloadURL().then((value) async {
-        FireStoreMethods().insertPatientInfoFireStorage(
+        await FireStoreMethods().insertPatientInfoFireStorage(
             displayName, email, uid, value, phoneNumber, gender, isDoctor);
         //  await auth.currentUser!.updatePhoneNumber(phoneNumber);
         await auth.currentUser!.updatePhotoURL(value);
@@ -40,7 +40,6 @@ class FireStorageMethods {
         authBox.write(KPhoneNumber, phoneNumber);
         authBox.write(KUid, uid);
         Get.offNamed(Routes.patientMainScreen);
-        AuthController().isLoading = false;
       }).catchError((onError) {
         print(onError);
       });

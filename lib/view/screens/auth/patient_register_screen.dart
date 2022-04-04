@@ -4,7 +4,8 @@ import 'package:get/get.dart';
 import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
- import 'package:psychology/view/widgets/auth/auth_button.dart';
+import 'package:psychology/utils/size_config.dart';
+import 'package:psychology/view/widgets/auth/auth_button.dart';
 import 'package:psychology/view/widgets/auth/auth_text_from_field.dart';
 import 'package:psychology/view/widgets/auth/gender_widget.dart';
 import 'package:psychology/view/widgets/auth/google_auth_widget.dart';
@@ -52,13 +53,18 @@ class PatientRegisterScreen extends StatelessWidget {
                   SizedBox(
                     width: 10,
                   ),
-                  KIconButtom(
-                      icon: Icons.arrow_back_ios,
-                      color: Colors.white,
-                      size: 30,
-                      function: () {
-                        Get.back();
-                      })
+                  GetBuilder<AuthController>(
+                    builder: (_) {
+                      return KIconButtom(
+                          icon: Icons.arrow_back_ios,
+                          color: Colors.white,
+                          size: 30,
+                          function: () {
+                            controller.clearImage();
+                            Get.back();
+                          });
+                    },
+                  )
                 ],
               ),
               SizedBox(
@@ -183,7 +189,7 @@ class PatientRegisterScreen extends StatelessWidget {
                               Icons.lock_outline_rounded,
                               color: white,
                             ),
-                            suffixIcon:IconButton(
+                            suffixIcon: IconButton(
                               onPressed: () {
                                 controller.visibility();
                               },
@@ -193,7 +199,7 @@ class PatientRegisterScreen extends StatelessWidget {
                               color: mainColor3,
                             ),
                             controller: passwordController,
-                            obscureText:controller.isVisibilty ? false : true,
+                            obscureText: controller.isVisibilty ? false : true,
                             validator: (value) {
                               if (value.toString().length < 6) {
                                 return "Password is too short";
@@ -213,8 +219,8 @@ class PatientRegisterScreen extends StatelessWidget {
                       SizedBox(
                         height: 25,
                       ),
-                      GetBuilder<AuthController>(
-                        builder: (_) {
+                      Obx(
+                            (){
                           return AuthButton(
                               onPressed: () {
                                 if (formKey.currentState!.validate()) {
@@ -231,11 +237,20 @@ class PatientRegisterScreen extends StatelessWidget {
                                   );
                                 }
                               },
-                              text:controller.isLoading==false? Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                    fontSize: 22, color: Colors.black, fontWeight: FontWeight.w700),
-                              ):CircularProgressIndicator(color: mainColor,),
+                              text: controller.isLoading.value == false
+                                  ? Text(
+                                      "Sign Up",
+                                      style: TextStyle(
+                                          fontSize: 22,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w700),
+                                    )
+                                  : SizedBox(
+                                      width: SizeConfig.defaultSize,
+                                      height: SizeConfig.defaultSize,
+                                      child: CircularProgressIndicator(
+                                        color: mainColor,
+                                      )),
                               width: width * .5);
                         },
                       ),
@@ -248,7 +263,7 @@ class PatientRegisterScreen extends StatelessWidget {
                         height: height * .01,
                       ),
                       GoogleAuthImage(
-                        onPressed: () {
+                        onPressed: () {controller.clearImage();
                           controller.googleSignupApp();
                         },
                       ),

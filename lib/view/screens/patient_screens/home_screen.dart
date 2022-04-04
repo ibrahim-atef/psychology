@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
 import 'package:psychology/utils/constants.dart';
-import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/Divider_widget.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/more_thera_Grid_view_widget.dart';
 
@@ -30,17 +28,20 @@ class PatientHomeScreen extends StatelessWidget {
         // ),
         body: CustomScrollView(
           slivers: [
-            SliverAppBar(
+            SliverAppBar(leadingWidth: 0,
+              leading: SizedBox(width: 0,),
               floating: true,
               title: const Text(
-              "Home",
-              style: TextStyle(fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: white,
+                "Home",
+                style: TextStyle(
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold,
+                  color: white,
+                ),
               ),
-            ),
               backgroundColor: mainColor2,
-              elevation: 2,),
+              elevation: 2,
+            ),
             SliverToBoxAdapter(child: UserImageAndName()),
             SliverToBoxAdapter(
               child: PopularDoctorsListView(),
