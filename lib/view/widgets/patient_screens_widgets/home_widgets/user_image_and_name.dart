@@ -5,11 +5,12 @@ import 'package:get_storage/get_storage.dart';
 
 import 'package:psychology/services/firestore_methods.dart';
 import 'package:psychology/utils/constants.dart';
+import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 class UserImageAndName extends StatelessWidget {
-  String uid= GetStorage().read("uid");
+  String uid= GetStorage().read(KUid);
 
 
   @override

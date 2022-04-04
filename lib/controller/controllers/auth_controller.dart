@@ -14,20 +14,16 @@ import 'package:psychology/utils/my_string.dart';
 
 class AuthController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
+
   ////////////////////////////////////////////////
   final GetStorage authBox = GetStorage();
   var googleSignin = GoogleSignIn();
-  var displayUserName = ''.obs;
-  var displayUserId = "".obs;
 
-  var displayUserPhoto = "".obs;
-  var displayUserEmail = "".obs;
   var patientGender = "".obs;
-  String gender="Gender";
+  String gender = "Gender";
 
   var isSignedIn = false;
   bool isVisibilty = false;
-
 
   CollectionReference patientsCollection =
       FirebaseFirestore.instance.collection(patientsCollectionKey);
@@ -83,6 +79,8 @@ class AuthController extends GetxController {
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) async {
+        await authBox.write(KUid, value.user!.uid);
+
         auth.currentUser!.updateDisplayName(name);
         // PatientFireStoreMethods().insertInfoFireStorage(
         //     name,
@@ -93,8 +91,9 @@ class AuthController extends GetxController {
         //     patientGender.value,
         //     patientsCollectionKey,
         //     false);
-         update();
-        FireStorageMethods().uploadPatientImageAndInfo(
+
+        update();
+       await   FireStorageMethods().uploadPatientImageAndInfo(
             value.user!.uid,
             profileImage!,
             name,
@@ -102,10 +101,10 @@ class AuthController extends GetxController {
             phoneNumber,
             patientGender.value,
             false);
-       });
+      });
       isSignedIn = true;
+
       authBox.write("auth", isSignedIn);
-    await  authBox.write("uid", auth.currentUser!.uid);
 
       update();
       Get.offNamed(Routes.patientMainScreen);
@@ -291,8 +290,11 @@ class AuthController extends GetxController {
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
-        displayUserName.value = auth.currentUser!.displayName!;
-        authBox.write("uid", value.user!.uid.toString());
+        authBox.write(KUid, value.user!.uid.toString());
+        authBox.write(KPhoneNumber, value.user!.phoneNumber.toString());
+        authBox.write(KImageUrl, value.user!.photoURL.toString());
+        authBox.write(KName, value.user!.displayName.toString());
+        authBox.write(KEmail, value.user!.email.toString());
       });
       isSignedIn = true;
       await authBox.write("auth", isSignedIn);
@@ -335,12 +337,12 @@ class AuthController extends GetxController {
   Future googleSignupApp() async {
     try {
       final GoogleSignInAccount? googleUser = await googleSignin.signIn();
-      displayUserName.value = googleUser!.displayName!;
-      displayUserPhoto.value = googleUser.photoUrl!;
-      displayUserEmail.value = googleUser.email;
+      // displayUserName.value = googleUser!.displayName!;
+      // displayUserPhoto.value = googleUser.photoUrl!;
+      // displayUserEmail.value = googleUser.email;
 
       final GoogleSignInAuthentication? googleAuth =
-          await googleUser.authentication;
+          await googleUser?.authentication;
 
       final credential = GoogleAuthProvider.credential(
         accessToken: googleAuth?.accessToken,
@@ -421,12 +423,28 @@ class AuthController extends GetxController {
     try {
       await auth.signOut();
       await googleSignin.signOut();
-      displayUserName.value = "";
-      displayUserPhoto.value = "";
-      displayUserEmail.value = "";
+      // displayUserName.value = "";
+      // displayUserPhoto.value = "";
+      // displayUserEmail.value = "";
       isSignedIn = false;
       authBox.remove("auth");
-      authBox.remove("uid");
+      authBox.remove(KUid);
+      await authBox.remove(KEmail);
+      await authBox.remove(
+        KName,
+      );
+      await authBox.remove(
+        KGender,
+      );
+      await authBox.remove(
+        KIsDoctor,
+      );
+      await authBox.remove(
+        KImageUrl,
+      );
+      await authBox.remove(
+        KPhoneNumber,
+      );
       update();
       Get.offAllNamed(Routes.loginScreen);
     } catch (error) {

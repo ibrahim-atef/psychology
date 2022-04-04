@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:psychology/controller/controllers/auth_controller.dart';
 import 'package:psychology/controller/controllers/patient_home_screen_controller.dart';
 import 'package:psychology/utils/constants.dart';
+import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/user_image_and_name.dart';
 
@@ -38,6 +40,7 @@ class PatientProfileScreen extends StatelessWidget {
               flex: 2,
             ),
             buildTextButtonIcon(
+              backColor: mainColor,
               onPressed: () {},
               icon: Icons.edit,
               iconColor: Colors.white,
@@ -46,7 +49,10 @@ class PatientProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             buildTextButtonIcon(
-              onPressed: () {},
+              backColor: mainColor,
+              onPressed: () {
+                print(GetStorage().read(KUid).toString());
+              },
               icon: Icons.messenger_outline_outlined,
               iconColor: Colors.white,
               label: '  Invite a friend',
@@ -54,24 +60,48 @@ class PatientProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             buildTextButtonIcon(
+              backColor: mainColor,
               onPressed: () {},
               icon: Icons.help,
               iconColor: Colors.white,
               label: '  Help',
               style: TextStyle(fontSize: 20, color: Colors.black),
             ),
-           const Spacer(flex: 1),
+            const Spacer(flex: 1),
             GetBuilder<AuthController>(
               builder: (_) {
-                return TextButton.icon(
-                  onPressed: () {
-                    controller.signOutFromApp();
-                  },
-                  icon: Icon(Icons.logout,color: Colors.red,size: 30,),
-                  label: Text("LogOut",style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.black54),),
-                );
+                return buildTextButtonIcon(
+                    onPressed: () {
+                      controller.signOutFromApp();
+                    },
+                    label: "LogOut",
+                    icon: Icons.logout,
+                    iconColor: Colors.red,
+                    style: TextStyle(fontSize: 20, color: Colors.black),
+                    backColor: Colors.transparent);
               },
             ),
+            // GetBuilder<AuthController>(
+            //   builder: (_) {
+            //     return TextButton.icon(
+            //       onPressed: () {
+            //         controller.signOutFromApp();
+            //       },
+            //       icon: Icon(
+            //         Icons.logout,
+            //         color: Colors.red,
+            //         size: 30,
+            //       ),
+            //       label: Text(
+            //         "LogOut",
+            //         style: TextStyle(
+            //             fontSize: 18,
+            //             fontWeight: FontWeight.bold,
+            //             color: Colors.black54),
+            //       ),
+            //     );
+            //   },
+            // ),
             const Spacer(flex: 5),
           ],
         ),
@@ -116,6 +146,7 @@ class PatientProfileScreen extends StatelessWidget {
     required String label,
     required IconData icon,
     Color? iconColor,
+    Color? backColor,
     TextStyle? style,
   }) {
     return Container(
@@ -129,7 +160,7 @@ class PatientProfileScreen extends StatelessWidget {
             width: SizeConfig.defaultSize! * 2.2,
             height: SizeConfig.defaultSize! * 2.2,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), color: mainColor),
+                borderRadius: BorderRadius.circular(10), color: backColor),
             child: Icon(
               icon,
               color: iconColor,

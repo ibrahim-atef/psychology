@@ -6,3 +6,10 @@ String validationPhone =  r'(^(?:[+0]9)?[0-9]{10,12}$)' ;
 
  const String patientsCollectionKey="patients";
  const String doctorsCollectionKey="doctors";
+ const String KUid="uid";
+ const String KName="userNAme";
+ const String KImageUrl="UserImageUrl";
+ const String KEmail="email";
+ const String KPhoneNumber="phoneNum";
+ const String KGender="gender";
+ const String KIsDoctor="isDoctor";
