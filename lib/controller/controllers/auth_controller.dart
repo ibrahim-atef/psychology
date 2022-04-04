@@ -93,7 +93,7 @@ class AuthController extends GetxController {
         //     false);
 
         update();
-       await   FireStorageMethods().uploadPatientImageAndInfo(
+        await FireStorageMethods().uploadPatientImageAndInfo(
             value.user!.uid,
             profileImage!,
             name,
@@ -430,21 +430,11 @@ class AuthController extends GetxController {
       authBox.remove("auth");
       authBox.remove(KUid);
       await authBox.remove(KEmail);
-      await authBox.remove(
-        KName,
-      );
-      await authBox.remove(
-        KGender,
-      );
-      await authBox.remove(
-        KIsDoctor,
-      );
-      await authBox.remove(
-        KImageUrl,
-      );
-      await authBox.remove(
-        KPhoneNumber,
-      );
+      await authBox.remove(KName);
+      await authBox.remove(KGender);
+      await authBox.remove(KIsDoctor);
+      await authBox.remove(KImageUrl);
+      await authBox.remove(KPhoneNumber);
       update();
       Get.offAllNamed(Routes.loginScreen);
     } catch (error) {

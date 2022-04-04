@@ -4,10 +4,12 @@ import 'package:psychology/utils/size_config.dart';
 
 class CirculeImageAvatar extends StatelessWidget {
   String imageUrl;
-
+double width;
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: width,
+      width: width,
 
       decoration: BoxDecoration(
         // image: DecorationImage(
@@ -35,5 +37,6 @@ class CirculeImageAvatar extends StatelessWidget {
 
   CirculeImageAvatar({
     required this.imageUrl,
+    required this.width,
   });
 }

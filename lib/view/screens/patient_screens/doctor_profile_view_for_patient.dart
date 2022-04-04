@@ -55,7 +55,7 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                         Container(
                             height: SizeConfig.screenWidth! * .12,
                             width: SizeConfig.screenWidth! * .12,
-                            child: CirculeImageAvatar(imageUrl: imageUrl)),
+                            child: CirculeImageAvatar(imageUrl: imageUrl, width: SizeConfig.defaultSize!*4,)),
                       ],
                     ),
                     HeightSizeBox(SizeConfig.defaultSize! * .5),

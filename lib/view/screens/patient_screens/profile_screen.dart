@@ -7,7 +7,10 @@ import 'package:psychology/controller/controllers/patient_home_screen_controller
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/size_config.dart';
-import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/user_image_and_name.dart';
+import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
+import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
+
+import '../../widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 
 class PatientProfileScreen extends StatelessWidget {
   PatientProfileScreen({Key? key}) : super(key: key);
@@ -25,11 +28,32 @@ class PatientProfileScreen extends StatelessWidget {
             const Spacer(
               flex: 2,
             ),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                UserImageAndName(),
-              ],
+            GetBuilder<PatientHomeScreenController>(
+              builder: (_) {
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    CirculeImageAvatar(
+                      imageUrl: cc.imageUrl,
+                      width: SizeConfig.defaultSize! * 4,
+                    ),
+                    HeightSizeBox(SizeConfig.defaultSize! * .7),
+                    KTextUtils(
+                        text: "${cc.name}",
+                        size: 22,
+                        color: darkGrey,
+                        fontWeight: FontWeight.w700,
+                        textDecoration: TextDecoration.none),
+                    HeightSizeBox(SizeConfig.defaultSize! * .2),
+                    KTextUtils(
+                        text: "${cc.email}",
+                        size: 15,
+                        color: grey,
+                        fontWeight: FontWeight.w400,
+                        textDecoration: TextDecoration.none)
+                  ],
+                );
+              },
             ),
             const Divider(
               thickness: 1,
@@ -149,23 +173,26 @@ class PatientProfileScreen extends StatelessWidget {
     Color? backColor,
     TextStyle? style,
   }) {
-    return Container(
-      alignment: Alignment.topLeft,
-      width: double.infinity,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10), color: Colors.grey[200]),
-      child: TextButton.icon(
-        onPressed: onPressed,
-        icon: Container(
-            width: SizeConfig.defaultSize! * 2.2,
-            height: SizeConfig.defaultSize! * 2.2,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10), color: backColor),
-            child: Icon(
-              icon,
-              color: iconColor,
-            )),
-        label: Text(label, style: style),
+    return InkWell(
+     onTap: onPressed,
+      child: Container(
+        alignment: Alignment.topLeft,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10), color: Colors.grey[200]),
+        child: TextButton.icon(
+          onPressed: onPressed,
+          icon: Container(
+              width: SizeConfig.defaultSize! * 2.2,
+              height: SizeConfig.defaultSize! * 2.2,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10), color: backColor),
+              child: Icon(
+                icon,
+                color: iconColor,
+              )),
+          label: Text(label, style: style),
+        ),
       ),
     );
   }

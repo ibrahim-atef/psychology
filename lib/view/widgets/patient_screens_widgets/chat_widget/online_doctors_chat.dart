@@ -22,8 +22,9 @@ class OnlineDoctorsChat extends StatelessWidget {
           return Stack(
             children: [
               CirculeImageAvatar(
+                width: SizeConfig.defaultSize!*3.5,
                 imageUrl:
-                    'https://firebasestorage.googleapis.com/v0/b/psychology-4ee11.appspot.com/o/patients%2FS3rpSpYU4hSPClFNUhtTQ4R4msw2%2Fimage_picker4772500994258809599.jpg?alt=media&token=bef859d3-6d79-4c1e-8894-0b5030cb3e8e',
+                "https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
               ),
               Container(
 
