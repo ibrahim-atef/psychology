@@ -95,9 +95,9 @@ class PopularDoctorsListView extends StatelessWidget {
               )
             : Padding(
               padding:  EdgeInsets.only(top: SizeConfig.defaultSize!*10),
-              child: Center(
+              child: const Center(
                   child: Text(
-                    "Doctors Will be add soon...",
+                    "Doctors Will be added soon...",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),

@@ -7,6 +7,7 @@ import 'package:psychology/controller/controllers/patient_home_screen_controller
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/size_config.dart';
+import 'package:psychology/view/screens/patient_screens/patient_update_profile.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
@@ -19,7 +20,8 @@ class PatientProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor:homeBackGroundColor ,
+    return Scaffold(
+      backgroundColor: homeBackGroundColor,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -65,7 +67,9 @@ class PatientProfileScreen extends StatelessWidget {
             ),
             buildTextButtonIcon(
               backColor: mainColor,
-              onPressed: () {},
+              onPressed: () {
+                Get.to(PatientUpdateProfile());
+              },
               icon: Icons.edit,
               iconColor: Colors.white,
               label: '  Edit Profile    ',
@@ -74,9 +78,7 @@ class PatientProfileScreen extends StatelessWidget {
             const SizedBox(height: 20),
             buildTextButtonIcon(
               backColor: mainColor,
-              onPressed: () {
-
-              },
+              onPressed: () {},
               icon: Icons.messenger_outline_outlined,
               iconColor: Colors.white,
               label: '  Invite a friend   ',
@@ -96,9 +98,14 @@ class PatientProfileScreen extends StatelessWidget {
               builder: (_) {
                 return buildTextButtonIcon(
                     onPressed: () {
-                      Get.defaultDialog(onCancel: (){controller.signOutFromApp();},
-                          title: "Logout",textConfirm: "No",
-                          middleText: "Are you sure to Logout...!",confirmTextColor: Colors.white,
+                      Get.defaultDialog(
+                          onCancel: () {
+                            controller.signOutFromApp();
+                          },
+                          title: "Logout",
+                          textConfirm: "No",
+                          middleText: "Are you sure to Logout...!",
+                          confirmTextColor: Colors.white,
                           textCancel: "Yes",
                           buttonColor: mainColor2,
                           cancelTextColor: mainColor2,

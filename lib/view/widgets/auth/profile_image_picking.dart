@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/auth_controller.dart';
-import 'package:psychology/utils/size_config.dart';
 
-import '../../../utils/constants.dart';
 
 class ProfileImagePicking extends StatelessWidget {
+
   ProfileImagePicking({Key? key}) : super(key: key);
   final controller = Get.find<AuthController>();
 
@@ -21,7 +20,7 @@ class ProfileImagePicking extends StatelessWidget {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(5.0),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(100),
                     child: Container(
@@ -42,8 +41,8 @@ class ProfileImagePicking extends StatelessWidget {
                       onPressed: () {
                         controller.getImage();
                       },
-                      icon:Icon (Icons.add_a_photo_outlined,color: Colors.white,),
-                      label: Text("pick an image",style: TextStyle(color: Colors.white),),
+                      icon:Icon (Icons.add_a_photo_outlined,color: Colors.black54,),
+                      label: Text("pick an image",style: TextStyle(color: Colors.black54),),
                     )
 
                     // IconButton(

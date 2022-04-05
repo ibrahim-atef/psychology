@@ -26,7 +26,7 @@ class AppRoutes {
         binding: SplashBinding()),
     GetPage(
       name: Routes.loginScreen,
-      page: () => LoginScreen(),
+      page: () => LoginScreen(),transition: Transition.downToUp,transitionDuration: Duration(milliseconds: 1000),
       //testing auth
       binding: AuthBinding(),
     ),
