@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:psychology/controller/controllers/auth_controller.dart';
+ import 'package:psychology/controller/controllers/auth_controller.dart';
 import 'package:psychology/controller/controllers/patient_home_screen_controller.dart';
 import 'package:psychology/utils/constants.dart';
-import 'package:psychology/utils/my_string.dart';
-import 'package:psychology/utils/size_config.dart';
+ import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/screens/patient_screens/patient_update_profile.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
@@ -32,7 +30,8 @@ class PatientProfileScreen extends StatelessWidget {
             ),
             GetBuilder<PatientHomeScreenController>(
               builder: (_) {
-                return Column(
+                return
+                  cc.imageUrl!=null ? Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     CirculeImageAvatar(
@@ -54,7 +53,7 @@ class PatientProfileScreen extends StatelessWidget {
                         fontWeight: FontWeight.w400,
                         textDecoration: TextDecoration.none)
                   ],
-                );
+                ):CircularProgressIndicator();
               },
             ),
             const Divider(

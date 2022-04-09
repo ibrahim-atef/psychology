@@ -27,19 +27,21 @@ class FireStorageMethods {
         .then((value) {
       value.ref.getDownloadURL().then((value) async {
         await FireStoreMethods().insertPatientInfoFireStorage(
-            displayName, email, uid, value, phoneNumber, gender, isDoctor);
-        //  await auth.currentUser!.updatePhoneNumber(phoneNumber);
-        await auth.currentUser!.updatePhotoURL(value);
-        await auth.currentUser!.updateDisplayName(displayName);
+            displayName, email, uid, value, phoneNumber, gender, isDoctor).then((a)async{
+          await auth.currentUser!.updatePhotoURL(value);
+          await auth.currentUser!.updateDisplayName(displayName);
 
-        authBox.write(KEmail, email);
-        authBox.write(KName, displayName);
-        authBox.write(KGender, gender);
-        authBox.write(KIsDoctor, isDoctor);
-        await authBox.write(KImageUrl, value);
-        authBox.write(KPhoneNumber, phoneNumber);
-        authBox.write(KUid, uid);
-        Get.offNamed(Routes.patientMainScreen);
+          authBox.write(KEmail, email);
+          authBox.write(KName, displayName);
+          authBox.write(KGender, gender);
+          authBox.write(KIsDoctor, isDoctor);
+          authBox.write(KImageUrl, value);
+          authBox.write(KPhoneNumber, phoneNumber);
+          authBox.write(KUid, uid);
+
+        });
+        //  await auth.currentUser!.updatePhoneNumber(phoneNumber);
+
       }).catchError((onError) {
         print(onError);
       });

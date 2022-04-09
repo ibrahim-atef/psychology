@@ -12,7 +12,7 @@ import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_v
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tap_bar_profile_widget.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tap_bar_reviews_widget.dart';
 
-class PatientHomeScreenController extends GetxController {
+ class PatientHomeScreenController extends GetxController {
   Stream<QuerySnapshot>? doctorsStream;
   List<dynamic> doctorsList = <DoctorInfo>[].obs;
   List<Widget> tabScreens = [FirstTapBarWidget(), TabBarReviewsWidget()];
@@ -38,13 +38,13 @@ class PatientHomeScreenController extends GetxController {
     GetStorage authBox = GetStorage();
 
     // TODO: implement onInit
-    email = authBox.read(KEmail);
-    name = authBox.read(KName);
+    email =await authBox.read(KEmail);
+    name =await authBox.read(KName);
     gender = authBox.read(KGender);
     isDoctor = authBox.read(KIsDoctor);
-    imageUrl = authBox.read(KImageUrl);
-    phoneNumber = authBox.read(KPhoneNumber);
-    uid = authBox.read(KUid);
+    imageUrl =await authBox.read(KImageUrl);
+    phoneNumber =await authBox.read(KPhoneNumber);
+    uid =await authBox.read(KUid);
     update();
     getDoctorsInfo();
     super.onInit();

@@ -28,7 +28,7 @@ class AppRoutes {
       name: Routes.loginScreen,
       page: () => LoginScreen(),transition: Transition.downToUp,transitionDuration: Duration(milliseconds: 1000),
       //testing auth
-      binding: AuthBinding(),
+      bindings:[ AuthBinding(),PatientHomeScreenBinding()],
     ),
     GetPage(
         name: Routes.patientRegisterScreen,

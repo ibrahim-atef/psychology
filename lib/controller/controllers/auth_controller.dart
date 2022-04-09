@@ -23,6 +23,8 @@ class AuthController extends GetxController {
   var patientGender = "".obs;
   String gender = "Gender";
 
+  var uid;
+
   var isSignedIn = false;
   bool isVisibilty = false;
 
@@ -89,6 +91,8 @@ class AuthController extends GetxController {
             .createUserWithEmailAndPassword(email: email, password: password)
             .then((value) async {
           await authBox.write(KUid, value.user!.uid);
+          uid= value.user!.uid;
+          update();
 
           auth.currentUser!.updateDisplayName(name);
           // PatientFireStoreMethods().insertInfoFireStorage(
@@ -105,10 +109,13 @@ class AuthController extends GetxController {
           await FireStorageMethods()
               .uploadPatientImageAndInfo(value.user!.uid, profileImage!, name,
                   email, phoneNumber, patientGender.value, false)
-              .then((value) {
+              .then((v) {
             isSignedIn = true;
+
+
             isLoading.value = false;
             update();
+            authBox.write("auth", isSignedIn);
 
             Get.offNamed(Routes.patientMainScreen);
             update();
