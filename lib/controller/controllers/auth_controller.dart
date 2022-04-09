@@ -38,12 +38,6 @@ class AuthController extends GetxController {
     update();
   }
 
-  Future<void> updateLoading() async {
-    isLoading.value = false;
-    print(isLoading.value);
-    update();
-  }
-
   //////////////////////////////get doctor Identity///////////////////////////////
 
   File? identityImage;
@@ -88,77 +82,83 @@ class AuthController extends GetxController {
     required String password,
     required String phoneNumber,
   }) async {
-    try {
-      isLoading.value = true;
-      await auth
-          .createUserWithEmailAndPassword(email: email, password: password)
-          .then((value) async {
-        await authBox.write(KUid, value.user!.uid);
+    if (profileImage != null) {
+      try {
+        isLoading.value = true;
+        await auth
+            .createUserWithEmailAndPassword(email: email, password: password)
+            .then((value) async {
+          await authBox.write(KUid, value.user!.uid);
 
-        auth.currentUser!.updateDisplayName(name);
-        // PatientFireStoreMethods().insertInfoFireStorage(
-        //     name,
-        //     email,
-        //     value.user!.uid,
-        //     "profileUrl",
-        //     phoneNumber,
-        //     patientGender.value,
-        //     patientsCollectionKey,
-        //     false);
+          auth.currentUser!.updateDisplayName(name);
+          // PatientFireStoreMethods().insertInfoFireStorage(
+          //     name,
+          //     email,
+          //     value.user!.uid,
+          //     "profileUrl",
+          //     phoneNumber,
+          //     patientGender.value,
+          //     patientsCollectionKey,
+          //     false);
 
+          update();
+          await FireStorageMethods()
+              .uploadPatientImageAndInfo(value.user!.uid, profileImage!, name,
+                  email, phoneNumber, patientGender.value, false)
+              .then((value) {
+            isSignedIn = true;
+            isLoading.value = false;
+            update();
+
+            Get.offNamed(Routes.patientMainScreen);
+            update();
+          });
+        });
+      } on FirebaseAuthException catch (error) {
+        isLoading.value = false;
         update();
-        await FireStorageMethods().uploadPatientImageAndInfo(
-            value.user!.uid,
-            profileImage!,
-            name,
-            email,
-            phoneNumber,
-            patientGender.value,
-            false);
-        await updateLoading();
 
-      });
-      isSignedIn = true;
+        String title = error.code.toString().replaceAll(RegExp('-'), ' ');
+        String message = "";
+        if (error.code == 'weak-password') {
+          message = "password is too weak.";
+          title = error.code.toString();
 
-      authBox.write("auth", isSignedIn);
+          print('The password provided is too weak.');
+        } else if (error.code == 'email-already-in-use') {
+          message = "account already exists ";
 
-      update();
-    } on FirebaseAuthException catch (error) {
-      await updateLoading();
-      String title = error.code.toString().replaceAll(RegExp('-'), ' ');
-      String message = "";
-      if (error.code == 'weak-password') {
-        message = "password is too weak.";
-        title = error.code.toString();
+          print('The account already exists for that email.');
+        } else {
+          message = error.message.toString();
+        }
 
-        print('The password provided is too weak.');
-      } else if (error.code == 'email-already-in-use') {
-        message = "account already exists ";
-
-        print('The account already exists for that email.');
-      } else {
-        message = error.message.toString();
+        Get.defaultDialog(
+            title: title,
+            middleText: message,
+            textCancel: "Ok",
+            buttonColor: mainColor2,
+            cancelTextColor: mainColor,
+            backgroundColor: white);
+        // Get.snackbar(
+        //   title,
+        //   message,
+        //   snackPosition: SnackPosition.TOP,
+        // );
+      } catch (error) {
+        Get.snackbar(
+          "Error",
+          "$error",
+          snackPosition: SnackPosition.TOP,
+        );
+        print(error);
       }
-
-      Get.defaultDialog(
-          title: title,
-          middleText: message,
-          textCancel: "Ok",
-          buttonColor: mainColor2,
-          cancelTextColor: mainColor,
-          backgroundColor: white);
-      // Get.snackbar(
-      //   title,
-      //   message,
-      //   snackPosition: SnackPosition.TOP,
-      // );
-    } catch (error) {
+    } else {
       Get.snackbar(
-        "Error",
-        "$error",
+        "empty Image",
+        "please add a Image",
         snackPosition: SnackPosition.TOP,
       );
-      print(error);
     }
   }
 
@@ -304,6 +304,7 @@ class AuthController extends GetxController {
   }) async {
     try {
       isLoading.value = true;
+      update();
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
           .then((value) {
@@ -312,16 +313,20 @@ class AuthController extends GetxController {
         authBox.write(KImageUrl, value.user!.photoURL.toString());
         authBox.write(KName, value.user!.displayName.toString());
         authBox.write(KEmail, value.user!.email.toString());
-        isLoading.value = false;
         update();
       });
+      isLoading.value = false;
+      update();
       isSignedIn = true;
+
       await authBox.write("auth", isSignedIn);
 //      displayUserId.value = await GetStorage().read("uid");
 
       update();
       Get.offNamed(Routes.patientMainScreen);
     } on FirebaseAuthException catch (error) {
+      isLoading.value = false;
+      update();
       String title = error.code.toString().replaceAll(RegExp('-'), ' ');
       String message = "";
       if (error.code == 'user-not-found') {

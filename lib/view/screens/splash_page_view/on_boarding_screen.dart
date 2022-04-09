@@ -30,20 +30,22 @@ class OnBoardingScreen extends StatelessWidget {
                     ? SizedBox(
                         height: height * .13,
                       )
-                    : InkWell(
-                        onTap: () {
-                          Get.offAllNamed(Routes.loginScreen,);
-                        },
+                    : Container(
+                        alignment: Alignment.centerRight,
+                        height: height * .13,
                         child: Container(
-                          alignment: Alignment.centerRight,
-                          height: height * .13,
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: height * .03,
-                            width: width * .2,
-                            decoration: BoxDecoration(
-                                color: Colors.grey[100],
-                                borderRadius: BorderRadius.circular(10)),
+                          alignment: Alignment.center,
+                          height: height * .03,
+                          width: width * .2,
+                          decoration: BoxDecoration(
+                              color: Colors.grey[100],
+                              borderRadius: BorderRadius.circular(10)),
+                          child: InkWell(borderRadius: BorderRadius.circular(10),
+                            onTap: () {
+                              Get.offAllNamed(
+                                Routes.loginScreen,
+                              );
+                            },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [

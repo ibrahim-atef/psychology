@@ -103,7 +103,7 @@ class PatientRegisterScreen extends StatelessWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      AuthTextFromField(
+                      GetBuilder<AuthController>(builder: (_) {return AuthTextFromField(
                         prefixIcon: Icon(
                           Icons.account_circle_outlined,
                           color: white,
@@ -123,30 +123,35 @@ class PatientRegisterScreen extends StatelessWidget {
                         },
                         hintText: "Full Name",
                         textInputType: TextInputType.name,
-                      ),
+                      );  },),
                       SizedBox(
                         height: 10,
                       ),
 
                       //Phone number
-                      AuthTextFromField(
-                        prefixIcon: Icon(
-                          Icons.phone_android,
-                          color: white,
-                        ),
-                        suffixIcon: Text(""),
-                        controller: phoneController,
-                        obscureText: false,
-                        validator: (value) {
-                          if (value.length == 0) {
-                            return 'Please enter mobile number';
-                          } else if (!RegExp(validationPhone).hasMatch(value)) {
-                            return 'Please enter valid mobile number';
-                          }
-                          return null;
+                      GetBuilder<AuthController>(
+                        builder: (_) {
+                          return AuthTextFromField(
+                            prefixIcon: Icon(
+                              Icons.phone_android,
+                              color: white,
+                            ),
+                            suffixIcon: Text(""),
+                            controller: phoneController,
+                            obscureText: false,
+                            validator: (value) {
+                              if (value.length == 0) {
+                                return 'Please enter mobile number';
+                              } else if (!RegExp(validationPhone)
+                                  .hasMatch(value)) {
+                                return 'Please enter valid mobile number';
+                              }
+                              return null;
+                            },
+                            hintText: 'Phone number',
+                            textInputType: TextInputType.phone,
+                          );
                         },
-                        hintText: 'Phone number',
-                        textInputType: TextInputType.phone,
                       ),
                       SizedBox(
                         height: 10,
@@ -220,10 +225,10 @@ class PatientRegisterScreen extends StatelessWidget {
                         height: 25,
                       ),
                       Obx(
-                            (){
+                        () {
                           return AuthButton(
                               onPressed: () {
-                                if (formKey.currentState!.validate()) {
+                                if (formKey.currentState!.validate() ) {
                                   String name = nameController.text;
 
                                   String email = emailController.text.trim();
@@ -263,7 +268,8 @@ class PatientRegisterScreen extends StatelessWidget {
                         height: height * .01,
                       ),
                       GoogleAuthImage(
-                        onPressed: () {controller.clearImage();
+                        onPressed: () {
+                          controller.clearImage();
                           controller.googleSignupApp();
                         },
                       ),
