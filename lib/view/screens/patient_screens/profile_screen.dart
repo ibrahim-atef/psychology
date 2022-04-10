@@ -72,7 +72,7 @@ class PatientProfileScreen extends StatelessWidget {
             buildTextButtonIcon(
               backColor: mainColor,
               onPressed: () {
-                Get.to(PatientUpdateProfile());
+                Get.to(()=>PatientUpdateProfile());
               },
               icon: Icons.edit,
               iconColor: Colors.white,
