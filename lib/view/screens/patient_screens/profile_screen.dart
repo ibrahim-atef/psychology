@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,7 +14,9 @@ import '../../widgets/patient_screens_widgets/doctor_profile_view_for_patient_wi
 class PatientProfileScreen extends StatelessWidget {
   PatientProfileScreen({Key? key}) : super(key: key);
   final controller = Get.find<AuthController>();
-  final cc = Get.put(PatientHomeScreenController(), );
+  final cc = Get.put(
+    PatientHomeScreenController(),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +32,12 @@ class PatientProfileScreen extends StatelessWidget {
             ),
             GetBuilder<PatientHomeScreenController>(
               builder: (_) {
-                if (cc.patientInfoModel!=null) {
+                if (cc.patientInfoModel != null) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CirculeImageAvatar(
-                        imageUrl:
-                        cc.patientInfoModel!.profileUrl.toString(),
+                        imageUrl: cc.patientInfoModel!.profileUrl.toString(),
                         width: SizeConfig.defaultSize! * 5,
                       ),
                       HeightSizeBox(SizeConfig.defaultSize! * .7),
@@ -69,15 +69,20 @@ class PatientProfileScreen extends StatelessWidget {
             const Spacer(
               flex: 2,
             ),
-            buildTextButtonIcon(
-              backColor: mainColor,
-              onPressed: () {
-                Get.to(()=>PatientUpdateProfile());
+            GetBuilder<PatientHomeScreenController>(
+              builder: (_) {
+                return buildTextButtonIcon(
+                  backColor: mainColor,
+                  onPressed: () {
+                    Get.to(() => PatientUpdateProfile(),
+                        arguments: [cc.patientInfoModel]);
+                  },
+                  icon: Icons.edit,
+                  iconColor: Colors.white,
+                  label: '  Edit Profile    ',
+                  style: TextStyle(fontSize: 20, color: Colors.black),
+                );
               },
-              icon: Icons.edit,
-              iconColor: Colors.white,
-              label: '  Edit Profile    ',
-              style: TextStyle(fontSize: 20, color: Colors.black),
             ),
             const SizedBox(height: 20),
             buildTextButtonIcon(

@@ -5,7 +5,7 @@ class AuthBinding extends Bindings{
   @override
   void dependencies() {
     // TODO: implement dependencies
-    Get.put(AuthController(),permanent: false);
+    Get.lazyPut(()=>AuthController() ,fenix: false);
   }
 
 }

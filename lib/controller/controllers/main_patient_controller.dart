@@ -6,12 +6,21 @@ import 'package:psychology/view/screens/patient_screens/home_screen.dart';
 import 'package:psychology/view/screens/patient_screens/profile_screen.dart';
 
 class MainPatientController extends GetxController {
+
+  @override
+  void onInit() async {
+    // TODO: implement onInit
+   bottomSelectedIndex=0;
+   update();
+    super.onInit();
+  }
   List<Widget> screens = [
      PatientHomeScreen(),
      PatientChatScreen(),
      BlogsScreen(),
       PatientProfileScreen(),
   ];
+
   int bottomSelectedIndex = 0;
   PageController pageController = PageController();
 

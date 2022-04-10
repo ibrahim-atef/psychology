@@ -1,16 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:psychology/model/doctor_info_model.dart';
 import 'package:psychology/utils/my_string.dart';
 
 class FireStoreMethods {
   CollectionReference doctors =
       FirebaseFirestore.instance.collection(doctorsCollectionKey);
   CollectionReference patients =
-  FirebaseFirestore.instance.collection(patientsCollectionKey);
+      FirebaseFirestore.instance.collection(patientsCollectionKey);
+
   Future<void> insertPatientInfoFireStorage(String displayName, email, uid,
       profileUrl, phoneNumber, gender, isDoctor) async {
-
-
     patients.doc(uid).set({
       'displayName': displayName,
       'uid': uid,
@@ -18,7 +16,7 @@ class FireStoreMethods {
       "profileUrl": profileUrl,
       "phoneNumber": phoneNumber,
       "gender": gender,
-       "registerDate": DateTime.now()
+      "registerDate": DateTime.now()
     });
     return;
   }
@@ -44,9 +42,8 @@ class FireStoreMethods {
         .doc(uid)
         .update({'identityFile': identityFilrUrl})
         .then((value) => print("User Updated"))
-        .catchError((error) => print("Failed to update user: $error"));
+        .catchError((error) => print("Failed to update doctor Image: $error"));
   }
 
- 
 
 }

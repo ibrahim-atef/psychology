@@ -43,7 +43,7 @@ class PatientHomeScreenController extends GetxController {
   }
 
   getDoctorsInfo() async {
-    doctorsList = [];
+
     // userStream = await FireStoreMethods().GetUserByUserName(textEditingController.text);
     doctorsStream = await FireStoreMethods().doctors.snapshots();
 

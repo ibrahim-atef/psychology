@@ -103,27 +103,31 @@ class PatientRegisterScreen extends StatelessWidget {
                   key: formKey,
                   child: Column(
                     children: [
-                      GetBuilder<AuthController>(builder: (_) {return AuthTextFromField(
-                        prefixIcon: Icon(
-                          Icons.account_circle_outlined,
-                          color: white,
-                        ),
-                        suffixIcon: Text(""),
-                        controller: nameController,
-                        obscureText: false,
-                        validator: (value) {
-                          if (value.length == 0) {
-                            return 'Please enter name';
-                          } else if (value.toString().length <= 2 ||
-                              !RegExp(validationName).hasMatch(value)) {
-                            return "Enter valid name";
-                          } else {
-                            return null;
-                          }
+                      GetBuilder<AuthController>(
+                        builder: (_) {
+                          return AuthTextFromField(
+                            prefixIcon: Icon(
+                              Icons.account_circle_outlined,
+                              color: white,
+                            ),
+                            suffixIcon: Text(""),
+                            controller: nameController,
+                            obscureText: false,
+                            validator: (value) {
+                              if (value.length == 0) {
+                                return 'Please enter name';
+                              } else if (value.toString().length <= 2 ||
+                                  !RegExp(validationName).hasMatch(value)) {
+                                return "Enter valid name";
+                              } else {
+                                return null;
+                              }
+                            },
+                            hintText: "Full Name",
+                            textInputType: TextInputType.name,
+                          );
                         },
-                        hintText: "Full Name",
-                        textInputType: TextInputType.name,
-                      );  },),
+                      ),
                       SizedBox(
                         height: 10,
                       ),
@@ -228,7 +232,7 @@ class PatientRegisterScreen extends StatelessWidget {
                         () {
                           return AuthButton(
                               onPressed: () {
-                                if (formKey.currentState!.validate() ) {
+                                if (formKey.currentState!.validate()) {
                                   String name = nameController.text;
 
                                   String email = emailController.text.trim();

@@ -39,12 +39,11 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  controller.doctorsList.isNotEmpty
-                      ? ListView.builder(
+                   ListView.builder(
                       physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
-                      itemCount: controller.doctorsList.length,
+                      itemCount: controller.doctorsList.length.toInt(),
                       // gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
                       //     childAspectRatio: 1, maxCrossAxisExtent: 200),
                       itemBuilder: (context, index) {
@@ -58,13 +57,7 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
                           uid: controller.doctorsList[index].uid,
                         );
                       })
-                      : Center(
-                      child: Container(
-                        child: Text(
-                          "there's no doctors",
-                          style: TextStyle(fontSize: 25),
-                        ),
-                      )),
+
                 ],
               )
             : SizedBox();

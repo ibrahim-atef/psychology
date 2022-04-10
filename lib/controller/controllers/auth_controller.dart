@@ -78,6 +78,10 @@ class AuthController extends GetxController {
   }
 
 //////////////////////////////////ال sign up patient//////////////////////////////////////////////////////////////////////////
+  updateUserEmail(String email) async {
+    await auth.currentUser!.updateEmail(email);
+  }
+
   void patientSignUpUsingFirebase({
     required String name,
     required String email,
@@ -91,7 +95,7 @@ class AuthController extends GetxController {
             .createUserWithEmailAndPassword(email: email, password: password)
             .then((value) async {
           await authBox.write(KUid, value.user!.uid);
-          uid= value.user!.uid;
+          uid = value.user!.uid;
           update();
 
           auth.currentUser!.updateDisplayName(name);
@@ -111,7 +115,6 @@ class AuthController extends GetxController {
                   email, phoneNumber, patientGender.value, false)
               .then((v) {
             isSignedIn = true;
-
 
             isLoading.value = false;
             update();
