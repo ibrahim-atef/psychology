@@ -18,7 +18,7 @@ class PopularDoctorsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PatientHomeScreenController>(
       builder: (_) {
-        return controller.doctorsList.isNotEmpty
+        return controller.doctorsList !=null
             ? Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Column(

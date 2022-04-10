@@ -17,7 +17,7 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PatientHomeScreenController>(
       builder: (_) {
-        return controller.doctorsList.isNotEmpty
+        return controller.doctorsList!=null
             ? Column(
                 children: [
                   Container(
@@ -39,48 +39,32 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  StreamBuilder<QuerySnapshot>(
-                      stream: controller.doctorsStream,
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          controller.doctorsList.clear();
-
-                          for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                            controller.doctorsList.add(
-                                DoctorInfo.fromJson(snapshot.data!.docs[i]));
-                          }
-                          return controller.doctorsList.isNotEmpty
-                              ? ListView.builder(
-                                  physics: BouncingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.vertical,
-                                  itemCount: controller.doctorsList.length,
-                                  // gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  //     childAspectRatio: 1, maxCrossAxisExtent: 200),
-                                  itemBuilder: (context, index) {
-                                    return DoctorCard(
-                                      imageUrl: controller
-                                          .doctorsList[index].profileUrl,
-                                      name: controller
-                                          .doctorsList[index].displayName,
-                                      description:
-                                          controller.doctorsList[index].email,
-                                      uid: controller.doctorsList[index].uid,
-                                    );
-                                  })
-                              : Center(
-                                  child: Container(
-                                  child: Text(
-                                    "there's no doctors",
-                                    style: TextStyle(fontSize: 25),
-                                  ),
-                                ));
-                        } else {
-                          return Center(
-                              child: Container(
-                                  child: CircularProgressIndicator()));
-                        }
-                      }),
+                  controller.doctorsList.isNotEmpty
+                      ? ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: controller.doctorsList.length,
+                      // gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      //     childAspectRatio: 1, maxCrossAxisExtent: 200),
+                      itemBuilder: (context, index) {
+                        return DoctorCard(
+                          imageUrl: controller
+                              .doctorsList[index].profileUrl,
+                          name: controller
+                              .doctorsList[index].displayName,
+                          description:
+                          controller.doctorsList[index].email,
+                          uid: controller.doctorsList[index].uid,
+                        );
+                      })
+                      : Center(
+                      child: Container(
+                        child: Text(
+                          "there's no doctors",
+                          style: TextStyle(fontSize: 25),
+                        ),
+                      )),
                 ],
               )
             : SizedBox();
