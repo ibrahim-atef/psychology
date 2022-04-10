@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
- import 'package:psychology/controller/controllers/auth_controller.dart';
+import 'package:psychology/controller/controllers/auth_controller.dart';
 import 'package:psychology/controller/controllers/patient_home_screen_controller.dart';
 import 'package:psychology/utils/constants.dart';
- import 'package:psychology/utils/size_config.dart';
+import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/screens/patient_screens/patient_update_profile.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
@@ -14,7 +15,7 @@ import '../../widgets/patient_screens_widgets/doctor_profile_view_for_patient_wi
 class PatientProfileScreen extends StatelessWidget {
   PatientProfileScreen({Key? key}) : super(key: key);
   final controller = Get.find<AuthController>();
-  final cc = Get.put(PatientHomeScreenController());
+  final cc = Get.put(PatientHomeScreenController(), );
 
   @override
   Widget build(BuildContext context) {
@@ -30,30 +31,34 @@ class PatientProfileScreen extends StatelessWidget {
             ),
             GetBuilder<PatientHomeScreenController>(
               builder: (_) {
-                return
-                  cc.imageUrl!=null ? Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CirculeImageAvatar(
-                      imageUrl: cc.imageUrl,
-                      width: SizeConfig.defaultSize! * 5,
-                    ),
-                    HeightSizeBox(SizeConfig.defaultSize! * .7),
-                    KTextUtils(
-                        text: "${cc.name}",
-                        size: 22,
-                        color: darkGrey,
-                        fontWeight: FontWeight.w700,
-                        textDecoration: TextDecoration.none),
-                    HeightSizeBox(SizeConfig.defaultSize! * .2),
-                    KTextUtils(
-                        text: "${cc.email}",
-                        size: 15,
-                        color: grey,
-                        fontWeight: FontWeight.w400,
-                        textDecoration: TextDecoration.none)
-                  ],
-                ):CircularProgressIndicator();
+                if (cc.patientInfoModel!=null) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      CirculeImageAvatar(
+                        imageUrl:
+                        cc.patientInfoModel!.profileUrl.toString(),
+                        width: SizeConfig.defaultSize! * 5,
+                      ),
+                      HeightSizeBox(SizeConfig.defaultSize! * .7),
+                      KTextUtils(
+                          text: "${cc.patientInfoModel!.displayName}",
+                          size: 22,
+                          color: darkGrey,
+                          fontWeight: FontWeight.w700,
+                          textDecoration: TextDecoration.none),
+                      HeightSizeBox(SizeConfig.defaultSize! * .2),
+                      KTextUtils(
+                          text: "${cc.patientInfoModel!.email}",
+                          size: 15,
+                          color: grey,
+                          fontWeight: FontWeight.w500,
+                          textDecoration: TextDecoration.none)
+                    ],
+                  );
+                } else {
+                  return CircularProgressIndicator();
+                }
               },
             ),
             const Divider(

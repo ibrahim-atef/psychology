@@ -1,19 +1,20 @@
 class PatientInfoModel {
   String? displayName;
-  String? uid;
+
   String? email;
   String? profileUrl;
   String? phoneNumber;
-  String ? gender;
+  String? gender;
+  String? uid;
 
-  PatientInfoModel({
+  PatientInfoModel(
     this.displayName,
     this.uid,
     this.email,
     this.profileUrl,
     this.phoneNumber,
     this.gender,
-  });
+  );
 
   Map<String, dynamic> toMap() {
     return {
@@ -26,14 +27,14 @@ class PatientInfoModel {
     };
   }
 
-  factory PatientInfoModel.fromMap(Map<String, dynamic> map) {
+factory  PatientInfoModel.fromMap(map) {
     return PatientInfoModel(
-      displayName: map['displayName'] as String,
-      uid: map['uid'] as String,
-      email: map['email'] as String,
-      profileUrl: map['profileUrl'] as String,
-      phoneNumber: map['phoneNumber'] as String,
-      gender: map['gender'] as String,
+      map['displayName'],
+      map['uid'],
+      map['email'],
+      map['profileUrl'],
+      map['phoneNumber'],
+      map['gender'],
     );
   }
 }

@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,59 +15,76 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<PatientHomeScreenController>(builder: (_) {return controller.doctorsList.isNotEmpty? Column(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 5),
-          height: SizeConfig.defaultSize! * 1,
-          width: SizeConfig.screenWidth,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              KTextUtils(
-                  text: "More Therapists",
-                  size: SizeConfig.defaultSize! * 1.05,
-                  color: black,
-                  fontWeight: FontWeight.w800,
-                  textDecoration: TextDecoration.none),
-            ],
-          ),
-        ),
-        SizedBox(
-          height: 5,
-        ),
-        StreamBuilder<QuerySnapshot>(
-            stream: controller.doctorsStream,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                controller.doctorsList.clear();
+    return GetBuilder<PatientHomeScreenController>(
+      builder: (_) {
+        return controller.doctorsList.isNotEmpty
+            ? Column(
+                children: [
+                  Container(
+                    margin: EdgeInsets.symmetric(horizontal: 5),
+                    height: SizeConfig.defaultSize! * 1,
+                    width: SizeConfig.screenWidth,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        KTextUtils(
+                            text: "More Therapists",
+                            size: SizeConfig.defaultSize! * 1.05,
+                            color: black,
+                            fontWeight: FontWeight.w800,
+                            textDecoration: TextDecoration.none),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  StreamBuilder<QuerySnapshot>(
+                      stream: controller.doctorsStream,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          controller.doctorsList.clear();
 
-                for (int i = 0; i < snapshot.data!.docs.length; i++) {
-                  controller.doctorsList
-                      .add(DoctorInfo.fromJson(snapshot.data!.docs[i]));
-                }
-                return controller.doctorsList.isNotEmpty? ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: controller.doctorsList.length,
-                    // gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    //     childAspectRatio: 1, maxCrossAxisExtent: 200),
-                    itemBuilder: (context, index) {
-                      return DoctorCard(
-                        imageUrl: controller.doctorsList[index].profileUrl,
-                        name: controller.doctorsList[index].displayName,
-                        description: controller.doctorsList[index].email,
-                        uid: controller.doctorsList[index].uid,
-                      );
-                    }):Center(child: Container(child: Text("there's no doctors",style: TextStyle(fontSize: 25),),));
-              } else {
-                return Center(child: Container(child: CircularProgressIndicator()));
-              }
-            }),
-      ],
-    ):SizedBox();  },
-
+                          for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                            controller.doctorsList.add(
+                                DoctorInfo.fromJson(snapshot.data!.docs[i]));
+                          }
+                          return controller.doctorsList.isNotEmpty
+                              ? ListView.builder(
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  scrollDirection: Axis.vertical,
+                                  itemCount: controller.doctorsList.length,
+                                  // gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                                  //     childAspectRatio: 1, maxCrossAxisExtent: 200),
+                                  itemBuilder: (context, index) {
+                                    return DoctorCard(
+                                      imageUrl: controller
+                                          .doctorsList[index].profileUrl,
+                                      name: controller
+                                          .doctorsList[index].displayName,
+                                      description:
+                                          controller.doctorsList[index].email,
+                                      uid: controller.doctorsList[index].uid,
+                                    );
+                                  })
+                              : Center(
+                                  child: Container(
+                                  child: Text(
+                                    "there's no doctors",
+                                    style: TextStyle(fontSize: 25),
+                                  ),
+                                ));
+                        } else {
+                          return Center(
+                              child: Container(
+                                  child: CircularProgressIndicator()));
+                        }
+                      }),
+                ],
+              )
+            : SizedBox();
+      },
     );
   }
 }

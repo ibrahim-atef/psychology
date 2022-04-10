@@ -9,12 +9,16 @@ import 'package:psychology/services/firestore_methods.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/first_tap_bar_column.dart';
-import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tap_bar_profile_widget.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tap_bar_reviews_widget.dart';
 
- class PatientHomeScreenController extends GetxController {
+import '../../model/patint_info_model.dart';
+
+class PatientHomeScreenController extends GetxController {
   Stream<QuerySnapshot>? doctorsStream;
+  Stream<DocumentSnapshot<Map<String, dynamic>>>? userInfoStream;
   List<dynamic> doctorsList = <DoctorInfo>[].obs;
+  PatientInfoModel? patientInfoModel;
+
   List<Widget> tabScreens = [FirstTapBarWidget(), TabBarReviewsWidget()];
   List<Color> colorList = [
     Color(0xffFFD93D),
@@ -23,30 +27,19 @@ import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_v
     Color(0xff97DBAE),
   ];
 
-  String? email;
-  String? name;
-  var gender;
-  var isDoctor;
-  var imageUrl;
-  var phoneNumber;
-  var uid;
-
   Random random = new Random();
+  GetStorage authBox = GetStorage();
 
   @override
   void onInit() async {
-    GetStorage authBox = GetStorage();
-
     // TODO: implement onInit
-    email =await authBox.read(KEmail);
-    name =await authBox.read(KName);
-    gender = authBox.read(KGender);
-    isDoctor = authBox.read(KIsDoctor);
-    imageUrl =await authBox.read(KImageUrl);
-    phoneNumber =await authBox.read(KPhoneNumber);
-    uid =await authBox.read(KUid);
+
     update();
+    await GetStorage.init();
+
     getDoctorsInfo();
+    //  getUserInfo();
+    update();
     super.onInit();
   }
 
