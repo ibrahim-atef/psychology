@@ -18,7 +18,8 @@ class PopularDoctorsListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PatientHomeScreenController>(
       builder: (_) {
-        return controller.doctorsList !=null
+        controller.getDoctorsInfo();
+        return controller.doctorsList != null
             ? Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Column(
@@ -54,54 +55,40 @@ class PopularDoctorsListView extends StatelessWidget {
                     Container(
                       width: SizeConfig.screenWidth,
                       height: SizeConfig.defaultSize! * 7.1,
-                      child: StreamBuilder<QuerySnapshot>(
-                          stream: controller.doctorsStream,
-                          builder: (context, snapshot) {
-                            if (snapshot.hasData) {
-                              controller.doctorsList.clear();
-
-                              for (int i = 0;
-                                  i < snapshot.data!.docs.length;
-                                  i++) {
-                                controller.doctorsList.add(DoctorInfo.fromJson(
-                                    snapshot.data!.docs[i]));
-                              }
-                              return ListView.builder(
-                                scrollDirection: Axis.horizontal,
-                                itemBuilder: (context, index) {
-                                  return HomeScreenDoctorContainerBocking(
-                                    imageUrl: controller
-                                        .doctorsList[index].profileUrl,
-                                    name: controller
-                                        .doctorsList[index].displayName,
-                                    description:
-                                        controller.doctorsList[index].email,
-                                    uid: controller.doctorsList[index].uid,
-                                  );
-                                },
-                                itemCount: controller.doctorsList.length,
-                              );
-                            } else {
-                              return Center(
-                                  child: Container(
-                                      child: CircularProgressIndicator(
-                                color: mainColor,
-                              )));
-                            }
-                          }),
+                      child: controller.doctorsList != null
+                          ? ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemBuilder: (context, index) {
+                                return HomeScreenDoctorContainerBocking(
+                                  imageUrl:
+                                      controller.doctorsList[index].profileUrl,
+                                  name:
+                                      controller.doctorsList[index].displayName,
+                                  description:
+                                      controller.doctorsList[index].email,
+                                  uid: controller.doctorsList[index].uid,
+                                );
+                              },
+                              itemCount: controller.doctorsList.length,
+                            )
+                          : Center(
+                              child: Container(
+                                  child: CircularProgressIndicator(
+                              color: mainColor,
+                            ))),
                     ),
                   ],
                 ),
               )
             : Padding(
-              padding:  EdgeInsets.only(top: SizeConfig.defaultSize!*10),
-              child: const Center(
+                padding: EdgeInsets.only(top: SizeConfig.defaultSize! * 10),
+                child: const Center(
                   child: Text(
                     "Doctors Will be added soon...",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
-            );
+              );
       },
     );
   }

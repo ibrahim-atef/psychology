@@ -1,13 +1,11 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
- import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:psychology/view/screens/patient_screens/patient_main_screen.dart';
-
 
 class PatientProfileController extends GetxController {
   bool isLoading = false;
@@ -37,7 +35,7 @@ class PatientProfileController extends GetxController {
 
   ///////////////////////////
 
-  updateUserInfo(Map<String, Object> map, uid, collectionKey) {
+  updateUserInfo(Map<String, Object> map, uid, collectionKey,context) {
     isLoading = true;
     update();
     return FirebaseFirestore.instance
@@ -53,8 +51,8 @@ class PatientProfileController extends GetxController {
       );
       isLoading = false;
       update();
-       Get.offAll(() => PatientMainScreen());
-
+//       Get.offAll(() => PatientMainScreen());
+      Navigator.pop(context);
     }).catchError((error) {
       isLoading = false;
       update();
@@ -73,8 +71,8 @@ class PatientProfileController extends GetxController {
     name,
     phoneNumber,
     email,
-    collectionKey,
-  ) async{
+    collectionKey,context
+  ) async {
     isLoading = true;
     update();
     if (profileImageFile != null) {
@@ -84,16 +82,14 @@ class PatientProfileController extends GetxController {
               "$collectionKey/$uid/${Uri.file(profileImageFile!.path).pathSegments.last}")
           .putFile(profileImageFile!)
           .then((value) {
-        value.ref.getDownloadURL().then((value) async{
-
-
+        value.ref.getDownloadURL().then((value) async {
           updateUserInfo({
             'displayName': name,
             'email': email,
             "profileUrl": value,
             "phoneNumber": phoneNumber,
-          }, uid, collectionKey);
-           Get.snackbar(
+          }, uid, collectionKey,context);
+          Get.snackbar(
             "Uploaded ✔✔",
             "Uploaded to firestorage successfully",
             backgroundColor: Colors.green,
@@ -119,7 +115,7 @@ class PatientProfileController extends GetxController {
         'email': email,
         "profileUrl": imageUrl,
         "phoneNumber": phoneNumber,
-      }, uid, collectionKey);
+      }, uid, collectionKey,context);
     }
   }
 }

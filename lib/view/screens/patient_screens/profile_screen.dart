@@ -32,6 +32,7 @@ class PatientProfileScreen extends StatelessWidget {
             ),
             GetBuilder<PatientHomeScreenController>(
               builder: (_) {
+                cc.getUserData();
                 if (cc.patientInfoModel != null) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

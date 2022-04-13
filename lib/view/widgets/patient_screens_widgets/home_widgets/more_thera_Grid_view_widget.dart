@@ -17,7 +17,8 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<PatientHomeScreenController>(
       builder: (_) {
-        return controller.doctorsList!=null
+        controller.getMoreDoctorsInfo();
+        return controller.moreDoctorsList != null
             ? Column(
                 children: [
                   Container(
@@ -39,7 +40,7 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                   ListView.builder(
+                  ListView.builder(
                       physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
@@ -48,16 +49,12 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
                       //     childAspectRatio: 1, maxCrossAxisExtent: 200),
                       itemBuilder: (context, index) {
                         return DoctorCard(
-                          imageUrl: controller
-                              .doctorsList[index].profileUrl,
-                          name: controller
-                              .doctorsList[index].displayName,
-                          description:
-                          controller.doctorsList[index].email,
+                          imageUrl: controller.doctorsList[index].profileUrl,
+                          name: controller.doctorsList[index].displayName,
+                          description: controller.doctorsList[index].email,
                           uid: controller.doctorsList[index].uid,
                         );
                       })
-
                 ],
               )
             : SizedBox();

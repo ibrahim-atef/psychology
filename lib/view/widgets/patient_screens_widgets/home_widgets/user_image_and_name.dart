@@ -16,7 +16,6 @@ import '../../utils_widgets/text_utils.dart';
 
 class UserImageAndName extends StatelessWidget {
   final controller = Get.put(PatientHomeScreenController());
-  final authController = Get.put(AuthController());
   GetStorage authBox = GetStorage();
 
   @override
@@ -25,72 +24,41 @@ class UserImageAndName extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
       child: GetBuilder<PatientHomeScreenController>(
         builder: (_) {
-          return StreamBuilder<DocumentSnapshot>(
-            stream:
-                FireStoreMethods().patients.doc(authBox.read(KUid)).snapshots(),
-            builder: (context, snapshot) {
-              try {
-                if (snapshot.hasData) {
-                  controller.patientInfoModel = null;
+          controller.getUserData();
 
-                  controller.patientInfoModel =
-                      PatientInfoModel.fromMap(snapshot.data!);
-
-                  return controller.patientInfoModel != null
-                      ? Row(
-                          children: [
-                            CirculeImageAvatar(
-                              imageUrl: controller.patientInfoModel!.profileUrl
-                                  .toString(),
-                              width: SizeConfig.defaultSize! * 4,
-                            ),
-                            SizedBox(
-                              width: SizeConfig.defaultSize,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                KTextUtils(
-                                    text: "Hello,",
-                                    size: 18,
-                                    color: darkGrey,
-                                    fontWeight: FontWeight.w500,
-                                    textDecoration: TextDecoration.none),
-                                KTextUtils(
-                                    text: controller
-                                        .patientInfoModel!.displayName
-                                        .toString(),
-                                    size: 22,
-                                    color: darkGrey,
-                                    fontWeight: FontWeight.w600,
-                                    textDecoration: TextDecoration.none),
-                              ],
-                            )
-                          ],
-                        )
-                      : SizedBox(
-                          child: LinearProgressIndicator(),
-                        );
-                } else {
-                  return SizedBox(child: LinearProgressIndicator());
-                }
-              } catch (e) {
-                return Center(
-                  child: Column(
-                    children: const [
-                      LinearProgressIndicator(),
-                      Text(
-                        "Your access denied",
-                        style: TextStyle(
-                          color: Colors.red,
-                        fontWeight: FontWeight.bold),
-                      )
-                    ],
-                  ),
-                );
-              }
-            },
-          );
+          if (controller.patientInfoModel == null) {
+            return SizedBox(child: LinearProgressIndicator());
+          } else {
+            return Row(
+              children: [
+                CirculeImageAvatar(
+                  imageUrl: controller.patientInfoModel!.profileUrl.toString(),
+                  width: SizeConfig.defaultSize! * 4,
+                ),
+                SizedBox(
+                  width: SizeConfig.defaultSize,
+                ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    KTextUtils(
+                        text: "Hello,",
+                        size: 18,
+                        color: darkGrey,
+                        fontWeight: FontWeight.w500,
+                        textDecoration: TextDecoration.none),
+                    KTextUtils(
+                        text:
+                        controller.patientInfoModel!.displayName.toString(),
+                        size: 22,
+                        color: darkGrey,
+                        fontWeight: FontWeight.w600,
+                        textDecoration: TextDecoration.none),
+                  ],
+                )
+              ],
+            );
+          }
         },
       ),
     );

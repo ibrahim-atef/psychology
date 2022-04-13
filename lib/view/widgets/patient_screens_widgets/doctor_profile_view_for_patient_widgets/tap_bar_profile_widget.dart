@@ -8,8 +8,8 @@ import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 import '../../../../controller/controllers/patient_home_screen_controller.dart';
 
 class TabBarProfileWidget extends StatelessWidget {
-   String field;
-   final controller = Get.lazyPut(() => PatientHomeScreenController());
+  String field;
+  final controller = Get.lazyPut(() => PatientHomeScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -25,9 +25,12 @@ class TabBarProfileWidget extends StatelessWidget {
               color: black,
               fontWeight: FontWeight.bold,
               textDecoration: TextDecoration.none),
-           SizedBox(height: SizeConfig.defaultSize!*.98,),
-          ListView.builder(physics: const NeverScrollableScrollPhysics(),
-               shrinkWrap: true,
+          SizedBox(
+            height: SizeConfig.defaultSize! * .98,
+          ),
+          ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
               scrollDirection: Axis.vertical,
               itemCount: 3,
               itemBuilder: (context, index) {
@@ -40,15 +43,17 @@ class TabBarProfileWidget extends StatelessWidget {
                           return Container(
                             width: SizeConfig.defaultSize! * .8,
                             height: SizeConfig.defaultSize! * 3,
-                            color: c.colorList[
-                            c.random.nextInt(c.colorList.length)],
+                            color: c.colorList[index] == null
+                                ? mainColor2
+                                : c.colorList[index],
                           );
                         },
                       ),
                       SizedBox(
                         width: 5,
                       ),
-                      Column(mainAxisAlignment: MainAxisAlignment.start,
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           KTextUtils(
@@ -80,7 +85,7 @@ class TabBarProfileWidget extends StatelessWidget {
     );
   }
 
-   TabBarProfileWidget({
+  TabBarProfileWidget({
     required this.field,
   });
 }

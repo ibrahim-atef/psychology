@@ -11,11 +11,11 @@ import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_v
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tap_bar_reviews_widget.dart';
 
 import '../../model/patint_info_model.dart';
+import '../../utils/my_string.dart';
 
 class PatientHomeScreenController extends GetxController {
-  Stream<QuerySnapshot>? doctorsStream;
-  Stream<DocumentSnapshot<Map<String, dynamic>>>? userInfoStream;
   List<dynamic> doctorsList = <DoctorInfo>[].obs;
+  List<dynamic> moreDoctorsList = <DoctorInfo>[].obs;
   PatientInfoModel? patientInfoModel;
 
   List<Widget> tabScreens = [FirstTapBarWidget(), TabBarReviewsWidget()];
@@ -23,30 +23,49 @@ class PatientHomeScreenController extends GetxController {
     Color(0xffFFD93D),
     mainColor2,
     Color(0xffF190B7),
+    yelloo,
     Color(0xff97DBAE),
   ];
 
-  Random random = new Random();
   GetStorage authBox = GetStorage();
 
   @override
   void onInit() async {
     // TODO: implement onInit
-
-    update();
     await GetStorage.init();
 
-    getDoctorsInfo();
-    //  getUserInfo();
-    update();
     super.onInit();
   }
 
   getDoctorsInfo() async {
-
     // userStream = await FireStoreMethods().GetUserByUserName(textEditingController.text);
-    doctorsStream = await FireStoreMethods().doctors.snapshots();
+    await FireStoreMethods().doctors.snapshots().listen((event) {
+      doctorsList = [];
+      for (int i = 0; i < event.docs.length; i++) {
+        doctorsList.add(DoctorInfo.fromJson(event.docs[i]));
+      }
 
-    update();
+    });update();
   }
+
+  getMoreDoctorsInfo() async {
+    await FireStoreMethods().doctors.snapshots().listen((event) {
+      moreDoctorsList = [];
+      for (int i = 0; i < event.docs.length; i++) {
+        moreDoctorsList.add(DoctorInfo.fromJson(event.docs[i]));
+      }
+    });
+    update();}
+
+  getUserData() async {
+    await FireStoreMethods()
+        .patients
+        .doc(authBox.read(KUid))
+        .snapshots()
+        .listen((event) {
+      patientInfoModel = null;
+      patientInfoModel = PatientInfoModel.fromMap(event);
+
+    });
+    update();}
 }
