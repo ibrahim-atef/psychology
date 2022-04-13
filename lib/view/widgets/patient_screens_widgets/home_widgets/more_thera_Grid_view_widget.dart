@@ -30,7 +30,7 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
                       children: [
                         KTextUtils(
                             text: "More Therapists",
-                            size: SizeConfig.defaultSize! * 1.05,
+                            size: SizeConfig.defaultSize! * 1,
                             color: black,
                             fontWeight: FontWeight.w800,
                             textDecoration: TextDecoration.none),
