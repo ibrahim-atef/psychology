@@ -25,7 +25,6 @@ class AuthController extends GetxController {
 
   var uid;
 
-  var isSignedIn = false;
   bool isVisibilty = false;
 
   CollectionReference patientsCollection =
@@ -114,11 +113,9 @@ class AuthController extends GetxController {
               .uploadPatientImageAndInfo(value.user!.uid, profileImage!, name,
                   email, phoneNumber, patientGender.value, false)
               .then((v) {
-            isSignedIn = true;
-
             isLoading.value = false;
             update();
-            authBox.write("auth", isSignedIn);
+            authBox.write("auth", patientsCollectionKey);
 
             Get.offNamed(Routes.patientMainScreen);
             update();
@@ -180,9 +177,9 @@ class AuthController extends GetxController {
     required String password,
     required String phoneNumber,
   }) async {
-
-    try {   isLoading.value = true;
-    update();
+    try {
+      isLoading.value = true;
+      update();
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
@@ -198,8 +195,7 @@ class AuthController extends GetxController {
             false);
         isLoading.value = false;
         update();
-        isSignedIn=true;
-        authBox.write("auth", isSignedIn);
+        authBox.write("auth", doctorsCollectionKey);
       });
 
       update();
@@ -323,23 +319,39 @@ class AuthController extends GetxController {
       update();
       await auth
           .signInWithEmailAndPassword(email: email, password: password)
-          .then((value) {
+          .then((value) async {
+        final p = await FirebaseFirestore.instance
+            .collection(patientsCollectionKey)
+            .doc(value.user!.uid.toString()) // varuId in your case
+            .get();
+        final d = await FirebaseFirestore.instance
+            .collection(doctorsCollectionKey)
+            .doc(value.user!.uid.toString()) // varuId in your case
+            .get();
         authBox.write(KUid, value.user!.uid.toString());
-        authBox.write(KPhoneNumber, value.user!.phoneNumber.toString());
-        authBox.write(KImageUrl, value.user!.photoURL.toString());
-        authBox.write(KName, value.user!.displayName.toString());
-        authBox.write(KEmail, value.user!.email.toString());
+        if (p.exists) {
+          Get.offNamed(Routes.patientMainScreen);
+          authBox.write("auth", patientsCollectionKey);
+          isLoading.value = false;
+        } else if (d.exists) {
+          Get.offNamed(Routes.doctorMainScreen);
+          authBox.write("auth", doctorsCollectionKey);
+          isLoading.value = false;
+        } else {
+          isLoading.value = false;
+          Get.snackbar(
+            "Error",
+            "try to login again",
+            snackPosition: SnackPosition.TOP,
+          );
+        }
         update();
       });
-      isLoading.value = false;
       update();
-      isSignedIn = true;
 
-      await authBox.write("auth", isSignedIn);
 //      displayUserId.value = await GetStorage().read("uid");
 
       update();
-      Get.offNamed(Routes.patientMainScreen);
     } on FirebaseAuthException catch (error) {
       isLoading.value = false;
       update();
@@ -400,8 +412,7 @@ class AuthController extends GetxController {
             false);
       });
 
-      isSignedIn = true;
-      authBox.write("auth", isSignedIn);
+      authBox.write("auth", patientsCollectionKey);
       update();
       Get.offNamed(Routes.patientMainScreen);
     } catch (error) {
@@ -466,15 +477,8 @@ class AuthController extends GetxController {
       // displayUserName.value = "";
       // displayUserPhoto.value = "";
       // displayUserEmail.value = "";
-      isSignedIn = false;
       authBox.remove("auth");
-      authBox.remove(KUid);
-      await authBox.remove(KEmail);
-      await authBox.remove(KName);
-      await authBox.remove(KGender);
-      await authBox.remove(KIsDoctor);
-      await authBox.remove(KImageUrl);
-      await authBox.remove(KPhoneNumber);
+
       update();
       Get.offAllNamed(Routes.loginScreen);
     } catch (error) {

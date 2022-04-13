@@ -4,6 +4,8 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:psychology/routes/routes.dart';
 import 'package:flutter/services.dart';
+import 'package:psychology/utils/my_string.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
@@ -14,7 +16,6 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
@@ -27,9 +28,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: GetStorage().read<bool>("auth") == true
-          ? Routes.doctorMainScreen
-          : Routes.SplashScreen,
+      initialRoute: GetStorage().read("auth") == patientsCollectionKey
+          ? Routes.patientMainScreen
+          : GetStorage().read("auth") == doctorsCollectionKey
+              ? Routes.doctorMainScreen
+              : Routes.SplashScreen,
       getPages: AppRoutes.routes,
 
       //Fraon
