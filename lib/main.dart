@@ -10,6 +10,7 @@ void main() async {
   await Firebase.initializeApp();
   runApp(MyApp());
   //please help me
+  // لااااااا
 }
 
 class MyApp extends StatelessWidget {
