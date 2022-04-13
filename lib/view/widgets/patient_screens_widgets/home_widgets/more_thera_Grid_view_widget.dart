@@ -39,7 +39,7 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
                     height: 5,
                   ),
                   ListView.builder(   padding: EdgeInsets.zero,
-                   //   physics: BouncingScrollPhysics(),
+                     physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       itemCount: controller.doctorsList.length.toInt(),

@@ -41,8 +41,8 @@ class PatientHomeScreenController extends GetxController {
       for (int i = 0; i < event.docs.length; i++) {
         doctorsList.add(DoctorInfo.fromJson(event.docs[i]));
       }
-
-    });update();
+    });
+    update();
   }
 
   getMoreDoctorsInfo() async {
@@ -52,7 +52,8 @@ class PatientHomeScreenController extends GetxController {
         moreDoctorsList.add(DoctorInfo.fromJson(event.docs[i]));
       }
     });
-    update();}
+    update();
+  }
 
   getUserData() async {
     await FireStoreMethods()
@@ -62,7 +63,7 @@ class PatientHomeScreenController extends GetxController {
         .listen((event) {
       patientInfoModel = null;
       patientInfoModel = PatientInfoModel.fromMap(event);
-
     });
-    update();}
+    update();
+  }
 }

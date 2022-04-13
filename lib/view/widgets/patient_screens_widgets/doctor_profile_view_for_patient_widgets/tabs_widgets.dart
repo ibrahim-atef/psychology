@@ -18,18 +18,18 @@ class Tabs extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: KTextUtils(
                 text: "Profile",
-                size: SizeConfig.defaultSize!*1.4,
+                size: SizeConfig.screenHeight!*.03,
                 color: black,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w800,
                 textDecoration: TextDecoration.none),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: KTextUtils(
                 text: "Reviews",
-                size: SizeConfig.defaultSize!*1.4,
+                size: SizeConfig.screenHeight!*.03,
                 color: black,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.w800,
                 textDecoration: TextDecoration.none),
           ),
         ],
