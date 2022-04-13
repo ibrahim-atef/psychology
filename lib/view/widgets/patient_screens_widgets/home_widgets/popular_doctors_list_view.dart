@@ -1,9 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/patient_home_screen_controller.dart';
-import 'package:psychology/model/doctor_info_model.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/home_screen_doctor_container_bocking.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
@@ -19,14 +16,14 @@ class PopularDoctorsListView extends StatelessWidget {
     return GetBuilder<PatientHomeScreenController>(
       builder: (_) {
         controller.getDoctorsInfo();
-        return controller.doctorsList != null
-            ? Padding(
+        return
+             Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Column(
                   children: [
                     Container(
                       padding: EdgeInsets.symmetric(horizontal: 5),
-                      height: SizeConfig.defaultSize,
+                      height: SizeConfig.screenHeight!*0.04,
                       width: SizeConfig.screenWidth,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,15 +77,7 @@ class PopularDoctorsListView extends StatelessWidget {
                   ],
                 ),
               )
-            : Padding(
-                padding: EdgeInsets.only(top: SizeConfig.defaultSize! * 10),
-                child: const Center(
-                  child: Text(
-                    "Doctors Will be added soon...",
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                  ),
-                ),
-              );
+            ;
       },
     );
   }
