@@ -180,7 +180,9 @@ class AuthController extends GetxController {
     required String password,
     required String phoneNumber,
   }) async {
-    try {
+
+    try {   isLoading.value = true;
+    update();
       await auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((value) {
@@ -194,10 +196,14 @@ class AuthController extends GetxController {
             phoneNumber,
             patientGender.value,
             false);
+        isLoading.value = false;
+        update();
+        isSignedIn=true;
+        authBox.write("auth", isSignedIn);
       });
 
       update();
-      Get.offNamed(Routes.patientMainScreen);
+      Get.offNamed(Routes.doctorMainScreen);
     } on FirebaseAuthException catch (error) {
       String title = error.code.toString().replaceAll(RegExp('-'), ' ');
       String message = "";

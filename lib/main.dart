@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       initialRoute: GetStorage().read<bool>("auth") == true
-          ? Routes.patientMainScreen
+          ? Routes.doctorMainScreen
           : Routes.SplashScreen,
       getPages: AppRoutes.routes,
 
