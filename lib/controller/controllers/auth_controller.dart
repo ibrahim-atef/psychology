@@ -339,11 +339,8 @@ class AuthController extends GetxController {
           isLoading.value = false;
         } else {
           isLoading.value = false;
-          Get.snackbar(
-            "Error",
-            "try to login again",
-            snackPosition: SnackPosition.TOP,
-          );
+          Get.snackbar("Error", "try to login again",
+              snackPosition: SnackPosition.TOP, backgroundColor: Colors.red);
         }
         update();
       });
