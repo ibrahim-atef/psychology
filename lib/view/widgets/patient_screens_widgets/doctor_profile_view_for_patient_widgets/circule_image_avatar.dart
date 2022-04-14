@@ -7,7 +7,6 @@ class CirculeImageAvatar extends StatelessWidget {
   String imageUrl;
   double width;
   Color? color;
-  File? image;
 
   @override
   Widget build(BuildContext context) {
@@ -41,5 +40,5 @@ class CirculeImageAvatar extends StatelessWidget {
   }
 
   CirculeImageAvatar(
-      {required this.imageUrl, required this.width, this.color, this.image});
+      {required this.imageUrl, required this.width, this.color, });
 }

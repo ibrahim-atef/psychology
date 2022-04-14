@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
-import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 class HomeScreenDoctorContainerBocking extends StatelessWidget {
   String name;
@@ -36,11 +35,7 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                     width: SizeConfig.defaultSize! * 5,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
-                      // image: DecorationImage(
-                      //     image: NetworkImage(
-                      //       imageUrl,
-                      //     ),
-                      //     fit: BoxFit.cover),
+
                     ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(15),
@@ -118,37 +113,7 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                 SizedBox(
                   height: SizeConfig.defaultSize,
                 ),
-                // SizedBox(
-                //   width: SizeConfig.defaultSize! * 7,
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                //     children: [
-                //       KTextUtils(
-                //           text: " \$ 200EGP",
-                //           size: SizeConfig.defaultSize! * 0.58,
-                //           color: black,
-                //           fontWeight: FontWeight.w600,
-                //           textDecoration: TextDecoration.none),
-                //       Spacer(),
-                //       SizedBox(
-                //         height: SizeConfig.defaultSize! * 1.2,
-                //         width: SizeConfig.defaultSize! * 4.2,
-                //         child: ElevatedButton(
-                //             style: ElevatedButton.styleFrom(
-                //               padding: EdgeInsets.all(0),
-                //               primary: mainColor2, // background
-                //             ),
-                //             onPressed: () {},
-                //             child: KTextUtils(
-                //                 text: "Bock Now",
-                //                 size: SizeConfig.defaultSize! * .7,
-                //                 color: white,
-                //                 fontWeight: FontWeight.w800,
-                //                 textDecoration: TextDecoration.none)),
-                //       )
-                //     ],
-                //   ),
-                // ),
+
               ],
             )
           ],

@@ -98,8 +98,7 @@ class PatientUpdateProfile extends StatelessWidget {
                             width: SizeConfig.width! * .28,
                             imageUrl: data.profileUrl!,
                             color: Colors.white,
-                            image: controller.profileImageFile,
-                          ),
+                           ),
                           Positioned(
                             bottom: 0,
                             right: 0,
