@@ -32,12 +32,9 @@ class CirculeImageAvatar extends StatelessWidget {
             borderRadius: BorderRadius.circular(width * 2)),
         child: ClipRRect(
           borderRadius: BorderRadius.circular(width * 2),
-          child: image == null
-              ? Image.network(
-                  imageUrl,
-                  fit: BoxFit.cover,
-                )
-              : Image.file(image!),
+          child: FadeInImage.assetNetwork(fit: BoxFit.cover,
+              placeholder: "assets/animations/63065-profile-in-out.gif",
+              image: imageUrl),
         ),
       ),
     );

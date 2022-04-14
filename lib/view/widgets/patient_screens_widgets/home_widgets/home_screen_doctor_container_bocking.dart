@@ -35,12 +35,20 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
                     height: SizeConfig.defaultSize! * 7,
                     width: SizeConfig.defaultSize! * 5,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        image: DecorationImage(
-                            image: NetworkImage(
-                              imageUrl,
-                            ),
-                            fit: BoxFit.cover)),
+                      borderRadius: BorderRadius.circular(15),
+                      // image: DecorationImage(
+                      //     image: NetworkImage(
+                      //       imageUrl,
+                      //     ),
+                      //     fit: BoxFit.cover),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(15),
+                      child: FadeInImage.assetNetwork(
+                          fit: BoxFit.cover,
+                          placeholder: "assets/animations/loading.gif",
+                          image: imageUrl),
+                    ),
                   ),
                 ),
               ),
