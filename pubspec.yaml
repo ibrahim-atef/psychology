@@ -45,7 +45,7 @@ dependencies:
   cloud_firestore: ^3.1.10
   image_picker: ^0.8.4+11
   firebase_storage: ^10.2.9
-  
+  google_fonts: ^2.3.1
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +70,11 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
+
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo.ttf
   assets:
     - assets/images/
     - assets/animations/

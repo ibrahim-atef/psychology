@@ -6,6 +6,8 @@ class FireStoreMethods {
       FirebaseFirestore.instance.collection(doctorsCollectionKey);
   CollectionReference patients =
       FirebaseFirestore.instance.collection(patientsCollectionKey);
+  CollectionReference blogs =
+      FirebaseFirestore.instance.collection("blogs");
 
   Future<void> insertPatientInfoFireStorage(String displayName, email, uid,
       profileUrl, phoneNumber, gender, isDoctor) async {
@@ -44,6 +46,4 @@ class FireStoreMethods {
         .then((value) => print("User Updated"))
         .catchError((error) => print("Failed to update doctor Image: $error"));
   }
-
-
 }

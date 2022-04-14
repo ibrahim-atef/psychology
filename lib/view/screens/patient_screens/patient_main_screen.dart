@@ -38,7 +38,7 @@ class PatientMainScreen extends StatelessWidget {
               items: [
                 buildBottomNavigationBarItem(Icons.home),
                 buildBottomNavigationBarItem(Icons.chat),
-                buildBottomNavigationBarItem(Icons.blender),
+                buildBottomNavigationBarItem(Icons.article_outlined),
                 buildBottomNavigationBarItem(Icons.account_circle),
               ],
             ));

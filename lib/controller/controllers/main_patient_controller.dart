@@ -10,8 +10,7 @@ class MainPatientController extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
-   bottomSelectedIndex=0;
-   update();
+
     super.onInit();
   }
   List<Widget> screens = [
@@ -35,4 +34,8 @@ class MainPatientController extends GetxController {
     bottomSelectedIndex = index;
     update();
   }
+
+
+
+
 }

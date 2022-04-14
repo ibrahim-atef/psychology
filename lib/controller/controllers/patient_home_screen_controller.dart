@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:psychology/model/blogs_model.dart';
 import 'package:psychology/model/doctor_info_model.dart';
 import 'package:psychology/services/firestore_methods.dart';
 import 'package:psychology/utils/constants.dart';
@@ -11,10 +12,12 @@ import '../../model/patint_info_model.dart';
 import '../../utils/my_string.dart';
 
 class PatientHomeScreenController extends GetxController {
-  RxList doctorsList = [].obs ;
-  RxList  moreDoctorsList = [].obs;
-  final patientInfoModel=Rxn<PatientInfoModel>();
+  RxList doctorsList = [].obs;
 
+  RxList moreDoctorsList = [].obs;
+  final patientInfoModel = Rxn<PatientInfoModel>();
+
+  List<BlogsModel> blogsList = [];
   List<Widget> tabScreens = [FirstTapBarWidget(), TabBarReviewsWidget()];
   List<Color> colorList = [
     Color(0xffFFD93D),
@@ -30,7 +33,10 @@ class PatientHomeScreenController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     await GetStorage.init();
-getUserData();getMoreDoctorsInfo();getDoctorsInfo();
+    getUserData();
+    getMoreDoctorsInfo();
+    getDoctorsInfo();
+    getBlogs();
     super.onInit();
   }
 
@@ -50,8 +56,7 @@ getUserData();getMoreDoctorsInfo();getDoctorsInfo();
       moreDoctorsList.clear();
       for (int i = 0; i < event.docs.length; i++) {
         moreDoctorsList.add(DoctorInfo.fromJson(event.docs[i]));
-        debugPrint("${moreDoctorsList[0].displayName} ");
-      }
+              }
     });
     //  update();
   }
@@ -64,8 +69,16 @@ getUserData();getMoreDoctorsInfo();getDoctorsInfo();
         .listen((event) {
       patientInfoModel.value = null;
       patientInfoModel.value = PatientInfoModel.fromMap(event);
-      debugPrint("${patientInfoModel.value!.displayName} ");
-      //  update();
+            //  update();
+    });
+  }
+
+  getBlogs() async {
+    await FireStoreMethods().blogs.get().then((event) {
+      blogsList.clear();
+      for (int i = 0; i < event.docs.length; i++) {
+        blogsList.add(BlogsModel.fromJson(event.docs[i]));
+              }
     });
   }
 }
