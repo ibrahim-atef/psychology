@@ -13,71 +13,68 @@ class PopularDoctorsListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<PatientHomeScreenController>(
-      builder: (_) {
-        controller.getDoctorsInfo();
-        return
-             Padding(
-                padding: const EdgeInsets.all(2.0),
-                child: Column(
+    return Obx(
+      () {
+         return Padding(
+          padding: const EdgeInsets.all(2.0),
+          child: Column(
+            children: [
+              Container(
+                padding: EdgeInsets.symmetric(horizontal: 5),
+                height: SizeConfig.screenHeight! * 0.04,
+                width: SizeConfig.screenWidth,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 5),
-                      height: SizeConfig.screenHeight!*0.04,
-                      width: SizeConfig.screenWidth,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          KTextUtils(
-                              text: "Popular Doctors",
-                              size: SizeConfig.defaultSize! * 1.05,
-                              color: black,
-                              fontWeight: FontWeight.w800,
-                              textDecoration: TextDecoration.none),
-                          // InkWell(
-                          //   onTap: () {},
-                          //   child: KTextUtils(
-                          //       text: "See More",
-                          //       size: 16,
-                          //       color: mainColor2,
-                          //       fontWeight: FontWeight.w600,
-                          //       textDecoration: TextDecoration.none),
-                          // )
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Container(
-                      width: SizeConfig.screenWidth,
-                      height: SizeConfig.defaultSize! * 7.1,
-                      child: controller.doctorsList != null
-                          ? ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return HomeScreenDoctorContainerBocking(
-                                  imageUrl:
-                                      controller.doctorsList[index].profileUrl,
-                                  name:
-                                      controller.doctorsList[index].displayName,
-                                  description:
-                                      controller.doctorsList[index].email,
-                                  uid: controller.doctorsList[index].uid,
-                                );
-                              },
-                              itemCount: controller.doctorsList.length,
-                            )
-                          : Center(
-                              child: Container(
-                                  child: CircularProgressIndicator(
-                              color: mainColor,
-                            ))),
-                    ),
+                    KTextUtils(
+                        text: "Popular Doctors",
+                        size: SizeConfig.defaultSize! * 1.05,
+                        color: black,
+                        fontWeight: FontWeight.w800,
+                        textDecoration: TextDecoration.none),
+                    // InkWell(
+                    //   onTap: () {},
+                    //   child: KTextUtils(
+                    //       text: "See More",
+                    //       size: 16,
+                    //       color: mainColor2,
+                    //       fontWeight: FontWeight.w600,
+                    //       textDecoration: TextDecoration.none),
+                    // )
                   ],
                 ),
-              )
-            ;
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Container(
+                width: SizeConfig.screenWidth,
+                height: SizeConfig.defaultSize! * 7.1,
+                child: controller.doctorsList != null
+                    ? ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return HomeScreenDoctorContainerBocking(
+                            imageUrl:
+                                controller.doctorsList[index].profileUrl,
+                            name:
+                                controller.doctorsList[index].displayName,
+                            description:
+                                controller.doctorsList[index].email,
+                            uid: controller.doctorsList[index].uid,
+                          );
+                        },
+                        itemCount: controller.doctorsList.length,
+                      )
+                    : Center(
+                        child: Container(
+                            child: CircularProgressIndicator(
+                        color: mainColor,
+                      ))),
+              ),
+            ],
+          ),
+        );
       },
     );
   }

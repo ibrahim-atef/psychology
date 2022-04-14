@@ -13,10 +13,9 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<PatientHomeScreenController>(
-      builder: (_) {
-        controller.getMoreDoctorsInfo();
-        return controller.moreDoctorsList != null
+    return Obx(
+      () {
+         return controller.moreDoctorsList != null
             ? Column(
                 children: [
                   Container(

@@ -11,8 +11,8 @@ import '../../model/patint_info_model.dart';
 import '../../utils/my_string.dart';
 
 class PatientHomeScreenController extends GetxController {
-  List<dynamic> doctorsList = <DoctorInfo>[].obs;
-  List<dynamic> moreDoctorsList = <DoctorInfo>[].obs;
+  RxList doctorsList = [].obs ;
+  RxList  moreDoctorsList = [].obs;
   PatientInfoModel? patientInfoModel;
 
   List<Widget> tabScreens = [FirstTapBarWidget(), TabBarReviewsWidget()];
@@ -30,29 +30,30 @@ class PatientHomeScreenController extends GetxController {
   void onInit() async {
     // TODO: implement onInit
     await GetStorage.init();
-
+getUserData();getMoreDoctorsInfo();getDoctorsInfo();
     super.onInit();
   }
 
   getDoctorsInfo() async {
     // userStream = await FireStoreMethods().GetUserByUserName(textEditingController.text);
     await FireStoreMethods().doctors.snapshots().listen((event) {
-      doctorsList = [];
+      doctorsList.clear();
       for (int i = 0; i < event.docs.length; i++) {
         doctorsList.add(DoctorInfo.fromJson(event.docs[i]));
       }
     });
-    update();
+    //   update();
   }
 
   getMoreDoctorsInfo() async {
     await FireStoreMethods().doctors.snapshots().listen((event) {
-      moreDoctorsList = [];
+      moreDoctorsList.clear();
       for (int i = 0; i < event.docs.length; i++) {
         moreDoctorsList.add(DoctorInfo.fromJson(event.docs[i]));
+        debugPrint("${moreDoctorsList[0].displayName} ");
       }
     });
-    update();
+    //  update();
   }
 
   getUserData() async {
@@ -63,7 +64,8 @@ class PatientHomeScreenController extends GetxController {
         .listen((event) {
       patientInfoModel = null;
       patientInfoModel = PatientInfoModel.fromMap(event);
+      debugPrint("${patientInfoModel!.displayName} ");
+      //  update();
     });
-    update();
   }
 }
