@@ -53,6 +53,7 @@ class PatientProfileController extends GetxController {
       update();
 //       Get.offAll(() => PatientMainScreen());
       Navigator.pop(context);
+
     }).catchError((error) {
       isLoading = false;
       update();
