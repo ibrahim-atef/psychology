@@ -19,8 +19,8 @@ class BlogDetailScreen extends StatelessWidget {
                   height: Get.height * .27,
                   child: ClipRRect(
                     borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(15),
-                      bottomRight: Radius.circular(15),
+                      bottomLeft: Radius.circular(5),
+                      bottomRight: Radius.circular(5),
                     ),
                     child: FadeInImage.assetNetwork(
                       height: Get.height * .25,
