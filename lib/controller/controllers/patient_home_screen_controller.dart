@@ -13,7 +13,7 @@ import '../../utils/my_string.dart';
 class PatientHomeScreenController extends GetxController {
   RxList doctorsList = [].obs ;
   RxList  moreDoctorsList = [].obs;
-  PatientInfoModel? patientInfoModel;
+  final patientInfoModel=Rxn<PatientInfoModel>();
 
   List<Widget> tabScreens = [FirstTapBarWidget(), TabBarReviewsWidget()];
   List<Color> colorList = [
@@ -62,9 +62,9 @@ getUserData();getMoreDoctorsInfo();getDoctorsInfo();
         .doc(authBox.read(KUid))
         .snapshots()
         .listen((event) {
-      patientInfoModel = null;
-      patientInfoModel = PatientInfoModel.fromMap(event);
-      debugPrint("${patientInfoModel!.displayName} ");
+      patientInfoModel.value = null;
+      patientInfoModel.value = PatientInfoModel.fromMap(event);
+      debugPrint("${patientInfoModel.value!.displayName} ");
       //  update();
     });
   }

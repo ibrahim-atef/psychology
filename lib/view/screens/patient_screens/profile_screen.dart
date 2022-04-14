@@ -8,7 +8,6 @@ import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/screens/patient_screens/patient_update_profile.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
-
 import '../../widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 
 class PatientProfileScreen extends StatelessWidget {
@@ -30,27 +29,27 @@ class PatientProfileScreen extends StatelessWidget {
             const Spacer(
               flex: 2,
             ),
-            GetBuilder<PatientHomeScreenController>(
-              builder: (_) {
-                cc.getUserData();
-                if (cc.patientInfoModel != null) {
+            Obx(
+              () {
+                if (cc.patientInfoModel.value != null) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CirculeImageAvatar(
-                        imageUrl: cc.patientInfoModel!.profileUrl.toString(),
+                        imageUrl:
+                            cc.patientInfoModel.value!.profileUrl.toString(),
                         width: SizeConfig.defaultSize! * 5,
                       ),
                       HeightSizeBox(SizeConfig.defaultSize! * .7),
                       KTextUtils(
-                          text: "${cc.patientInfoModel!.displayName}",
+                          text: "${cc.patientInfoModel.value!.displayName}",
                           size: 22,
                           color: darkGrey,
                           fontWeight: FontWeight.w700,
                           textDecoration: TextDecoration.none),
                       HeightSizeBox(SizeConfig.defaultSize! * .2),
                       KTextUtils(
-                          text: "${cc.patientInfoModel!.email}",
+                          text: "${cc.patientInfoModel.value!.email}",
                           size: 15,
                           color: grey,
                           fontWeight: FontWeight.w500,
@@ -76,7 +75,7 @@ class PatientProfileScreen extends StatelessWidget {
                   backColor: mainColor,
                   onPressed: () {
                     Get.to(() => PatientUpdateProfile(),
-                        arguments: [cc.patientInfoModel]);
+                        arguments: [cc.patientInfoModel.value]);
                   },
                   icon: Icons.edit,
                   iconColor: Colors.white,
