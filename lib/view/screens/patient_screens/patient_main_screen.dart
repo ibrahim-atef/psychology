@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/main_patient_controller.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
+import 'package:psychology/utils/styles.dart';
 
 class PatientMainScreen extends StatelessWidget {
   PatientMainScreen({Key? key}) : super(key: key);
@@ -36,10 +37,10 @@ class PatientMainScreen extends StatelessWidget {
               unselectedItemColor: grey,
               selectedItemColor: mainColor2,
               items: [
-                buildBottomNavigationBarItem(Icons.home),
-                buildBottomNavigationBarItem(Icons.chat),
-                buildBottomNavigationBarItem(Icons.article_outlined),
-                buildBottomNavigationBarItem(Icons.account_circle),
+                buildBottomNavigationBarItem(IconBroken.Home),
+                buildBottomNavigationBarItem(IconBroken.Message),
+                buildBottomNavigationBarItem(IconBroken.Paper),
+                buildBottomNavigationBarItem(IconBroken.User),
               ],
             ));
       },
