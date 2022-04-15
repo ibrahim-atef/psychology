@@ -75,6 +75,10 @@ flutter:
     - family: Cairo
       fonts:
         - asset: assets/fonts/Cairo.ttf
+    - family: IconBroken
+      fonts:
+        - asset: assets/fonts/icons.ttf
+
   assets:
     - assets/images/
     - assets/animations/
