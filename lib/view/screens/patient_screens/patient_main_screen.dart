@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:psychology/controller/controllers/main_patient_controller.dart';
+import 'package:psychology/controller/controllers/patient_controller/main_patient_controller.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/utils/styles.dart';

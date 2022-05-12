@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:psychology/controller/controllers/patient_home_screen_controller.dart';
-import 'package:psychology/utils/constants.dart';
+ import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/reviews_and_sissions_widget.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tabs_widgets.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
+
+import '../../../controller/controllers/patient_controller/patient_home_screen_controller.dart';
 
 class DoctorProfileViewForPatient extends StatelessWidget {
   DoctorProfileViewForPatient({Key? key}) : super(key: key);

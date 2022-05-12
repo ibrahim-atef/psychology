@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/utils/size_config.dart';
-import '../../../controller/controllers/patient_home_screen_controller.dart';
+ import '../../../controller/controllers/patient_controller/patient_home_screen_controller.dart';
 import '../../../utils/constants.dart';
 import '../../widgets/utils_widgets/text_utils.dart';
 import 'blog_details_screen.dart';

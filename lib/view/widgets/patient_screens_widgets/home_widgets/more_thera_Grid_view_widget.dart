@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:psychology/controller/controllers/patient_home_screen_controller.dart';
+import 'package:psychology/controller/controllers/patient_controller/patient_home_screen_controller.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/home_widgets/doctor_card.dart';

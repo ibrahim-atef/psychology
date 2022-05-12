@@ -8,7 +8,8 @@ class DoctorMainScreen extends StatelessWidget {
   final controller = Get.find<AuthController>();
 
   @override
-  Widget build(BuildContext context) {SizeConfig().init(context);
+  Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Scaffold(
       body: Center(
         child: GetBuilder<AuthController>(

@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psychology/controller/controllers/patient_controller/patient_profile_controller.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/auth/auth_button.dart';
 import 'package:psychology/view/widgets/auth/auth_text_from_field.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
 
 import '../../../controller/controllers/auth_controller.dart';
-import '../../../controller/controllers/patient_profile_controller.dart';
-import '../../../model/patint_info_model.dart';
+ import '../../../model/patint_info_model.dart';
 import '../../../utils/constants.dart';
 import '../../../utils/my_string.dart';
-import '../../widgets/auth/profile_image_picking.dart';
-import '../../widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
+ import '../../widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 
 class PatientUpdateProfile extends StatelessWidget {
   PatientUpdateProfile({Key? key}) : super(key: key);

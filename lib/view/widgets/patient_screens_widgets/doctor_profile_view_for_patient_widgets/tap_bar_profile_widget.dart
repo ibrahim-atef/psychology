@@ -5,7 +5,7 @@ import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
-import '../../../../controller/controllers/patient_home_screen_controller.dart';
+import 'package:psychology/controller/controllers/patient_controller/patient_home_screen_controller.dart';
 
 class TabBarProfileWidget extends StatelessWidget {
   String field;

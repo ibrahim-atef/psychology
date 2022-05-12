@@ -45,7 +45,7 @@ class AppRoutes {
     GetPage(
         name: Routes.doctorMainScreen,
         page: () => DoctorMainScreen(),
-        bindings: [AuthBinding(), PatientHomeScreenBinding()]),
+        bindings: [AuthBinding(),  ]),
     GetPage(
         name: Routes.forgotPassword,
         page: () => ForgotPassword(),
