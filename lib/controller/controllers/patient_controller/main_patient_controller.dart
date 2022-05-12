@@ -13,7 +13,7 @@ class MainPatientController extends GetxController {
 
     super.onInit();
   }
-  List<Widget> screens = [
+  List<Widget> patientScreens = [
      PatientHomeScreen(),
      PatientChatScreen(),
      BlogsScreen(),

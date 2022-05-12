@@ -24,7 +24,7 @@ class PatientMainScreen extends StatelessWidget {
               controller: controller.pageController,
               allowImplicitScrolling: true,
               scrollDirection: Axis.horizontal,
-              children: controller.screens,
+              children: controller.patientScreens,
             ),
             bottomNavigationBar: BottomNavigationBar(
               showSelectedLabels: false,
