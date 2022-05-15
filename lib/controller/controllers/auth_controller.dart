@@ -475,6 +475,7 @@ class AuthController extends GetxController {
       // displayUserPhoto.value = "";
       // displayUserEmail.value = "";
       authBox.remove("auth");
+      authBox.erase();
 
       update();
       Get.offAllNamed(Routes.loginScreen);
