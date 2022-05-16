@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:psychology/controller/bindings/auth_binding.dart';
+import 'package:psychology/controller/bindings/doctor_home_binding.dart';
 import 'package:psychology/controller/bindings/main_doctor_binding.dart';
 import 'package:psychology/controller/bindings/main_patient_binding.dart';
 import 'package:psychology/controller/bindings/message_binding.dart';
@@ -9,6 +10,7 @@ import 'package:psychology/view/screens/chat/chat_screen.dart';
 import 'package:psychology/view/screens/auth/doctor_register_screen.dart';
 import 'package:psychology/view/screens/auth/forgot_password.dart';
 import 'package:psychology/view/screens/auth/login_screen.dart';
+import 'package:psychology/view/screens/doctor_screens/add_blog_screen.dart';
 import 'package:psychology/view/screens/doctor_screens/doctor_main_screen.dart';
 import 'package:psychology/view/screens/patient_screens/patient_main_screen.dart';
 import 'package:psychology/view/screens/splash_page_view/on_boarding_screen.dart';
@@ -33,7 +35,9 @@ class AppRoutes {
       transition: Transition.downToUp,
       transitionDuration: Duration(milliseconds: 1000),
       //testing auth
-      bindings: [AuthBinding(), ],
+      bindings: [
+        AuthBinding(),
+      ],
     ),
     GetPage(
         name: Routes.patientRegisterScreen,
@@ -70,6 +74,11 @@ class AppRoutes {
         bindings: [
           MessagesBinding(),
         ]),
+    GetPage(
+      name: Routes.aggBlogScreen,
+      page: () => AggBlogScreen(),
+      transition: Transition.downToUp,binding: DoctorHomeBinding()
+    ),
   ];
 }
 
@@ -85,4 +94,5 @@ class Routes {
   static const chatScreen = "/chatScreen";
 
   static const doctorProfileViewForPatient = "/doctorProfileViewForPatient";
+  static const aggBlogScreen = "/aggBlogScreen";
 }

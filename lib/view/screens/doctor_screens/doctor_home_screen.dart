@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/doctor_controller/doctor_main_controller.dart';
- import 'package:psychology/utils/constants.dart';
+import 'package:psychology/routes/routes.dart';
+import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/styles.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 
@@ -13,13 +14,29 @@ class DoctorHomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        leadingWidth: 0,
+        leading: SizedBox(
+          width: 0,
+        ),
+        title: const Text(
+          "Home",
+          style: TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+            color: white,
+          ),
+        ),
+        backgroundColor: mainColor2,
+        elevation: 2,
+      ),
       body: Padding(
         padding: EdgeInsets.all(8),
         child: Column(
           children: [
-            SizedBox(
-              height: Get.height * .05,
-            ),
+            // SizedBox(
+            //   height: Get.height * .05,
+            // ),
             GetBuilder(
               builder: (MainDoctorController mainDoctorController) {
                 return mainDoctorController.myData.value == null
@@ -73,7 +90,7 @@ class DoctorHomeScreen extends StatelessWidget {
               builder: (MainDoctorController mainDoctorController) {
                 return Container(
                   height: Get.height * .05,
-                  width: Get.width * .9,
+                  width: Get.width * .94,
                   padding: EdgeInsets.zero,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
@@ -88,7 +105,8 @@ class DoctorHomeScreen extends StatelessWidget {
                       border: Border.all(color: mainColor2, width: 1.3)),
                   child: GestureDetector(
                     onTap: () {
-                      print("fffffffff");
+                      Get.toNamed(Routes.aggBlogScreen,
+                          arguments: [mainDoctorController.myData.value!]);
                     },
                     child: Card(
                       margin: EdgeInsets.zero,
@@ -125,7 +143,6 @@ class DoctorHomeScreen extends StatelessWidget {
                 );
               },
             ),
-
           ],
         ),
       ),
