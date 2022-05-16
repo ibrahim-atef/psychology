@@ -15,7 +15,7 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-         return controller.moreDoctorsList != null
+        return controller.moreDoctorsList.isNotEmpty
             ? Column(
                 children: [
                   Container(
@@ -37,8 +37,9 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
                   SizedBox(
                     height: 5,
                   ),
-                  ListView.builder(   padding: EdgeInsets.zero,
-                     physics: BouncingScrollPhysics(),
+                  ListView.builder(
+                      padding: EdgeInsets.zero,
+                      physics: BouncingScrollPhysics(),
                       shrinkWrap: true,
                       scrollDirection: Axis.vertical,
                       itemCount: controller.doctorsList.length.toInt(),
@@ -54,7 +55,16 @@ class MoreTherapistsGridViewWidget extends StatelessWidget {
                       })
                 ],
               )
-            : SizedBox();
+            : SizedBox(
+                child: Center(
+                  child: KTextUtils(
+                      text: "Theres no doctors ",
+                      size: 17,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                      textDecoration: TextDecoration.none),
+                ),
+              );
       },
     );
   }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
- import 'package:psychology/utils/constants.dart';
+import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
+import 'package:psychology/utils/styles.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/reviews_and_sissions_widget.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tabs_widgets.dart';
@@ -22,66 +23,97 @@ class DoctorProfileViewForPatient extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: homeBackGroundColor,
-      body: DefaultTabController(
-        length: 2,
-        child: NestedScrollView(floatHeaderSlivers: true,
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return [
-              SliverToBoxAdapter(child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5),
-              child: Container(
-                height: SizeConfig.defaultSize! * 17.2,
-                decoration: buildBoxDecoration(),
-                child: Column(
-                  children: [
-                    HeightSizeBox(SizeConfig.defaultSize! * 2.5),
-                    Row(crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            IconButton(padding: EdgeInsets.zero,alignment: Alignment.topLeft,
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                icon: Icon(
-                                  Icons.arrow_back_ios_outlined,
-                                  color: black,
-                                  size: SizeConfig.screenWidth!*.035,
-                                )),
-                          ],
-                        ),
-                        SizedBox(width: SizeConfig.screenWidth!*.1,),
-                        Container(
-                            height: SizeConfig.screenWidth! * .12,
-                            width: SizeConfig.screenWidth! * .12,
-                            child: CirculeImageAvatar(imageUrl: imageUrl, width: SizeConfig.defaultSize!*4,)),
-                      ],
+      body: SafeArea(
+        child: DefaultTabController(
+          length: 2,
+          child: NestedScrollView(
+            floatHeaderSlivers: true,
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return [
+                SliverToBoxAdapter(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 1),
+                    child: Container(
+                      height: Get.height * .3,
+                      decoration: buildBoxDecoration(),
+                      child: Column(
+                        children: [
+                          HeightSizeBox(Get.width * .03),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  IconButton(
+                                      padding: EdgeInsets.zero,
+                                      alignment: Alignment.topLeft,
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      icon: Icon(
+                                        Icons.arrow_back_ios_outlined,
+                                        color: black,
+                                        size: Get.width * .07,
+                                      )),
+                                ],
+                              ),
+                              // SizedBox(
+                              //   width: Get.width * .23,
+                              // ),
+                              Container(
+                                  height: Get.width * .25,
+                                  width: Get.width * .25,
+                                  child: CirculeImageAvatar(
+                                    imageUrl: imageUrl,
+                                    width: SizeConfig.defaultSize! * 4,
+                                  )),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  IconButton(
+                                      padding: EdgeInsets.zero,
+                                      alignment: Alignment.topLeft,
+                                      onPressed: () {
+
+                                      },
+                                      icon: Icon(
+                                        IconBroken.Chat,
+                                        color: black,
+                                        size: Get.width * .07,
+                                      )),
+                                ],
+                              ),
+                            ],
+                          ),
+                          HeightSizeBox(Get.width * .01),
+                          KTextUtils(
+                              text: "Dr." + name,
+                              size: 21,
+                              color: black,
+                              fontWeight: FontWeight.w800,
+                              textDecoration: TextDecoration.none),
+                          HeightSizeBox(Get.width * .01),
+                          ReviewsAndSissions(),
+                          HeightSizeBox(Get.width * .01),
+                          Tabs()
+                        ],
+                      ),
                     ),
-                    HeightSizeBox(SizeConfig.defaultSize! * .5),
-                    KTextUtils(
-                        text: "Dr." + name,
-                        size: 21,
-                        color: black,
-                        fontWeight: FontWeight.w800,
-                        textDecoration: TextDecoration.none),
-                    HeightSizeBox(SizeConfig.defaultSize! * 1.5),
-                    ReviewsAndSissions(),
-                    HeightSizeBox(SizeConfig.defaultSize! * 1),
-                    Tabs()
-                  ],
-                ),
-              ),
-            ),)];
-          },
-          body:  GetBuilder<PatientHomeScreenController>(
-            builder: (_) {
-              return TabBarView(children: controller.tabScreens);
+                  ),
+                )
+              ];
             },
-          ) ,
-
-
+            body: GetBuilder<PatientHomeScreenController>(
+              builder: (_) {
+                return TabBarView(children: controller.tabScreens);
+              },
+            ),
+          ),
         ),
       ),
       floatingActionButton: GestureDetector(
@@ -114,9 +146,7 @@ class DoctorProfileViewForPatient extends StatelessWidget {
             child: Text(
               "Book Now",
               style: TextStyle(
-                  fontSize: 22,
-                  color: white,
-                  fontWeight: FontWeight.w700),
+                  fontSize: 22, color: white, fontWeight: FontWeight.w700),
             ),
           ),
         ),

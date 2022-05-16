@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/auth_controller.dart';
 import 'package:psychology/controller/controllers/patient_controller/patient_home_screen_controller.dart';
- import 'package:psychology/utils/constants.dart';
+import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/screens/patient_screens/patient_update_profile.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
@@ -12,10 +12,8 @@ import '../../widgets/patient_screens_widgets/doctor_profile_view_for_patient_wi
 
 class PatientProfileScreen extends StatelessWidget {
   PatientProfileScreen({Key? key}) : super(key: key);
-  final controller = Get.find<AuthController>();
-  final cc = Get.put(
-    PatientHomeScreenController(),
-  );
+  final authController = Get.put(AuthController());
+  final patientHomeScreenController = Get.put(PatientHomeScreenController());
 
   @override
   Widget build(BuildContext context) {
@@ -31,25 +29,25 @@ class PatientProfileScreen extends StatelessWidget {
             ),
             Obx(
               () {
-                if (cc.patientInfoModel.value != null) {
+                if (patientHomeScreenController.patientInfoModel.value != null) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CirculeImageAvatar(
                         imageUrl:
-                            cc.patientInfoModel.value!.profileUrl.toString(),
+                            patientHomeScreenController.patientInfoModel.value!.profileUrl.toString(),
                         width: SizeConfig.defaultSize! * 5,
                       ),
                       HeightSizeBox(SizeConfig.defaultSize! * .7),
                       KTextUtils(
-                          text: "${cc.patientInfoModel.value!.displayName}",
+                          text: "${patientHomeScreenController.patientInfoModel.value!.displayName}",
                           size: 22,
                           color: darkGrey,
                           fontWeight: FontWeight.w700,
                           textDecoration: TextDecoration.none),
                       HeightSizeBox(SizeConfig.defaultSize! * .2),
                       KTextUtils(
-                          text: "${cc.patientInfoModel.value!.email}",
+                          text: "${patientHomeScreenController.patientInfoModel.value!.email}",
                           size: 15,
                           color: grey,
                           fontWeight: FontWeight.w500,
@@ -75,7 +73,7 @@ class PatientProfileScreen extends StatelessWidget {
                   backColor: mainColor,
                   onPressed: () {
                     Get.to(() => PatientUpdateProfile(),
-                        arguments: [cc.patientInfoModel.value]);
+                        arguments: [patientHomeScreenController.patientInfoModel.value]);
                   },
                   icon: Icons.edit,
                   iconColor: Colors.white,
@@ -109,7 +107,7 @@ class PatientProfileScreen extends StatelessWidget {
                     onPressed: () {
                       Get.defaultDialog(
                           onCancel: () {
-                            controller.signOutFromApp();
+                            authController.signOutFromApp();
                           },
                           title: "Logout",
                           textConfirm: "No",
@@ -175,7 +173,7 @@ class PatientProfileScreen extends StatelessWidget {
     //             builder: (_) {
     //               return InkWell(
     //                   onTap: () {
-    //                      //cc.getDooctorsInfo();
+    //                      //patientHomeScreenController.getDooctorsInfo();
     //                   },
     //                   child: Text("DoctorData"));
     //             },

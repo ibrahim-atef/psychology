@@ -7,11 +7,12 @@ import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/view/screens/doctor_screens/doctor_chat_screen.dart';
 import 'package:psychology/view/screens/doctor_screens/doctor_home_screen.dart';
 import 'package:psychology/view/screens/doctor_screens/doctor_profile_screen.dart';
+import 'package:psychology/view/screens/patient_screens/blogs_screen.dart';
 
 class MainDoctorController extends GetxController {
   @override
   void onInit() async {
-await GetStorage.init();
+    await GetStorage.init();
     getMyData();
     super.onInit();
   }
@@ -21,6 +22,7 @@ await GetStorage.init();
   List<Widget> doctorScreens = [
     DoctorHomeScreen(),
     DoctorChatScreen(),
+    BlogsScreen(),
     DoctorProfileScreen(),
   ];
   int bottomNavSelectedIndex = 0;

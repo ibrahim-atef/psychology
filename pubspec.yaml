@@ -46,6 +46,15 @@ dependencies:
   image_picker: ^0.8.4+11
   firebase_storage: ^10.2.9
   google_fonts: ^2.3.1
+  fluttertoast: ^8.0.9
+  flutter_sound: ^9.2.10
+  permission_handler: ^9.2.0
+  audio_session:
+  just_audio:
+  random_string:
+  firebase_messaging: ^11.4.0
+  flutter_staggered_animations: ^1.0.0
+
 
 dev_dependencies:
   flutter_test:

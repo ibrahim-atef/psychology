@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -32,6 +33,12 @@ class AuthController extends GetxController {
 
   CollectionReference doctorsCollection =
       FirebaseFirestore.instance.collection(doctorsCollectionKey);
+
+  @override
+  void onInit() {
+    // TODO: implement onInit
+    super.onInit();
+  }
 
 ///////////////////passwordVisibilty///////////////////////
   void visibility() {
@@ -196,6 +203,7 @@ class AuthController extends GetxController {
         isLoading.value = false;
         update();
         authBox.write("auth", doctorsCollectionKey);
+        authBox.write(KUid, value.user!.uid);
       });
 
       update();
@@ -398,20 +406,26 @@ class AuthController extends GetxController {
         idToken: googleAuth?.idToken,
       );
 
-      await auth.signInWithCredential(credential).then((value) {
-        FireStoreMethods().insertPatientInfoFireStorage(
-            value.user!.displayName!,
-            value.user!.email,
-            value.user!.uid,
-            value.user!.photoURL,
-            value.user!.phoneNumber,
-            "",
-            false);
-      });
+      await auth.signInWithCredential(credential).then((value) async {
+        var     token =await FirebaseMessaging.instance.getToken();
+        print(token);
 
-      authBox.write("auth", patientsCollectionKey);
-      update();
-      Get.offNamed(Routes.patientMainScreen);
+           FireStoreMethods().insertPatientInfoFireStorage(
+            value.user!.displayName!.toString(),
+            value.user!.email.toString(),
+            value.user!.uid.toString(),
+            value.user!.photoURL.toString(),
+            value.user!.phoneNumber.toString(),
+            "male",
+            false,
+            token);
+        authBox.write(KUid, value.user!.uid.toString());
+      }).then((value) {
+        authBox.write("auth", patientsCollectionKey);
+
+        update();
+        Get.offNamed(Routes.patientMainScreen);
+      });
     } catch (error) {
       Get.defaultDialog(
           title: "error",

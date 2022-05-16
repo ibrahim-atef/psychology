@@ -1,33 +1,30 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class PatientInfoModel {
   String? displayName;
-
   String? email;
   String? profileUrl;
   String? phoneNumber;
   String? gender;
+  String? identityFile;
+  Timestamp? registerDate;
+  bool? isDoctor;
   String? uid;
+  String? token;
 
   PatientInfoModel(
-    this.displayName,
-    this.uid,
-    this.email,
-    this.profileUrl,
-    this.phoneNumber,
-    this.gender,
-  );
+      this.displayName,
+      this.uid,
+      this.email,
+      this.profileUrl,
+      this.phoneNumber,
+      this.gender,
+      this.isDoctor,
+      this.identityFile,
+      this.registerDate,
+      this.token);
 
-  Map<String, dynamic> toMap() {
-    return {
-      'displayName': this.displayName,
-      'uid': this.uid,
-      'email': this.email,
-      'profileUrl': this.profileUrl,
-      'phoneNumber': this.phoneNumber,
-      'gender': this.gender,
-    };
-  }
-
-factory  PatientInfoModel.fromMap(map) {
+  factory PatientInfoModel.fromMap(map) {
     return PatientInfoModel(
       map['displayName'],
       map['uid'],
@@ -35,6 +32,10 @@ factory  PatientInfoModel.fromMap(map) {
       map['profileUrl'],
       map['phoneNumber'],
       map['gender'],
+      map['isDoctor'],
+      map['identityFile'],
+      map['registerDate'],
+      map['token'],
     );
   }
 }

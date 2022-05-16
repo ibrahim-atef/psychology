@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:psychology/utils/my_string.dart';
 
-class FireStoreMethods {
+class FireStoreMethods {  CollectionReference chatRooms =
+FirebaseFirestore.instance.collection(chatRoomsCollectionKey);
   CollectionReference doctors =
       FirebaseFirestore.instance.collection(doctorsCollectionKey);
   CollectionReference patients =
@@ -10,7 +11,7 @@ class FireStoreMethods {
       FirebaseFirestore.instance.collection("blogs");
 
   Future<void> insertPatientInfoFireStorage(String displayName, email, uid,
-      profileUrl, phoneNumber, gender, isDoctor) async {
+      profileUrl, phoneNumber, gender, isDoctor,token) async {
     patients.doc(uid).set({
       'displayName': displayName,
       'uid': uid,
@@ -18,13 +19,17 @@ class FireStoreMethods {
       "profileUrl": profileUrl,
       "phoneNumber": phoneNumber,
       "gender": gender,
-      "registerDate": DateTime.now()
+      "registerDate": DateTime.now(),
+      "isDoctor":false,
+      "identityFile":"null",
+      "token":token
+
     });
     return;
   }
 
   Future<void> insertDoctorInfoFireStorage(String displayName, email, uid,
-      profileUrl, identityFile, phoneNumber, gender, isDoctor) async {
+      profileUrl, identityFile, phoneNumber, gender, isDoctor,token) async {
     doctors.doc(uid).set({
       'displayName': displayName,
       'uid': uid,
@@ -34,7 +39,8 @@ class FireStoreMethods {
       "phoneNumber": phoneNumber,
       "gender": gender,
       "isDoctor": isDoctor,
-      "registerDate": DateTime.now()
+      "registerDate": DateTime.now(),
+      "token":token
     });
     return;
   }
@@ -45,5 +51,31 @@ class FireStoreMethods {
         .update({'identityFile': identityFilrUrl})
         .then((value) => print("User Updated"))
         .catchError((error) => print("Failed to update doctor Image: $error"));
-  }
+  }  /////////////////////////////////
+updateLastMessageSend(
+    String chatRoomId, Map<String, dynamic> lastMessageInfoMap) {
+  return chatRooms.doc(chatRoomId).update(lastMessageInfoMap);
+}
+
+Future addMessage(String chatRoomId, String messageId,
+    Map<String, dynamic> messageInfoMap) async {
+  return chatRooms
+      .doc(chatRoomId)
+      .collection("chats")
+      .doc(messageId)
+      .set(messageInfoMap);
+}
+
+////////////////////////////////////deleteMessage    //////////////////////////////
+Future<void> deleteMessage(
+    String chatRoomId,
+    String messageId,
+    ) async {
+  return chatRooms
+      .doc(chatRoomId)
+      .collection("chats")
+      .doc(messageId)
+      .delete();
+}
+
 }

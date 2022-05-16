@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 
@@ -10,7 +11,7 @@ class Tabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: SizeConfig.defaultSize! * 3,
+      height: Get.height*.06,
       child: TabBar(
         indicatorColor: Colors.transparent,
         tabs: [
@@ -18,7 +19,7 @@ class Tabs extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: KTextUtils(
                 text: "Profile",
-                size: SizeConfig.screenHeight!*.03,
+                size: Get.height*.028,
                 color: black,
                 fontWeight: FontWeight.w800,
                 textDecoration: TextDecoration.none),
@@ -27,7 +28,7 @@ class Tabs extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: KTextUtils(
                 text: "Reviews",
-                size: SizeConfig.screenHeight!*.03,
+                size: Get.height*.028,
                 color: black,
                 fontWeight: FontWeight.w800,
                 textDecoration: TextDecoration.none),

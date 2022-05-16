@@ -27,6 +27,7 @@ class DoctorMainScreen extends StatelessWidget {
           items: [
             buildBottomNavigationBarItem(IconBroken.Home),
             buildBottomNavigationBarItem(IconBroken.Message),
+            buildBottomNavigationBarItem(IconBroken.Paper),
             buildBottomNavigationBarItem(IconBroken.User),
           ],
         ));  },);

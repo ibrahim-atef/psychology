@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
-import 'package:psychology/view/widgets/patient_screens_widgets/chat_widget/chat_list_tile.dart';
-import 'package:psychology/view/widgets/patient_screens_widgets/chat_widget/chat_search_widget.dart';
-import 'package:psychology/view/widgets/patient_screens_widgets/chat_widget/online_doctors_chat.dart';
-import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
+import 'package:psychology/view/widgets/patient_screens_widgets/chat_widget/chat_room_list_view.dart';
+ import 'package:psychology/view/widgets/patient_screens_widgets/chat_widget/chat_search_widget.dart';
+ import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 class PatientChatScreen extends StatelessWidget {
   const PatientChatScreen({Key? key}) : super(key: key);
@@ -54,19 +53,19 @@ class PatientChatScreen extends StatelessWidget {
             ),
             SliverToBoxAdapter(child: SearchWidget()),
 
-            SliverToBoxAdapter(
-              child: Container(
-                alignment: Alignment.topLeft,
-                margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .9),
-                child: KTextUtils(
-                    text: "Online",
-                    size: SizeConfig.defaultSize! * 1.2,
-                    color: black,
-                    fontWeight: FontWeight.w800,
-                    textDecoration: TextDecoration.none),
-              ),
-            ),
-            SliverToBoxAdapter(child: OnlineDoctorsChat()),
+            // SliverToBoxAdapter(
+            //   child: Container(
+            //     alignment: Alignment.topLeft,
+            //     margin: EdgeInsets.only(left: SizeConfig.defaultSize! * .9),
+            //     child: KTextUtils(
+            //         text: "Online",
+            //         size: SizeConfig.defaultSize! * 1.2,
+            //         color: black,
+            //         fontWeight: FontWeight.w800,
+            //         textDecoration: TextDecoration.none),
+            //   ),
+            // ),
+            // SliverToBoxAdapter(child: OnlineDoctorsChat()),
             SliverToBoxAdapter(
               child: SizedBox(
                 height: SizeConfig.defaultSize,
@@ -86,7 +85,7 @@ class PatientChatScreen extends StatelessWidget {
               ),
             ),
 
-            SliverToBoxAdapter(child: ChatListViewChatRoomsList())
+           SliverToBoxAdapter(child: ChatListViewChatRoomsList())
           ],
         ));
   }

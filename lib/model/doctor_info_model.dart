@@ -10,6 +10,7 @@ class DoctorInfo {
   final bool? isDoctor;
   final String? phoneNumber;
   final String? gender;
+  final String? token;
 
   DoctorInfo(
     this.displayName,
@@ -21,6 +22,7 @@ class DoctorInfo {
     this.isDoctor,
     this.phoneNumber,
     this.gender,
+      this.token
   );
 
   //
@@ -49,6 +51,7 @@ class DoctorInfo {
       map['isDoctor'] ,
       map['phoneNumber'],
       map['gender'] ,
+      map['token'] ,
     );
   }
 }

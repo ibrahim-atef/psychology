@@ -15,19 +15,19 @@ class ReviewsAndSissions extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(width: SizeConfig.defaultSize!*1.5 ,height: SizeConfig.defaultSize!*1.5  ,
-                    child: Image.asset("assets/images/dollar.png",fit: BoxFit.cover,)),
-                KTextUtils(
-                    text: "200 EGP",
-                    size: SizeConfig.defaultSize! * .8,
-                    color: black,
-                    fontWeight: FontWeight.w500,
-                    textDecoration: TextDecoration.none)
-              ],
-            ),
+            // Row(
+            //   mainAxisAlignment: MainAxisAlignment.center,
+            //   children: [
+            //     SizedBox(width: SizeConfig.defaultSize!*1.5 ,height: SizeConfig.defaultSize!*1.5  ,
+            //         child: Image.asset("assets/images/dollar.png",fit: BoxFit.cover,)),
+            //     KTextUtils(
+            //         text: "200 EGP",
+            //         size: SizeConfig.defaultSize! * .8,
+            //         color: black,
+            //         fontWeight: FontWeight.w500,
+            //         textDecoration: TextDecoration.none)
+            //   ],
+            // ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [

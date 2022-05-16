@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 
 import 'tap_bar_profile_widget.dart';
@@ -8,9 +10,10 @@ class FirstTapBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: homeBackGroundColor,
       body: ListView(
         children: [
+          SizedBox(height: Get.height*.01,),
           TabBarProfileWidget(
             field: 'Experience',
           ),

@@ -1,19 +1,71 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:psychology/routes/routes.dart';
 import 'package:flutter/services.dart';
+import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
+
+
+Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  // If you're going to use other Firebase services in the background, such as Firestore,
+  // make sure you call `initializeApp` before using other Firebase services.
+  debugPrint("on ${message.notification!.body} message ");
+  print(message.notification!.body.toString());
+
+
+  Fluttertoast.showToast(
+    gravity: ToastGravity.TOP,
+    msg: "New message from " + message.notification!.title.toString(),
+    backgroundColor: mainColor2,
+  );
+}
 
 void main() async {
+
+
+  //بيتاكد ان كل حاجه هنا خلصانه وبعدين يفتح التطبيق
   WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
+
   await Firebase.initializeApp();
+  await GetStorage.init();
+
+  var token = await FirebaseMessaging.instance.getToken();
+  debugPrint(token.toString());
+  await FirebaseMessaging.instance.getNotificationSettings();
+
+  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  await messaging.requestPermission(
+    alert: true,
+    announcement: true,
+    badge: true,
+    carPlay: true,
+    criticalAlert: true,
+    provisional: true,
+    sound: true,
+  );
+  FirebaseMessaging.onMessage.listen((message) {
+
+
+  });
+  FirebaseMessaging.onMessageOpenedApp.listen((event) {
+    print(event.notification!.body.toString());
+
+    Fluttertoast.showToast(
+      gravity: ToastGravity.TOP,
+      msg: "New message from " + event.notification!.title.toString(),
+      backgroundColor: Colors.red,
+    );
+  });
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
   runApp(MyApp());
-  //please help me
-  //afroto
 }
+
 
 class MyApp extends StatelessWidget {
   @override

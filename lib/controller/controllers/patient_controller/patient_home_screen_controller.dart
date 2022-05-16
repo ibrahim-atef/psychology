@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:psychology/model/blogs_model.dart';
@@ -68,7 +69,12 @@ class PatientHomeScreenController extends GetxController {
         .snapshots()
         .listen((event) {
       patientInfoModel.value = null;
-      patientInfoModel.value = PatientInfoModel.fromMap(event);
+      if(event.exists){      patientInfoModel.value = PatientInfoModel.fromMap(event);
+      }else{  Fluttertoast.showToast(
+        gravity: ToastGravity.TOP,
+        msg: "user data not found in firebase" ,
+        backgroundColor: mainColor2,
+      );}
             //  update();
     });
   }

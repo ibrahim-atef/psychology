@@ -19,7 +19,7 @@ class PopularDoctorsListView extends StatelessWidget {
           padding: const EdgeInsets.all(2.0),
           child: Column(
             children: [
-              Container(
+              controller.doctorsList.isNotEmpty?  Container(
                 padding: EdgeInsets.symmetric(horizontal: 5),
                 height: SizeConfig.screenHeight! * 0.04,
                 width: SizeConfig.screenWidth,
@@ -43,14 +43,14 @@ class PopularDoctorsListView extends StatelessWidget {
                     // )
                   ],
                 ),
-              ),
+              ):SizedBox(),
               SizedBox(
                 height: 5,
               ),
               Container(
                 width: SizeConfig.screenWidth,
-                height: SizeConfig.defaultSize! * 7.1,
-                child: controller.doctorsList != null
+                height:controller.doctorsList.isNotEmpty? SizeConfig.defaultSize! * 7.1:0,
+                child: controller.doctorsList.isNotEmpty
                     ? ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
