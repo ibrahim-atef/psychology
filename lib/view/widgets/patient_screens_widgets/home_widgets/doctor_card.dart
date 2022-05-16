@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psychology/model/patint_info_model.dart';
 import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
@@ -11,12 +12,14 @@ class DoctorCard extends StatelessWidget {
   String description;
   String imageUrl;
   String uid;
+  UserModel doctorInfo;
 
   DoctorCard({
     required this.name,
     required this.description,
     required this.imageUrl,
     required this.uid,
+    required this.doctorInfo,
   });
 
   @override
@@ -30,7 +33,7 @@ class DoctorCard extends StatelessWidget {
           children: [
             InkWell( onTap: () {
               Get.toNamed(Routes.doctorProfileViewForPatient,
-                  arguments: [uid, imageUrl, name, description]);
+                  arguments: [uid, imageUrl, name, description,doctorInfo]);
             },
               child: ClipRRect(
                 child: Card(elevation:

@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/auth_controller.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
- final authController=Get.put(AuthController());
+  final authController = Get.put(AuthController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

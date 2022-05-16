@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psychology/controller/controllers/chat_rooms_controller.dart';
+import 'package:psychology/model/doctor_info_model.dart';
+import 'package:psychology/model/patint_info_model.dart';
+import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/utils/styles.dart';
+import 'package:psychology/view/screens/call_screens/answer_call/answer_call_wrap_layout.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/reviews_and_sissions_widget.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tabs_widgets.dart';
@@ -17,141 +22,175 @@ class DoctorProfileViewForPatient extends StatelessWidget {
   String imageUrl = Get.arguments[1];
   String name = Get.arguments[2];
   String description = Get.arguments[3];
+  UserModel doctorInfo = Get.arguments[4];
   final controller = Get.find<PatientHomeScreenController>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: homeBackGroundColor,
-      body: SafeArea(
-        child: DefaultTabController(
-          length: 2,
-          child: NestedScrollView(
-            floatHeaderSlivers: true,
-            headerSliverBuilder:
-                (BuildContext context, bool innerBoxIsScrolled) {
-              return [
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 1),
-                    child: Container(
-                      height: Get.height * .3,
-                      decoration: buildBoxDecoration(),
-                      child: Column(
-                        children: [
-                          HeightSizeBox(Get.width * .03),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  IconButton(
-                                      padding: EdgeInsets.zero,
-                                      alignment: Alignment.topLeft,
-                                      onPressed: () {
-                                        Get.back();
+    return AnswerCallWrapLayout(
+      scaffold: Scaffold(
+        backgroundColor: homeBackGroundColor,
+        body: SafeArea(
+          child: DefaultTabController(
+            length: 2,
+            child: NestedScrollView(
+              floatHeaderSlivers: true,
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return [
+                  SliverToBoxAdapter(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 1),
+                      child: Container(
+                        height: Get.height * .3,
+                        decoration: buildBoxDecoration(),
+                        child: Column(
+                          children: [
+                            HeightSizeBox(Get.width * .03),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    IconButton(
+                                        padding: EdgeInsets.zero,
+                                        alignment: Alignment.topLeft,
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        icon: Icon(
+                                          Icons.arrow_back_ios_outlined,
+                                          color: black,
+                                          size: Get.width * .07,
+                                        )),
+                                  ],
+                                ),
+                                // SizedBox(
+                                //   width: Get.width * .23,
+                                // ),
+                                Container(
+                                    height: Get.width * .25,
+                                    width: Get.width * .25,
+                                    child: CirculeImageAvatar(
+                                      imageUrl: imageUrl,
+                                      width: SizeConfig.defaultSize! * 4,
+                                    )),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    GetBuilder(
+                                      builder: (ChatRoomsController
+                                          chatRoomController) {
+                                        return IconButton(
+                                            padding: EdgeInsets.zero,
+                                            alignment: Alignment.topLeft,
+                                            onPressed: () async {
+                                              String cattRoomId =
+                                                  await chatRoomController
+                                                      .getChatRoomIdByUser(
+                                                          chatRoomController
+                                                              .myUid,
+                                                          uid);
+                                              chatRoomController
+                                                  .createChatRoom(cattRoomId, {
+                                                "chatRoomId": cattRoomId,
+                                                "chatRoomUsers": [
+                                                  doctorInfo.uid!,
+                                                  chatRoomController.myUid
+                                                ],
+                                                "lastMessageSendTs":
+                                                    DateTime.now(),
+                                                'lastMessage': ' ',
+                                                'lastMessageSenderUid':
+                                                    chatRoomController.myUid,
+                                              }).then((value) {
+                                                Get.toNamed(Routes.chatScreen,
+                                                    arguments: [
+                                                      doctorInfo,
+                                                      cattRoomId,
+                                                      chatRoomController.myUid,
+                                                      controller.patientInfoModel.value,
+                                                    ]);
+                                              });
+                                            },
+                                            icon: Icon(
+                                              IconBroken.Chat,
+                                              color: black,
+                                              size: Get.width * .07,
+                                            ));
                                       },
-                                      icon: Icon(
-                                        Icons.arrow_back_ios_outlined,
-                                        color: black,
-                                        size: Get.width * .07,
-                                      )),
-                                ],
-                              ),
-                              // SizedBox(
-                              //   width: Get.width * .23,
-                              // ),
-                              Container(
-                                  height: Get.width * .25,
-                                  width: Get.width * .25,
-                                  child: CirculeImageAvatar(
-                                    imageUrl: imageUrl,
-                                    width: SizeConfig.defaultSize! * 4,
-                                  )),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  IconButton(
-                                      padding: EdgeInsets.zero,
-                                      alignment: Alignment.topLeft,
-                                      onPressed: () {
-
-                                      },
-                                      icon: Icon(
-                                        IconBroken.Chat,
-                                        color: black,
-                                        size: Get.width * .07,
-                                      )),
-                                ],
-                              ),
-                            ],
-                          ),
-                          HeightSizeBox(Get.width * .01),
-                          KTextUtils(
-                              text: "Dr." + name,
-                              size: 21,
-                              color: black,
-                              fontWeight: FontWeight.w800,
-                              textDecoration: TextDecoration.none),
-                          HeightSizeBox(Get.width * .01),
-                          ReviewsAndSissions(),
-                          HeightSizeBox(Get.width * .01),
-                          Tabs()
-                        ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            HeightSizeBox(Get.width * .01),
+                            KTextUtils(
+                                text: "Dr." + name,
+                                size: 21,
+                                color: black,
+                                fontWeight: FontWeight.w800,
+                                textDecoration: TextDecoration.none),
+                            HeightSizeBox(Get.width * .01),
+                            ReviewsAndSissions(),
+                            HeightSizeBox(Get.width * .01),
+                            Tabs()
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                )
-              ];
-            },
-            body: GetBuilder<PatientHomeScreenController>(
-              builder: (_) {
-                return TabBarView(children: controller.tabScreens);
+                  )
+                ];
               },
-            ),
-          ),
-        ),
-      ),
-      floatingActionButton: GestureDetector(
-        onTap: () {},
-        child: Container(
-          height: SizeConfig.screenHeight! * .06,
-          width: SizeConfig.screenWidth! * .3,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 6,
-                offset: Offset(0, 3), // changes position of shadow
+              body: GetBuilder<PatientHomeScreenController>(
+                builder: (_) {
+                  return TabBarView(children: controller.tabScreens);
+                },
               ),
-            ],
-            color: mainColor2,
-            // gradient: LinearGradient(
-            //   colors: [
-            //     mainColor2,
-            //     // Color(0xffcc6213),
-            //     // Color(0xffba0b08),
-            //     // Color(0xff931c04),
-            //     // Color(0xff3f0303),
-            //   ],
-            // ),
-            borderRadius: BorderRadius.circular(20),
-          ),
-          child: Center(
-            child: Text(
-              "Book Now",
-              style: TextStyle(
-                  fontSize: 22, color: white, fontWeight: FontWeight.w700),
             ),
           ),
         ),
+        floatingActionButton: GestureDetector(
+          onTap: () {},
+          child: Container(
+            height: SizeConfig.screenHeight! * .06,
+            width: SizeConfig.screenWidth! * .3,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 2,
+                  blurRadius: 6,
+                  offset: Offset(0, 3), // changes position of shadow
+                ),
+              ],
+              color: mainColor2,
+              // gradient: LinearGradient(
+              //   colors: [
+              //     mainColor2,
+              //     // Color(0xffcc6213),
+              //     // Color(0xffba0b08),
+              //     // Color(0xff931c04),
+              //     // Color(0xff3f0303),
+              //   ],
+              // ),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Center(
+              child: Text(
+                "Book Now",
+                style: TextStyle(
+                    fontSize: 22, color: white, fontWeight: FontWeight.w700),
+              ),
+            ),
+          ),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/doctor_controller/doctor_main_controller.dart';
-import 'package:psychology/controller/controllers/patient_controller/patient_home_screen_controller.dart';
-import 'package:psychology/utils/constants.dart';
+ import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/styles.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 

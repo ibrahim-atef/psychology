@@ -4,6 +4,7 @@ import 'package:psychology/controller/controllers/doctor_controller/doctor_main_
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/utils/styles.dart';
+import 'package:psychology/view/screens/call_screens/answer_call/answer_call_wrap_layout.dart';
 
 class DoctorMainScreen extends StatelessWidget {
   DoctorMainScreen({Key? key}) : super(key: key);
@@ -12,25 +13,32 @@ class DoctorMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return GetBuilder<MainDoctorController>(builder: (_) {return Scaffold(
-        body: controller.doctorScreens[controller.bottomNavSelectedIndex],
-        bottomNavigationBar: BottomNavigationBar(elevation: 5,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          backgroundColor: Colors.white,
-          currentIndex: controller.bottomNavSelectedIndex,
-          onTap: (index) {
-            controller.bottomTapped(index);
-          },
-          unselectedItemColor: grey,
-          selectedItemColor: mainColor2,
-          items: [
-            buildBottomNavigationBarItem(IconBroken.Home),
-            buildBottomNavigationBarItem(IconBroken.Message),
-            buildBottomNavigationBarItem(IconBroken.Paper),
-            buildBottomNavigationBarItem(IconBroken.User),
-          ],
-        ));  },);
+    return GetBuilder<MainDoctorController>(
+      builder: (_) {
+        return AnswerCallWrapLayout(
+          scaffold: Scaffold(
+              body: controller.doctorScreens[controller.bottomNavSelectedIndex],
+              bottomNavigationBar: BottomNavigationBar(
+                elevation: 5,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                backgroundColor: Colors.white,
+                currentIndex: controller.bottomNavSelectedIndex,
+                onTap: (index) {
+                  controller.bottomTapped(index);
+                },
+                unselectedItemColor: grey,
+                selectedItemColor: mainColor2,
+                items: [
+                  buildBottomNavigationBarItem(IconBroken.Home),
+                  buildBottomNavigationBarItem(IconBroken.Message),
+                  buildBottomNavigationBarItem(IconBroken.Paper),
+                  buildBottomNavigationBarItem(IconBroken.User),
+                ],
+              )),
+        );
+      },
+    );
   }
 
   BottomNavigationBarItem buildBottomNavigationBarItem(IconData iconData) {

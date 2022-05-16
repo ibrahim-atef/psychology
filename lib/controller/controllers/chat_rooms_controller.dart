@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:psychology/model/chat_room_model.dart';
 import 'package:psychology/model/doctor_info_model.dart';
+import 'package:psychology/model/patint_info_model.dart';
 import 'package:psychology/services/firestore_methods.dart';
 import 'package:psychology/utils/my_string.dart';
 
@@ -15,7 +16,7 @@ class ChatRoomsController extends GetxController {
   var chatRoomsList = <ChatRoomModel>[].obs;
 
   // final friendInfoModel = Rxn<UserModel>();
-  var friendInfoModel = <DoctorInfo>[].obs;
+  var friendInfoModel = <UserModel>[].obs;
 
   @override
   void onInit() async {
@@ -98,7 +99,7 @@ class ChatRoomsController extends GetxController {
             .doc(myFriendId)
             .snapshots()
             .listen((event) {
-            friendInfoModel.add(DoctorInfo.fromJson(event));
+            friendInfoModel.add(UserModel.fromMap(event));
             //update();
           })
         : FireStoreMethods()
@@ -106,7 +107,7 @@ class ChatRoomsController extends GetxController {
             .doc(myFriendId)
             .snapshots()
             .listen((event) {
-            friendInfoModel.add(DoctorInfo.fromJson(event));
+            friendInfoModel.add(UserModel.fromMap(event));
             //update();
           });
   }

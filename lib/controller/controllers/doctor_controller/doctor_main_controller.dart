@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:psychology/model/doctor_info_model.dart';
+import 'package:psychology/model/patint_info_model.dart';
 import 'package:psychology/services/firestore_methods.dart';
 import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/view/screens/doctor_screens/doctor_chat_screen.dart';
@@ -18,7 +19,7 @@ class MainDoctorController extends GetxController {
   }
 
   GetStorage storageBox = GetStorage();
-  final myData = Rxn<DoctorInfo>();
+  final myData = Rxn<UserModel>();
   List<Widget> doctorScreens = [
     DoctorHomeScreen(),
     DoctorChatScreen(),
@@ -40,7 +41,7 @@ class MainDoctorController extends GetxController {
         .snapshots()
         .listen((event) {
       if (event.exists) {
-        myData.value = DoctorInfo.fromJson(event);
+        myData.value = UserModel.fromMap(event);
         update();
       } else {
         Get.snackbar("doctor Data", "doctor Data not found");

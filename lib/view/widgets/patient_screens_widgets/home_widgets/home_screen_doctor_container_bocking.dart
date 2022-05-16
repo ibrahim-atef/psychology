@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+ import 'package:psychology/model/patint_info_model.dart';
 import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
@@ -10,6 +11,7 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
   String description;
   String imageUrl;
   String uid;
+  UserModel doctorInfo;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
             InkWell(
               onTap: () {
                 Get.toNamed(Routes.doctorProfileViewForPatient,
-                    arguments: [uid, imageUrl, name, description]);
+                    arguments: [uid, imageUrl, name, description,doctorInfo]);
               },
               child: ClipRRect(
                 child: Card(
@@ -135,5 +137,6 @@ class HomeScreenDoctorContainerBocking extends StatelessWidget {
     required this.description,
     required this.imageUrl,
     required this.uid,
+    required this.doctorInfo,
   });
 }

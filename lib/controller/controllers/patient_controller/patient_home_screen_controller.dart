@@ -16,7 +16,7 @@ class PatientHomeScreenController extends GetxController {
   RxList doctorsList = [].obs;
 
   RxList moreDoctorsList = [].obs;
-  final patientInfoModel = Rxn<PatientInfoModel>();
+  final patientInfoModel = Rxn<UserModel>();
 
   List<BlogsModel> blogsList = [];
   List<Widget> tabScreens = [FirstTapBarWidget(), TabBarReviewsWidget()];
@@ -46,7 +46,7 @@ class PatientHomeScreenController extends GetxController {
     await FireStoreMethods().doctors.snapshots().listen((event) {
       doctorsList.clear();
       for (int i = 0; i < event.docs.length; i++) {
-        doctorsList.add(DoctorInfo.fromJson(event.docs[i]));
+        doctorsList.add(UserModel.fromMap(event.docs[i]));
       }
     });
     //   update();
@@ -56,7 +56,7 @@ class PatientHomeScreenController extends GetxController {
     await FireStoreMethods().doctors.snapshots().listen((event) {
       moreDoctorsList.clear();
       for (int i = 0; i < event.docs.length; i++) {
-        moreDoctorsList.add(DoctorInfo.fromJson(event.docs[i]));
+        moreDoctorsList.add(UserModel.fromMap(event.docs[i]));
               }
     });
     //  update();
@@ -69,7 +69,7 @@ class PatientHomeScreenController extends GetxController {
         .snapshots()
         .listen((event) {
       patientInfoModel.value = null;
-      if(event.exists){      patientInfoModel.value = PatientInfoModel.fromMap(event);
+      if(event.exists){      patientInfoModel.value = UserModel.fromMap(event);
       }else{  Fluttertoast.showToast(
         gravity: ToastGravity.TOP,
         msg: "user data not found in firebase" ,

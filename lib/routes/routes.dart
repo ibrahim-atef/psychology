@@ -5,7 +5,7 @@ import 'package:psychology/controller/bindings/main_patient_binding.dart';
 import 'package:psychology/controller/bindings/message_binding.dart';
 import 'package:psychology/controller/bindings/pateint_home_screen_binding.dart';
 import 'package:psychology/controller/bindings/splash_binding.dart';
-import 'package:psychology/view/chat_screen.dart';
+import 'package:psychology/view/screens/chat/chat_screen.dart';
 import 'package:psychology/view/screens/auth/doctor_register_screen.dart';
 import 'package:psychology/view/screens/auth/forgot_password.dart';
 import 'package:psychology/view/screens/auth/login_screen.dart';

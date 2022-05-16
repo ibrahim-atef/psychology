@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class PatientInfoModel {
+class UserModel {
   String? displayName;
   String? email;
   String? profileUrl;
@@ -12,7 +12,7 @@ class PatientInfoModel {
   String? uid;
   String? token;
 
-  PatientInfoModel(
+  UserModel(
       this.displayName,
       this.uid,
       this.email,
@@ -24,8 +24,8 @@ class PatientInfoModel {
       this.registerDate,
       this.token);
 
-  factory PatientInfoModel.fromMap(map) {
-    return PatientInfoModel(
+  factory UserModel.fromMap(map) {
+    return UserModel(
       map['displayName'],
       map['uid'],
       map['email'],

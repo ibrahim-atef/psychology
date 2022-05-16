@@ -4,6 +4,7 @@ import 'package:psychology/controller/controllers/patient_controller/main_patien
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/utils/styles.dart';
+import 'package:psychology/view/screens/call_screens/answer_call/answer_call_wrap_layout.dart';
 
 class PatientMainScreen extends StatelessWidget {
   PatientMainScreen({Key? key}) : super(key: key);
@@ -16,33 +17,35 @@ class PatientMainScreen extends StatelessWidget {
     SizeConfig().init(context);
     return GetBuilder<MainPatientController>(
       builder: (_) {
-        return Scaffold(
-            body: PageView(
-              onPageChanged: (val) {
-                controller.pageChanged(val);
-              },
-              controller: controller.pageController,
-              allowImplicitScrolling: true,
-              scrollDirection: Axis.horizontal,
-              children: controller.patientScreens,
-            ),
-            bottomNavigationBar: BottomNavigationBar(
-              showSelectedLabels: false,
-              showUnselectedLabels: false,
-              backgroundColor: Colors.green,
-              currentIndex: controller.bottomSelectedIndex,
-              onTap: (index) {
-                controller.bottomTapped(index);
-              },
-              unselectedItemColor: grey,
-              selectedItemColor: mainColor2,
-              items: [
-                buildBottomNavigationBarItem(IconBroken.Home),
-                buildBottomNavigationBarItem(IconBroken.Message),
-                buildBottomNavigationBarItem(IconBroken.Paper),
-                buildBottomNavigationBarItem(IconBroken.User),
-              ],
-            ));
+        return AnswerCallWrapLayout(
+          scaffold: Scaffold(
+              body: PageView(
+                onPageChanged: (val) {
+                  controller.pageChanged(val);
+                },
+                controller: controller.pageController,
+                allowImplicitScrolling: true,
+                scrollDirection: Axis.horizontal,
+                children: controller.patientScreens,
+              ),
+              bottomNavigationBar: BottomNavigationBar(
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                backgroundColor: Colors.green,
+                currentIndex: controller.bottomSelectedIndex,
+                onTap: (index) {
+                  controller.bottomTapped(index);
+                },
+                unselectedItemColor: grey,
+                selectedItemColor: mainColor2,
+                items: [
+                  buildBottomNavigationBarItem(IconBroken.Home),
+                  buildBottomNavigationBarItem(IconBroken.Message),
+                  buildBottomNavigationBarItem(IconBroken.Paper),
+                  buildBottomNavigationBarItem(IconBroken.User),
+                ],
+              )),
+        );
       },
     );
   }

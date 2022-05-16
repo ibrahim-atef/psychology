@@ -20,7 +20,7 @@ class PatientUpdateProfile extends StatelessWidget {
   final TextEditingController passwordController = TextEditingController();
   final controller = Get.put(PatientProfileController());
   final cc = Get.put(AuthController());
-  PatientInfoModel data = Get.arguments[0];
+  UserModel data = Get.arguments[0];
   final formUpdateKey = GlobalKey<FormState>();
 
   @override

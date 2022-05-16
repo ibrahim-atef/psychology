@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:psychology/controller/controllers/chat_rooms_controller.dart';
 import 'package:psychology/model/doctor_info_model.dart';
+import 'package:psychology/model/patint_info_model.dart';
  import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
 
@@ -10,7 +11,7 @@ class ChatRoomListTil extends StatelessWidget {
   String chatRoomId;
   int index;
 
-  DoctorInfo myData;
+  UserModel myData;
   String lastMessage = "";
 
   final cc = Get.put(ChatRoomsController());
