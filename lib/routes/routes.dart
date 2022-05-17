@@ -76,7 +76,7 @@ class AppRoutes {
         ]),
     GetPage(
       name: Routes.aggBlogScreen,
-      page: () => AggBlogScreen(),
+      page: () => AddBlogScreen(),
       transition: Transition.downToUp,binding: DoctorHomeBinding()
     ),
   ];

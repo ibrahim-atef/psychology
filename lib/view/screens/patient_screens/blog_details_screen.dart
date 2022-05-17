@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:psychology/utils/constants.dart';
+import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/styles.dart';
 
 class BlogDetailScreen extends StatelessWidget {
-  const BlogDetailScreen({Key? key}) : super(key: key);
+  final GetStorage authBox = GetStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +38,9 @@ class BlogDetailScreen extends StatelessWidget {
                         top: 5,
                         child: RawMaterialButton(
                           padding: EdgeInsets.all(8),
-                          onPressed: () {Get.back();},
+                          onPressed: () {
+                            Get.back();
+                          },
                           child: Icon(
                             IconBroken.Arrow___Left_2,
                             color: Colors.black,
@@ -77,6 +81,16 @@ class BlogDetailScreen extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: authBox.read(KUid) == Get.arguments[3]
+          ? FloatingActionButton(
+              backgroundColor: homeBackGroundColor,
+              onPressed: () {},
+              child: Icon(
+                IconBroken.Delete,
+                color: mainColor2,
+              ),
+            )
+          : SizedBox(),
     );
   }
 }

@@ -11,14 +11,15 @@ import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/first_tap_bar_column.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tap_bar_reviews_widget.dart';
 
-
 class PatientHomeScreenController extends GetxController {
   RxList doctorsList = [].obs;
+
 
   RxList moreDoctorsList = [].obs;
   final patientInfoModel = Rxn<UserModel>();
 
-  List<BlogsModel> blogsList = [];
+  RxList blogsList = [].obs;
+  RxList blogsIdList = [].obs;
   List<Widget> tabScreens = [FirstTapBarWidget(), TabBarReviewsWidget()];
   List<Color> colorList = [
     Color(0xffFFD93D),
@@ -57,7 +58,7 @@ class PatientHomeScreenController extends GetxController {
       moreDoctorsList.clear();
       for (int i = 0; i < event.docs.length; i++) {
         moreDoctorsList.add(UserModel.fromMap(event.docs[i]));
-              }
+      }
     });
     //  update();
   }
@@ -69,22 +70,26 @@ class PatientHomeScreenController extends GetxController {
         .snapshots()
         .listen((event) {
       patientInfoModel.value = null;
-      if(event.exists){      patientInfoModel.value = UserModel.fromMap(event);
-      }else{  Fluttertoast.showToast(
-        gravity: ToastGravity.TOP,
-        msg: "user data not found in firebase" ,
-        backgroundColor: mainColor2,
-      );}
-            //  update();
+      if (event.exists) {
+        patientInfoModel.value = UserModel.fromMap(event);
+      } else {
+        Fluttertoast.showToast(
+          gravity: ToastGravity.TOP,
+          msg: "user data not found in firebase",
+          backgroundColor: mainColor2,
+        );
+      }
+      //  update();
     });
   }
 
-  getBlogs() async {
-    await FireStoreMethods().blogs.get().then((event) {
+  getBlogs() {
+    FireStoreMethods().blogs.orderBy("date", ).snapshots().listen((event) {
       blogsList.clear();
       for (int i = 0; i < event.docs.length; i++) {
         blogsList.add(BlogsModel.fromJson(event.docs[i]));
-              }
+        blogsIdList.add(event.docs[i].id);
+      }
     });
   }
 }

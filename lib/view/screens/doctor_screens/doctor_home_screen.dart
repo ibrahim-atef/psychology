@@ -13,7 +13,7 @@ class DoctorHomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(backgroundColor: homeBackGroundColor,
       appBar: AppBar(
         leadingWidth: 0,
         leading: SizedBox(
@@ -45,7 +45,7 @@ class DoctorHomeScreen extends StatelessWidget {
                         minHeight: 2,
                       )
                     : SizedBox(
-                        height: Get.height * .11,
+                        height: Get.height * .12,
                         width: Get.width,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
@@ -108,7 +108,7 @@ class DoctorHomeScreen extends StatelessWidget {
                       Get.toNamed(Routes.aggBlogScreen,
                           arguments: [mainDoctorController.myData.value!]);
                     },
-                    child: Card(
+                    child: Card(color: homeBackGroundColor,
                       margin: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),

@@ -112,4 +112,31 @@ class FireStorageMethods {
       print("$onError ddddddddddddddddddddddddd");
     });
   }
+
+  /////////////////////////////
+  Future<void> uploadBlogFile({
+    required File file,
+    required String blogOwnerId,
+    required String body,
+    required String title,
+    required   date,
+  }) async {
+    await storage
+        .ref()
+        .child("$blogsCollectionKey/${Uri.file(file.path).pathSegments.last}")
+        .putFile(file)
+        .then((value) async {
+      value.ref.getDownloadURL().then((value) async {
+        FireStoreMethods().addBlog(
+          body: body,
+          imageUrl: value,
+          title: title,
+          blogOwnerId: blogOwnerId,
+          date: date,
+        );
+      });
+    }).catchError((onError) {
+      print("$onError ddddddddddddddddddddddddd");
+    });
+  }
 }

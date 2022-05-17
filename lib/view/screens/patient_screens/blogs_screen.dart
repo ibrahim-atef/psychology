@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/utils/size_config.dart';
- import '../../../controller/controllers/patient_controller/patient_home_screen_controller.dart';
+import '../../../controller/controllers/patient_controller/patient_home_screen_controller.dart';
 import '../../../utils/constants.dart';
 import '../../widgets/utils_widgets/text_utils.dart';
 import 'blog_details_screen.dart';
@@ -29,8 +29,8 @@ class BlogsScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: EdgeInsets.all(8),
-        child: GetBuilder<PatientHomeScreenController>(
-          builder: (_) {
+        child: Obx(
+          () {
             return controller.blogsList.isEmpty
                 ? Center(
                     child: Column(
@@ -48,13 +48,17 @@ class BlogsScreen extends StatelessWidget {
                       ],
                     ),
                   )
-                : ListView.builder(                     physics: BouncingScrollPhysics(),
-
-              itemBuilder: (context, index) {
+                : ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemBuilder: (context, index) {
                       return ArticlrContainer(
-                          controller.blogsList[index].imageUrl.toString(),
-                          controller.blogsList[index].title.toString(),
-                          controller.blogsList[index].body.toString());
+                        controller.blogsList[index].imageUrl.toString(),
+                        controller.blogsList[index].title.toString(),
+                        controller.blogsList[index].body.toString(),
+                        controller.blogsList[index].blogOwnerId.toString(),
+
+                        controller.blogsIdList[index].toString(),
+                      );
                     },
                     itemCount: controller.blogsList.length,
                   );
@@ -64,14 +68,15 @@ class BlogsScreen extends StatelessWidget {
     );
   }
 
-  Widget ArticlrContainer(image, title, body) {
+  Widget ArticlrContainer(image, title, body, blogOwnerId,blogId) {
     return SizedBox(
       width: SizeConfig.screenWidth,
       height: SizeConfig.screenHeight! * .25,
       child: InkWell(
         borderRadius: BorderRadius.circular(15),
         onTap: () {
-          Get.to(() => BlogDetailScreen(), arguments: [image, title, body]);
+          Get.to(() => BlogDetailScreen(),
+              arguments: [image, title, body, blogOwnerId,blogId]);
         },
         child: Card(
           shape:

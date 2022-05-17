@@ -8,6 +8,7 @@ class CirculeImageAvatar extends StatelessWidget {
   double width;
   Color? color;
 
+
   @override
   Widget build(BuildContext context) {
     return Container(
