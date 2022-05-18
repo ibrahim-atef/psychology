@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:psychology/controller/controllers/patient_controller/patient_home_screen_controller.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/styles.dart';
@@ -82,13 +83,26 @@ class BlogDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: authBox.read(KUid) == Get.arguments[3]
-          ? FloatingActionButton(
-              backgroundColor: homeBackGroundColor,
-              onPressed: () {},
-              child: Icon(
-                IconBroken.Delete,
-                color: mainColor2,
-              ),
+          ? GetX(
+              init: PatientHomeScreenController(),
+              builder:
+                  (PatientHomeScreenController patientHomeScreenController) {
+                return  FloatingActionButton(
+                        backgroundColor: homeBackGroundColor,
+                        onPressed: () async {
+                          patientHomeScreenController.daleteBlog(
+                              id: Get.arguments[4]);
+                        },
+                        child: patientHomeScreenController.isDeleting.value
+                            ? const Center(
+                          child: CircularProgressIndicator(color: mainColor2,),
+                        )
+                            : Icon(
+                          IconBroken.Delete,
+                          color: mainColor2,
+                        ),
+                      );
+              },
             )
           : SizedBox(),
     );

@@ -14,10 +14,9 @@ import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_v
 class PatientHomeScreenController extends GetxController {
   RxList doctorsList = [].obs;
 
-
   RxList moreDoctorsList = [].obs;
   final patientInfoModel = Rxn<UserModel>();
-
+  RxBool isDeleting = false.obs;
   RxList blogsList = [].obs;
   RxList blogsIdList = [].obs;
   List<Widget> tabScreens = [FirstTapBarWidget(), TabBarReviewsWidget()];
@@ -84,12 +83,42 @@ class PatientHomeScreenController extends GetxController {
   }
 
   getBlogs() {
-    FireStoreMethods().blogs.orderBy("date", ).snapshots().listen((event) {
+    FireStoreMethods()
+        .blogs
+        .orderBy(
+          "date",
+        )
+        .snapshots()
+        .listen((event) {
       blogsList.clear();
+      blogsIdList.clear();
       for (int i = 0; i < event.docs.length; i++) {
         blogsList.add(BlogsModel.fromJson(event.docs[i]));
-        blogsIdList.add(event.docs[i].id);
       }
+      for (int x = 0; x < event.docs.length; x++) {
+        blogsIdList.add(event.docs[x].id);
+      }
+    });
+  }
+
+  daleteBlog({required String id}) {
+    isDeleting.value = true;
+    FireStoreMethods().blogs.doc(id).delete().then((value) {
+      isDeleting.value = false;
+      Get.back();
+      Fluttertoast.showToast(
+        gravity: ToastGravity.TOP,
+        msg: "Blog Deleted Successfully",
+        backgroundColor: mainColor2,
+      );
+
+    }).catchError((onError) {
+      isDeleting.value = false;
+      Fluttertoast.showToast(
+        gravity: ToastGravity.TOP,
+        msg: "error: ${onError.toString()}",
+        backgroundColor: Colors.red,
+      );
     });
   }
 }

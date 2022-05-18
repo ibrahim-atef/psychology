@@ -71,7 +71,7 @@ class AddBlogScreen extends StatelessWidget {
       body: Column(
         children: [
           SizedBox(
-            height: 3,
+            height: 1,
           ),
           GetBuilder(
             builder: (DoctorHomeController doctorHomeController) {
