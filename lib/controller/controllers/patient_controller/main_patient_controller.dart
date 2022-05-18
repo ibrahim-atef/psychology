@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:psychology/view/screens/patient_screens/blogs_screen.dart';
-import 'package:psychology/view/screens/patient_screens/chat_screen.dart';
+import 'package:psychology/view/screens/patient_screens/patient_chatrooms_screen.dart';
 import 'package:psychology/view/screens/patient_screens/home_screen.dart';
 import 'package:psychology/view/screens/patient_screens/profile_screen.dart';
 
@@ -10,7 +10,7 @@ class MainPatientController extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
-
+bottomSelectedIndex=0;
     super.onInit();
   }
   List<Widget> patientScreens = [

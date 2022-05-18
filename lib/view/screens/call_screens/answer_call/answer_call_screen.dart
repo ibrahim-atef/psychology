@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:lottie/lottie.dart';
 
- import 'package:psychology/controller/controllers/call_controller.dart';
+import 'package:psychology/controller/controllers/call_controller.dart';
 import 'package:psychology/model/call_model.dart';
+import 'package:psychology/routes/routes.dart';
 import 'package:psychology/services/call_methods.dart';
 import 'package:psychology/services/permission_services.dart';
 import 'package:psychology/utils/constants.dart';
+import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/utils/styles.dart';
 import 'package:psychology/view/screens/call_screens/audio_call_screen.dart';
 import 'package:psychology/view/screens/call_screens/video_call_screen.dart';
- import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
+import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 
 import '../../../../utils/constants.dart';
 
@@ -19,6 +22,7 @@ class AnswerCallScreen extends StatelessWidget {
   final Call call;
   final CallMethods callMethods = CallMethods();
   final callController = Get.put(CallController());
+  final GetStorage authBox = GetStorage();
 
   AnswerCallScreen({
     required this.call,
@@ -35,8 +39,6 @@ class AnswerCallScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-
-
             Stack(
               alignment: Alignment.center,
               children: [
@@ -50,7 +52,7 @@ class AnswerCallScreen extends StatelessWidget {
                 CirculeImageAvatar(
                   imageUrl: call.callerPic,
                   width: Get.width * .3,
-                 ),
+                ),
               ],
             ),
             Text(
@@ -60,10 +62,14 @@ class AnswerCallScreen extends StatelessWidget {
                 fontSize: 20,
               ),
             ),
-            SizedBox(height: Get.width * .01),         Text(
-              call.isAudioCall?    "Incoming audio call...":"Incoming video call...",
-              style: TextStyle(color: Colors.black54,
-                fontSize: Get.width*.05,
+            SizedBox(height: Get.width * .01),
+            Text(
+              call.isAudioCall
+                  ? "Incoming audio call..."
+                  : "Incoming video call...",
+              style: TextStyle(
+                color: Colors.black54,
+                fontSize: Get.width * .05,
               ),
             ),
             Spacer(),
@@ -76,7 +82,7 @@ class AnswerCallScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(50)),
                   child: InkWell(
                     onTap: () async {
-                      await callMethods.endCall(call: call);
+                      await callMethods.endCall(call: call) ;
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),

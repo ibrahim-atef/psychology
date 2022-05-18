@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/utils/size_config.dart';
+import 'package:psychology/view/screens/call_screens/answer_call/answer_call_wrap_layout.dart';
 import '../../../controller/controllers/patient_controller/patient_home_screen_controller.dart';
 import '../../../utils/constants.dart';
 import '../../widgets/utils_widgets/text_utils.dart';
@@ -11,58 +12,60 @@ class BlogsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: homeBackGroundColor,
-      appBar: AppBar(
-        elevation: 2,
-        leadingWidth: 0,
-        leading: SizedBox(
-          width: 0,
+    return AnswerCallWrapLayout(
+      scaffold: Scaffold(
+        backgroundColor: homeBackGroundColor,
+        appBar: AppBar(
+          elevation: 2,
+          leadingWidth: 0,
+          leading: SizedBox(
+            width: 0,
+          ),
+          backgroundColor: mainColor2,
+          title: KTextUtils(
+              text: "Blogs",
+              size: 25,
+              color: white,
+              fontWeight: FontWeight.bold,
+              textDecoration: TextDecoration.none),
         ),
-        backgroundColor: mainColor2,
-        title: KTextUtils(
-            text: "Blogs",
-            size: 25,
-            color: white,
-            fontWeight: FontWeight.bold,
-            textDecoration: TextDecoration.none),
-      ),
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: Obx(
-          () {
-            return controller.blogsList.isEmpty
-                ? Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(
-                          color: mainColor2,
-                        ),
-                        KTextUtils(
-                            text: "There's no blogs",
-                            size: 20,
-                            color: black,
-                            fontWeight: FontWeight.bold,
-                            textDecoration: TextDecoration.none)
-                      ],
-                    ),
-                  )
-                : ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      return ArticlrContainer(
-                        controller.blogsList[index].imageUrl.toString(),
-                        controller.blogsList[index].title.toString(),
-                        controller.blogsList[index].body.toString(),
-                        controller.blogsList[index].blogOwnerId.toString(),
+        body: Padding(
+          padding: EdgeInsets.all(8),
+          child: Obx(
+            () {
+              return controller.blogsList.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          CircularProgressIndicator(
+                            color: mainColor2,
+                          ),
+                          KTextUtils(
+                              text: "There's no blogs",
+                              size: 20,
+                              color: black,
+                              fontWeight: FontWeight.bold,
+                              textDecoration: TextDecoration.none)
+                        ],
+                      ),
+                    )
+                  : ListView.builder(
+                      physics: BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        return ArticlrContainer(
+                          controller.blogsList[index].imageUrl.toString(),
+                          controller.blogsList[index].title.toString(),
+                          controller.blogsList[index].body.toString(),
+                          controller.blogsList[index].blogOwnerId.toString(),
 
-                        controller.blogsIdList[index].toString(),
-                      );
-                    },
-                    itemCount: controller.blogsList.length,
-                  );
-          },
+                          controller.blogsIdList[index].toString(),
+                        );
+                      },
+                      itemCount: controller.blogsList.length,
+                    );
+            },
+          ),
         ),
       ),
     );

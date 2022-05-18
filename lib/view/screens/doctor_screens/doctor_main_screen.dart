@@ -1,24 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psychology/controller/controllers/call_controller.dart';
 import 'package:psychology/controller/controllers/doctor_controller/doctor_main_controller.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/utils/styles.dart';
-import 'package:psychology/view/screens/call_screens/answer_call/answer_call_wrap_layout.dart';
 
 class DoctorMainScreen extends StatelessWidget {
   DoctorMainScreen({Key? key}) : super(key: key);
   final controller = Get.find<MainDoctorController>();
-
+  final callController = Get.put(CallController());
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return GetBuilder<MainDoctorController>(
       builder: (_) {
-        return AnswerCallWrapLayout(
-          scaffold: Scaffold(
-              body: controller.doctorScreens[controller.bottomNavSelectedIndex],
-              bottomNavigationBar: BottomNavigationBar(
+        return Scaffold(
+            body: controller.doctorScreens[controller.bottomNavSelectedIndex],
+            bottomNavigationBar: Obx(() {
+              return callController.isComingCall.value == true
+                  ? SizedBox()
+                  : BottomNavigationBar(
                 elevation: 5,
                 showSelectedLabels: false,
                 showUnselectedLabels: false,
@@ -35,8 +37,8 @@ class DoctorMainScreen extends StatelessWidget {
                   buildBottomNavigationBarItem(IconBroken.Paper),
                   buildBottomNavigationBarItem(IconBroken.User),
                 ],
-              )),
-        );
+              );
+            }) );
       },
     );
   }
