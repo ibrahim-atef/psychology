@@ -1,6 +1,7 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:psychology/controller/controllers/doctor_controller/doctor_home_controller.dart';
 import 'package:psychology/controller/controllers/doctor_controller/doctor_main_controller.dart';
 import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
@@ -11,7 +12,8 @@ import '../../widgets/utils_widgets/text_utils.dart';
 import '../call_screens/answer_call/answer_call_wrap_layout.dart';
 
 class DoctorHomeScreen extends StatelessWidget {
-  //final mainDoctorController = Get.find<>();
+  // final mainDoctorController = Get.find<MainDoctorController>();
+  final doctorHomeController = Get.put(DoctorHomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -151,27 +153,71 @@ class DoctorHomeScreen extends StatelessWidget {
               SizedBox(
                 height: Get.height * .02,
               ),
-              Container(margin: EdgeInsets.only(left: 10),
+              Container(
+                margin: EdgeInsets.only(left: 10),
                 alignment: Alignment.centerLeft,
                 child: KTextUtils(
                     text: "Appointments",
-                    size: Get.width*.05,
+                    size: Get.width * .05,
                     color: black,
                     fontWeight: FontWeight.bold,
                     textDecoration: TextDecoration.none),
               ),
-              Container(
-                height: Get.height * .11,
-                width: Get.width,
-                child: DatePicker(
-                  DateTime.now(),
-                  selectedTextColor: white,
-                  selectionColor: mainColor2,
-                  onDateChange: (newData) {},
-                ),
+              const SizedBox(
+                height: 5,
+              ),
+              GetBuilder<DoctorHomeController>(
+                builder: (_) {
+                  return Container(
+                    height: Get.height * .11,
+                    width: Get.width,
+                    child: DatePicker(
+                      DateTime.now(),
+                      initialSelectedDate: doctorHomeController.currentDateTime,
+                      selectedTextColor: white,
+                      selectionColor: mainColor2,
+                      daysCount: 7,
+                      onDateChange: (newDate) {
+                        doctorHomeController.changeSelectedDateTime;
+                        print(newDate);
+                      },
+                    ),
+                  );
+                },
+              ),
+              GetBuilder<DoctorHomeController>(
+                builder: (_) {
+                  return Expanded(
+                    child: Container(
+                      width: Get.width,
+                      child: GridView.builder(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: 5,
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisSpacing: 3,
+                                mainAxisSpacing: 5,
+                                crossAxisCount: 3),
+                        itemBuilder: (context, index) {
+                          return Card(
+                            elevation: 5,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
+                            color: white,
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                },
               )
             ],
           ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          backgroundColor: mainColor2,
+          child: Icon(IconBroken.Time_Circle, color: white),
         ),
       ),
     );

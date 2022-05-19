@@ -12,6 +12,7 @@ class DoctorHomeController extends GetxController {
   final ImagePicker picker = ImagePicker();
   File? blogImage;
   RxBool isLoading = false.obs;
+  DateTime currentDateTime = DateTime.now();
   final GetStorage authBox = GetStorage();
 
   getImage() async {
@@ -38,12 +39,15 @@ class DoctorHomeController extends GetxController {
     update();
   }
 
-  Future uploadingNewBlog(String body, title,  ) async {
+  Future uploadingNewBlog(
+    String body,
+    title,
+  ) async {
     if (blogImage != null) {
       isLoading.value = true;
       update();
       String userUid = authBox.read(KUid);
-     await FireStorageMethods()
+      await FireStorageMethods()
           .uploadBlogFile(
         file: blogImage!,
         blogOwnerId: userUid,
@@ -52,7 +56,8 @@ class DoctorHomeController extends GetxController {
         date: DateTime.now(),
       )
           .then((value) {
-        isLoading.value = false;      update();
+        isLoading.value = false;
+        update();
 
         Fluttertoast.showToast(
           gravity: ToastGravity.TOP,
@@ -75,9 +80,10 @@ class DoctorHomeController extends GetxController {
         update();
       });
     }
+  }
 
-
-
-
+  void changeSelectedDateTime(DateTime dateTime) {
+    currentDateTime = dateTime;
+    update();
   }
 }
