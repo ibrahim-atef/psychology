@@ -6,8 +6,10 @@ import 'package:psychology/controller/controllers/doctor_controller/doctor_main_
 import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/styles.dart';
+import 'package:psychology/view/widgets/doctor_screen_widget/home_screen_horizental_dayes.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 
+import '../../widgets/doctor_screen_widget/appointments_grid_view.dart';
 import '../../widgets/utils_widgets/text_utils.dart';
 import '../call_screens/answer_call/answer_call_wrap_layout.dart';
 
@@ -166,58 +168,16 @@ class DoctorHomeScreen extends StatelessWidget {
               const SizedBox(
                 height: 5,
               ),
-              GetBuilder<DoctorHomeController>(
-                builder: (_) {
-                  return Container(
-                    height: Get.height * .11,
-                    width: Get.width,
-                    child: DatePicker(
-                      DateTime.now(),
-                      initialSelectedDate: doctorHomeController.currentDateTime,
-                      selectedTextColor: white,
-                      selectionColor: mainColor2,
-                      daysCount: 7,
-                      onDateChange: (newDate) {
-                        doctorHomeController.changeSelectedDateTime;
-                        print(newDate);
-                      },
-                    ),
-                  );
-                },
-              ),
-              GetBuilder<DoctorHomeController>(
-                builder: (_) {
-                  return Expanded(
-                    child: Container(
-                      width: Get.width,
-                      child: GridView.builder(
-                        physics: BouncingScrollPhysics(),
-                        itemCount: 5,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisSpacing: 3,
-                                mainAxisSpacing: 5,
-                                crossAxisCount: 3),
-                        itemBuilder: (context, index) {
-                          return Card(
-                            elevation: 5,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20)),
-                            color: white,
-                          );
-                        },
-                      ),
-                    ),
-                  );
-                },
-              )
+              DaysListView(),
+              AppointmentsGridView()
+
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           backgroundColor: mainColor2,
-          child: Icon(IconBroken.Time_Circle, color: white),
+          child: Icon(Icons.more_time, color: white),
         ),
       ),
     );

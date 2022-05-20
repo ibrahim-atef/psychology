@@ -14,6 +14,7 @@ class DoctorHomeController extends GetxController {
   RxBool isLoading = false.obs;
   DateTime currentDateTime = DateTime.now();
   final GetStorage authBox = GetStorage();
+  int currentPAgeViewIndex=0;
 
   getImage() async {
     final pickedFile = await picker.pickImage(source: ImageSource.gallery);

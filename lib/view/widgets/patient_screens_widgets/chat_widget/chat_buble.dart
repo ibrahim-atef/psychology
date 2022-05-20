@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:psychology/view/widgets/utils_widgets/image_viewer.dart';
 import 'package:voice_message_package/voice_message_package.dart';
 
-import '../../../utils/constants.dart';
+import '../../../../utils/constants.dart';
 
 class ChatBuble extends StatelessWidget {
   ChatBuble({

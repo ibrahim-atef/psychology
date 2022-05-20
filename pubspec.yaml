@@ -63,6 +63,7 @@ dependencies:
   stop_watch_timer: ^1.4.0
   date_picker_timeline: ^1.2.3
   flutter_datetime_picker:
+  intl:
 
 
 dev_dependencies:
