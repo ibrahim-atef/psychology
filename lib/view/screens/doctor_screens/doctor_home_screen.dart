@@ -1,4 +1,5 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/doctor_controller/doctor_home_controller.dart';
@@ -170,15 +171,64 @@ class DoctorHomeScreen extends StatelessWidget {
               ),
               DaysListView(),
               AppointmentsGridView()
-
             ],
           ),
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Get.defaultDialog(
+                titlePadding: EdgeInsets.zero,
+                titleStyle: TextStyle(fontSize: 0),
+                content: Padding(
+                  padding: EdgeInsets.all(8),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          KTextUtils(
+                              text: "Date",
+                              size: Get.width * .04,
+                              color: black,
+                              fontWeight: FontWeight.bold,
+                              textDecoration: TextDecoration.none),
+                          addDate(() {}, "${DateTime.now().hour}:${DateTime.now().minute}")
+                        ],
+                      )
+                    ],
+                  ),
+                ));
+          },
           backgroundColor: mainColor2,
           child: Icon(Icons.more_time, color: white),
         ),
+      ),
+    );
+  }
+
+  Widget addDate(Function() onPressed, String date) {
+    return InkWell(
+      onTap: onPressed,
+      child: Container(
+        alignment: Alignment.center,
+        width: Get.width * .3,
+        height: Get.height * .046,
+        margin: const EdgeInsets.only(top: 3),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: darkGrey,
+            width: 1.3,
+          ),
+        ),
+        child: KTextUtils(
+            text: date,
+            size: 16,
+            color: darkGrey,
+            fontWeight: FontWeight.w700,
+            textDecoration: TextDecoration.none),
       ),
     );
   }

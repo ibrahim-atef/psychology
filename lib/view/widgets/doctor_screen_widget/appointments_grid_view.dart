@@ -13,28 +13,22 @@ class AppointmentsGridView extends StatelessWidget {
         return Expanded(
           child: Container(
             width: Get.width,
-            child: PageView.builder(
-                itemCount: 7,
-                itemBuilder: (context, index) {
-              return Container(
-                child: GridView.builder(
-                  physics: BouncingScrollPhysics(),
-                  itemCount: 5,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisSpacing: 3,
-                      mainAxisSpacing: 5,
-                      crossAxisCount: 3),
-                  itemBuilder: (context, index) {
-                    return Card(
-                      elevation: 5,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20)),
-                      color: white,
-                    );
-                  },
-                ),
-              );
-            }),
+            child: GridView.builder(
+              physics: BouncingScrollPhysics(),
+              itemCount: 5,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisSpacing: 3,
+                  mainAxisSpacing: 5,
+                  crossAxisCount: 2),
+              itemBuilder: (context, index) {
+                return Card(
+                  elevation: 5,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  color: white,
+                );
+              },
+            ),
           ),
         );
       },
