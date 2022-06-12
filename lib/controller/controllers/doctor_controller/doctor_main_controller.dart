@@ -44,7 +44,7 @@ class MainDoctorController extends GetxController {
         myData.value = UserModel.fromMap(event);
         update();
       } else {
-        Get.snackbar("doctor Data", "doctor Data not found");
+   print("doctor Data not found0000");
       }
     });
   }

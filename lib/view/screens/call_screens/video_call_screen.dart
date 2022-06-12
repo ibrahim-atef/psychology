@@ -176,7 +176,7 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
             padding: const EdgeInsets.all(12.0),
           ),
           RawMaterialButton(
-            onPressed: ()async {await
+            onPressed: ()async {
               CallMethods()
                   .endCall(call: callController.comingCall.value!)
                   .then((value) {

@@ -125,7 +125,7 @@ class AppointmentsGridView extends StatelessWidget {
                   fontWeight: FontWeight.w900,
                   textDecoration: TextDecoration.none),
               KTextUtils(
-                  text: price,
+                  text: price +" EGP",
                   size: Get.width * .045,
                   color: mainColor2,
                   fontWeight: FontWeight.w900,

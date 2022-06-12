@@ -186,7 +186,7 @@ class DoctorHomeController extends GetxController {
         update();
       } else {
         appointmentsList.clear();
-        Get.snackbar("add appointments", "You don't have appointments");
+        print("You don't have appointments");
       }
       update();
     });

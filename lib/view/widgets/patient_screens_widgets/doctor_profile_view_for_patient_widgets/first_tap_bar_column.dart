@@ -13,8 +13,7 @@ class FirstTapBarWidget extends StatelessWidget {
     return Scaffold(backgroundColor: homeBackGroundColor,
       body: ListView(
         children: [
-          SizedBox(height: Get.height*.01,),
-          TabBarProfileWidget(
+           TabBarProfileWidget(
             field: 'Experience',
           ),
           SizedBox(height: SizeConfig.defaultSize,),

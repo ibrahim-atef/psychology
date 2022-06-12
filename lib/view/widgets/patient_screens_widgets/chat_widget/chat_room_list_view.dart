@@ -28,7 +28,7 @@ class ChatListViewChatRoomsList extends StatelessWidget {
                   position: index,
                   duration: const Duration(milliseconds: 1000),
                   child: SlideAnimation(
-                    horizontalOffset: 300,
+                    verticalOffset: 300,
                     child: FadeInAnimation(
                       child: ChatRoomListTil(
                         chatRoomId:

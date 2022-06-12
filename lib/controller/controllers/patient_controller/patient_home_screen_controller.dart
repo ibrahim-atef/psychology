@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:psychology/model/appointment_model.dart';
 import 'package:psychology/model/blogs_model.dart';
 import 'package:psychology/model/doctor_info_model.dart';
 import 'package:psychology/model/patint_info_model.dart';
@@ -19,6 +20,7 @@ class PatientHomeScreenController extends GetxController {
   RxBool isDeleting = false.obs;
   RxList blogsList = [].obs;
   RxList blogsIdList = [].obs;
+  var appointmentsList = <AppointmentModel>[].obs;
   List<Widget> tabScreens = [FirstTapBarWidget(), TabBarReviewsWidget()];
   List<Color> colorList = [
     Color(0xffFFD93D),
@@ -111,7 +113,6 @@ class PatientHomeScreenController extends GetxController {
         msg: "Blog Deleted Successfully",
         backgroundColor: mainColor2,
       );
-
     }).catchError((onError) {
       isDeleting.value = false;
       Fluttertoast.showToast(
@@ -119,6 +120,28 @@ class PatientHomeScreenController extends GetxController {
         msg: "error: ${onError.toString()}",
         backgroundColor: Colors.red,
       );
+    });
+  }
+
+  Future getDoctorAppointments({required String doctorId}) async {
+    await FireStoreMethods()
+        .doctors
+        .doc(doctorId)
+        .collection(appointmentsCollectionKey)
+        .orderBy("appointmentCreationDate", descending: true)
+        .get()
+        .then((value) {
+      if (value.docs.isNotEmpty) {
+        appointmentsList.clear();
+        for (int i = 0; i < value.docs.length; i++) {
+          appointmentsList.add(AppointmentModel.fromMap(value.docs[i]));
+        }
+
+        update();
+      } else {
+        appointmentsList.clear();
+        print("You don't have appointments");
+      }
     });
   }
 }

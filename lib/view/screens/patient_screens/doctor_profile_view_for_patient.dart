@@ -42,7 +42,6 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                     child: Padding(
                       padding: EdgeInsets.symmetric(horizontal: 1),
                       child: Container(
-                        height: Get.height * .3,
                         decoration: buildBoxDecoration(),
                         child: Column(
                           children: [
@@ -135,9 +134,9 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                                 color: black,
                                 fontWeight: FontWeight.w800,
                                 textDecoration: TextDecoration.none),
-                            HeightSizeBox(Get.width * .01),
+                            HeightSizeBox(Get.height * .004),
                             ReviewsAndSissions(),
-                            HeightSizeBox(Get.width * .01),
+                            HeightSizeBox(Get.height * .005),
                             Tabs()
                           ],
                         ),

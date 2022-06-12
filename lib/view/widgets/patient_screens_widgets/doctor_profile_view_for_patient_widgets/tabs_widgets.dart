@@ -11,7 +11,7 @@ class Tabs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: Get.height*.06,
+
       child: TabBar(
         indicatorColor: Colors.transparent,
         tabs: [
@@ -19,7 +19,7 @@ class Tabs extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: KTextUtils(
                 text: "Profile",
-                size: Get.height*.028,
+                size: Get.height*.025,
                 color: black,
                 fontWeight: FontWeight.w800,
                 textDecoration: TextDecoration.none),
@@ -28,7 +28,7 @@ class Tabs extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: KTextUtils(
                 text: "Reviews",
-                size: Get.height*.028,
+                size: Get.height*.025,
                 color: black,
                 fontWeight: FontWeight.w800,
                 textDecoration: TextDecoration.none),

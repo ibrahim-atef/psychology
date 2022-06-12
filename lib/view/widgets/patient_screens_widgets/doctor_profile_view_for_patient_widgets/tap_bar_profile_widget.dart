@@ -26,8 +26,7 @@ class TabBarProfileWidget extends StatelessWidget {
               fontWeight: FontWeight.bold,
               textDecoration: TextDecoration.none),
           SizedBox(
-            height: SizeConfig.defaultSize! * .98,
-          ),
+           ),
           ListView.builder(
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
@@ -35,8 +34,7 @@ class TabBarProfileWidget extends StatelessWidget {
               itemCount: 3,
               itemBuilder: (context, index) {
                 return SizedBox(
-                  height: SizeConfig.defaultSize! * 3.4,
-                  child: Row(
+                   child: Row(
                     children: [
                       GetBuilder<PatientHomeScreenController>(
                         builder: (c) {
@@ -58,19 +56,19 @@ class TabBarProfileWidget extends StatelessWidget {
                         children: [
                           KTextUtils(
                               text: "Training And Treatment",
-                              size: 19,
+                              size: Get.width*.04,
                               color: black,
                               fontWeight: FontWeight.bold,
                               textDecoration: TextDecoration.none),
                           KTextUtils(
                               text: "Helwan Hospital for Mental Health",
-                              size: 15,
+                              size: Get.width*.03,
                               color: grey,
                               fontWeight: FontWeight.w600,
                               textDecoration: TextDecoration.none),
                           KTextUtils(
                               text: "sep 2019 - Feb 2012",
-                              size: 12,
+                              size: Get.width*.028,
                               color: yelloo,
                               fontWeight: FontWeight.w600,
                               textDecoration: TextDecoration.none),
