@@ -10,6 +10,7 @@ import 'package:psychology/view/screens/chat/chat_screen.dart';
 import 'package:psychology/view/screens/auth/doctor_register_screen.dart';
 import 'package:psychology/view/screens/auth/forgot_password.dart';
 import 'package:psychology/view/screens/auth/login_screen.dart';
+import 'package:psychology/view/screens/doctor_screens/add_appointment_screen.dart';
 import 'package:psychology/view/screens/doctor_screens/add_blog_screen.dart';
 import 'package:psychology/view/screens/doctor_screens/doctor_main_screen.dart';
 import 'package:psychology/view/screens/patient_screens/patient_main_screen.dart';
@@ -75,10 +76,15 @@ class AppRoutes {
           MessagesBinding(),
         ]),
     GetPage(
-      name: Routes.aggBlogScreen,
-      page: () => AddBlogScreen(),
-      transition: Transition.downToUp,binding: DoctorHomeBinding()
-    ),
+        name: Routes.aggBlogScreen,
+        page: () => AddBlogScreen(),
+        transition: Transition.downToUp,
+        binding: DoctorHomeBinding()),
+    GetPage(
+        name: Routes.addAppointmentScreen,
+        page: () => AddAppointmentScreen(),
+        transition: Transition.downToUp,
+        binding: DoctorHomeBinding()),
   ];
 }
 
@@ -94,5 +100,6 @@ class Routes {
   static const chatScreen = "/chatScreen";
 
   static const doctorProfileViewForPatient = "/doctorProfileViewForPatient";
+  static const addAppointmentScreen = "/addAppointmentScreen";
   static const aggBlogScreen = "/aggBlogScreen";
 }

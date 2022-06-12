@@ -10,7 +10,7 @@ class KTextUtils extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(text,maxLines: 2,
-        style: TextStyle(
+        style: TextStyle(fontFamily: "cairo",
           fontSize: size,
           color: color,
           fontWeight:fontWeight ,

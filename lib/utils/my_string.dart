@@ -6,10 +6,12 @@ String validationEmail =
 String validationName = r'^[a-z A-Z]+$';
 String validationPhone = r'(^(?:[+0]9)?[0-9]{10,12}$)';
 
+
 const String patientsCollectionKey = "patients";
 const String doctorsCollectionKey = "doctors";
 const String blogsCollectionKey = "blogs";
 const String chatRoomsCollectionKey = "chatRooms";
+const String appointmentsCollectionKey = "appointments";
 const theSource = AudioSource.microphone;
 const String fcmBaseUrl = "https://fcm.googleapis.com/fcm/send";
 const String cloudMessagingKey =

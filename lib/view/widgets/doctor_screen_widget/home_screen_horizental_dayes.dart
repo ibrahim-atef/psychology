@@ -22,7 +22,10 @@ class DaysListView extends StatelessWidget {
             selectionColor: mainColor2,
             daysCount: 7,
             onDateChange: (newDate) {
-              doctorHomeController.changeSelectedDateTime;
+              doctorHomeController.getSpecificAppointmentsList(newDate);
+
+              doctorHomeController.changeSelectedDateTime(newDate);
+          //    doctorHomeController.getMyAppointments();
               print(newDate);
             },
           ),

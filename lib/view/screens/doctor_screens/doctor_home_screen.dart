@@ -176,30 +176,70 @@ class DoctorHomeScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.defaultDialog(
-                titlePadding: EdgeInsets.zero,
-                titleStyle: TextStyle(fontSize: 0),
-                content: Padding(
-                  padding: EdgeInsets.all(8),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          KTextUtils(
-                              text: "Date",
-                              size: Get.width * .04,
-                              color: black,
-                              fontWeight: FontWeight.bold,
-                              textDecoration: TextDecoration.none),
-                          addDate(() {}, "${DateTime.now().hour}:${DateTime.now().minute}")
-                        ],
-                      )
-                    ],
-                  ),
-                ));
+            Get.toNamed( Routes.addAppointmentScreen);
+            // Get.defaultDialog(
+            //     titlePadding: EdgeInsets.zero,
+            //     titleStyle: TextStyle(fontSize: 0),
+            //     content: Padding(
+            //       padding: EdgeInsets.all(2),
+            //       child: Column(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           Row(
+            //             crossAxisAlignment: CrossAxisAlignment.center,
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: [
+            //               KTextUtils(
+            //                   text: "Date",
+            //                   size: Get.width * .04,
+            //                   color: black,
+            //                   fontWeight: FontWeight.bold,
+            //                   textDecoration: TextDecoration.none),
+            //               addDate(() {},
+            //                   "${doctorHomeController.currentDateTime.day}/${doctorHomeController.currentDateTime.month}")
+            //             ],
+            //           ),
+            //           Row(
+            //             crossAxisAlignment: CrossAxisAlignment.center,
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: [
+            //               KTextUtils(
+            //                   text: "from",
+            //                   size: Get.width * .04,
+            //                   color: black,
+            //                   fontWeight: FontWeight.bold,
+            //                   textDecoration: TextDecoration.none),
+            //               addDate(() {},
+            //                   "${doctorHomeController.currentDateTime.day}/${doctorHomeController.currentDateTime.month}")
+            //             ],
+            //           ),
+            //           Row(
+            //             crossAxisAlignment: CrossAxisAlignment.center,
+            //             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //             children: [
+            //               KTextUtils(
+            //                   text: "to",
+            //                   size: Get.width * .04,
+            //                   color: black,
+            //                   fontWeight: FontWeight.bold,
+            //                   textDecoration: TextDecoration.none),
+            //               addDate(() {
+            //                 showTimePicker(
+            //                         context: context,
+            //                         initialTime: TimeOfDay.now())
+            //                     .then((value) {
+            //                   doctorHomeController.currentDateTime =
+            //                       value!.format(context) as DateTime;
+            //                   //! 1970-01-01 time selected:00.000
+            //                   // print(DateFormat("hh:mm a")
+            //                   //     .parse(timecontroller.text.toString()));
+            //                 });
+            //               }, "${doctorHomeController.currentDateTime.hour}")
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ));
           },
           backgroundColor: mainColor2,
           child: Icon(Icons.more_time, color: white),
