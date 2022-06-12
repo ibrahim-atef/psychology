@@ -69,8 +69,7 @@ class AddAppointmentScreen extends StatelessWidget {
                           ).then((value) {
                             //Todo: handle date to string
                             //print(DateFormat.yMMMd().format(value!));
-                            var tdate = value.toString().split(' ');
-                            doctorHomeController.changeSelectedDateTime(value!);
+                             doctorHomeController.changeSelectedDateTime(value!);
                           });
                         },
                         child: Container(
