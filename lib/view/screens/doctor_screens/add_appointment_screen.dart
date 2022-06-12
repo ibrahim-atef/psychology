@@ -62,9 +62,9 @@ class AddAppointmentScreen extends StatelessWidget {
                           // );
                           showDatePicker(
                             context: context,
-                            initialDate: doctorHomeController.currentDateTime,
-                            firstDate: doctorHomeController.currentDateTime,
-                            lastDate: doctorHomeController.currentDateTime
+                            initialDate: DateTime.now(),
+                            firstDate: DateTime.now(),
+                            lastDate: DateTime.now()
                                 .add(Duration(days: 7)),
                           ).then((value) {
                             //Todo: handle date to string
