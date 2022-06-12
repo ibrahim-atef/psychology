@@ -17,6 +17,7 @@ import 'package:psychology/view/screens/patient_screens/patient_main_screen.dart
 import 'package:psychology/view/screens/splash_page_view/on_boarding_screen.dart';
 import 'package:psychology/view/screens/auth/patient_register_screen.dart';
 import 'package:psychology/view/screens/splash_page_view/splash_screen.dart';
+import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/booking_details_screen.dart';
 
 import '../view/screens/patient_screens/doctor_profile_view_for_patient.dart';
 
@@ -67,6 +68,9 @@ class AppRoutes {
     GetPage(
         name: Routes.doctorProfileViewForPatient,
         page: () => DoctorProfileViewForPatient(),
+        binding: PatientHomeScreenBinding()),    GetPage(
+        name: Routes.bookingDetailsScreen,
+        page: () => BookingDetailsScreen(),
         binding: PatientHomeScreenBinding()),
     GetPage(
         name: Routes.chatScreen,
@@ -101,5 +105,6 @@ class Routes {
 
   static const doctorProfileViewForPatient = "/doctorProfileViewForPatient";
   static const addAppointmentScreen = "/addAppointmentScreen";
+  static const bookingDetailsScreen = "/bookingDetailsScreen";
   static const aggBlogScreen = "/aggBlogScreen";
 }

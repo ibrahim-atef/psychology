@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/chat_rooms_controller.dart';
-import 'package:psychology/model/doctor_info_model.dart';
 import 'package:psychology/model/patint_info_model.dart';
 import 'package:psychology/routes/routes.dart';
 import 'package:psychology/utils/constants.dart';
@@ -9,6 +8,7 @@ import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/utils/styles.dart';
 import 'package:psychology/view/screens/call_screens/answer_call/answer_call_wrap_layout.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
+import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/nested_appointments_List.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/reviews_and_sissions_widget.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tabs_widgets.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
@@ -83,17 +83,17 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                                   children: [
                                     GetBuilder(
                                       builder: (ChatRoomsController
-                                          chatRoomController) {
+                                      chatRoomController) {
                                         return IconButton(
                                             padding: EdgeInsets.zero,
                                             alignment: Alignment.topLeft,
                                             onPressed: () async {
                                               String cattRoomId =
-                                                  await chatRoomController
-                                                      .getChatRoomIdByUser(
-                                                          chatRoomController
-                                                              .myUid,
-                                                          uid);
+                                              await chatRoomController
+                                                  .getChatRoomIdByUser(
+                                                  chatRoomController
+                                                      .myUid,
+                                                  uid);
                                               chatRoomController
                                                   .createChatRoom(cattRoomId, {
                                                 "chatRoomId": cattRoomId,
@@ -102,17 +102,19 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                                                   chatRoomController.myUid
                                                 ],
                                                 "lastMessageSendTs":
-                                                    DateTime.now(),
+                                                DateTime.now(),
                                                 'lastMessage': ' ',
                                                 'lastMessageSenderUid':
-                                                    chatRoomController.myUid,
+                                                chatRoomController.myUid,
                                               }).then((value) {
                                                 Get.toNamed(Routes.chatScreen,
                                                     arguments: [
                                                       doctorInfo,
                                                       cattRoomId,
                                                       chatRoomController.myUid,
-                                                      controller.patientInfoModel.value,
+                                                      controller
+                                                          .patientInfoModel
+                                                          .value,
                                                     ]);
                                               });
                                             },
@@ -153,41 +155,52 @@ class DoctorProfileViewForPatient extends StatelessWidget {
             ),
           ),
         ),
-        floatingActionButton: GestureDetector(
-          onTap: () {},
-          child: Container(
-            height: SizeConfig.screenHeight! * .06,
-            width: SizeConfig.screenWidth! * .3,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 6,
-                  offset: Offset(0, 3), // changes position of shadow
+        floatingActionButton: Obx(() {
+          return GestureDetector(
+            onTap: () {
+              controller.getDoctorAppointments(doctorId: uid).then((value) {
+                controller.addDaysList();
+             Get.toNamed(Routes.bookingDetailsScreen);
+              }).catchError((onError) {
+                Get.snackbar("error", onError.toString());
+              });
+            },
+            child: Container(
+              height: Get.height * .06,
+              width: Get.width * .6,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 2,
+                    blurRadius: 6,
+                    offset: Offset(0, 3), // changes position of shadow
+                  ),
+                ],
+                color: mainColor2,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: controller.isGettingAppointments.value
+                  ? Padding(
+                padding: EdgeInsets.symmetric(
+                    horizontal: Get.width * .1,
+                    vertical: Get.height * .028),
+                child: const LinearProgressIndicator(
+                  color: white,
                 ),
-              ],
-              color: mainColor2,
-              // gradient: LinearGradient(
-              //   colors: [
-              //     mainColor2,
-              //     // Color(0xffcc6213),
-              //     // Color(0xffba0b08),
-              //     // Color(0xff931c04),
-              //     // Color(0xff3f0303),
-              //   ],
-              // ),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Center(
-              child: Text(
-                "Book Now",
-                style: TextStyle(
-                    fontSize: 22, color: white, fontWeight: FontWeight.w700),
+              )
+                  : const Center(
+                child: Text(
+                  "Book Now",
+                  style: TextStyle(
+                      fontSize: 22,
+                      color: white,
+                      fontWeight: FontWeight.w700),
+                ),
               ),
             ),
-          ),
-        ),
+          );
+        }),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       ),
     );

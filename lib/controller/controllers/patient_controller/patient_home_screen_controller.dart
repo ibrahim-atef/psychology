@@ -14,10 +14,13 @@ import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_v
 
 class PatientHomeScreenController extends GetxController {
   RxList doctorsList = [].obs;
-
+  DateTime firstDayDateTime = DateTime(DateTime.now().year,
+      DateTime.now().month, DateTime.now().day, 0, 0, 0, 0000);
+  List<DateTime> daysDateList = [];
   RxList moreDoctorsList = [].obs;
   final patientInfoModel = Rxn<UserModel>();
   RxBool isDeleting = false.obs;
+  RxBool isGettingAppointments = false.obs;
   RxList blogsList = [].obs;
   RxList blogsIdList = [].obs;
   var appointmentsList = <AppointmentModel>[].obs;
@@ -39,7 +42,7 @@ class PatientHomeScreenController extends GetxController {
     getUserData();
     getMoreDoctorsInfo();
     getDoctorsInfo();
-    getBlogs();
+    getBlogs();addDaysList();
     super.onInit();
   }
 
@@ -124,6 +127,7 @@ class PatientHomeScreenController extends GetxController {
   }
 
   Future getDoctorAppointments({required String doctorId}) async {
+    isGettingAppointments.value = true;
     await FireStoreMethods()
         .doctors
         .doc(doctorId)
@@ -136,12 +140,22 @@ class PatientHomeScreenController extends GetxController {
         for (int i = 0; i < value.docs.length; i++) {
           appointmentsList.add(AppointmentModel.fromMap(value.docs[i]));
         }
-
+        isGettingAppointments.value = false;
+        print("Done");
         update();
       } else {
+        isGettingAppointments.value = false;
+
         appointmentsList.clear();
         print("You don't have appointments");
       }
     });
+  }
+
+  addDaysList() {
+    daysDateList.clear();
+    for (int i = 0; i < 7; i++) {
+      daysDateList.add(firstDayDateTime.add(Duration(days: i)));
+    }
   }
 }

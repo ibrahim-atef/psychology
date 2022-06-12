@@ -193,6 +193,7 @@ class DoctorHomeController extends GetxController {
   }
 
   getSpecificAppointmentsList(DateTime dateTime) {
+    currentDayAppointmentsList.clear();
  currentDayAppointmentsList.value=   appointmentsList.where((p0) {
       return p0.dayDate == dateTime.toString();
     }).toList();
