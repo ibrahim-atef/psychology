@@ -177,10 +177,10 @@ class _VideoCallScreenState extends State<VideoCallScreen> {
           ),
           RawMaterialButton(
             onPressed: ()async {
-              CallMethods()
+           await   CallMethods()
                   .endCall(call: callController.comingCall.value!)
-                  .then((value) {
-                Navigator.pop(context);
+                  .then((value)  {
+               Navigator.pop(context);
               });
             },
             child: const Icon(

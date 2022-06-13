@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:lottie/lottie.dart';
 import 'package:psychology/model/appointment_model.dart';
 import 'package:psychology/model/blogs_model.dart';
 import 'package:psychology/model/doctor_info_model.dart';
@@ -11,11 +12,13 @@ import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/my_string.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/first_tap_bar_column.dart';
 import 'package:psychology/view/widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/tap_bar_reviews_widget.dart';
+import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
+import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 class PatientHomeScreenController extends GetxController {
   RxList doctorsList = [].obs;
   DateTime firstDayDateTime = DateTime(DateTime.now().year,
-      DateTime.now().month, DateTime.now().day, 0, 0, 0, 0000);
+      DateTime.now().month, DateTime.now().day, 00, 00, 00);
   List<DateTime> daysDateList = [];
   RxList moreDoctorsList = [].obs;
   final patientInfoModel = Rxn<UserModel>();
@@ -42,7 +45,8 @@ class PatientHomeScreenController extends GetxController {
     getUserData();
     getMoreDoctorsInfo();
     getDoctorsInfo();
-    getBlogs();addDaysList();
+    getBlogs();
+    addDaysList();
     super.onInit();
   }
 
@@ -149,6 +153,57 @@ class PatientHomeScreenController extends GetxController {
         appointmentsList.clear();
         print("You don't have appointments");
       }
+    });
+  }
+
+  Future selectAppointment({
+    required String doctorId,
+    required String startTime,
+    required String endTime,
+    required String dayDate,
+    required String myId,
+    required String myImage,
+    required String myName,
+    required String myToken,
+    required bool isTaken,
+  }) async {
+    await FireStoreMethods()
+        .doctors
+        .doc(doctorId)
+        .collection(appointmentsCollectionKey)
+        .doc("${startTime}-${endTime}-${dayDate}")
+        .update({
+      "isTaken": isTaken,
+      "patientId": myId,
+      "patientImage": myImage,
+      "patientName": myName,
+      "patientToken": myToken,
+    }).then((value) async {
+      await getDoctorAppointments(doctorId: doctorId);
+
+      Get.defaultDialog(
+          titleStyle: TextStyle(fontSize: 0),
+          content: Column(
+            children: [
+              Container(
+                  height: Get.width * .5,
+                  width: Get.width * .5,
+                  child: Lottie.asset(
+                    "assets/animations/88860-success-animation.json",
+                     fit: BoxFit.cover,repeat: false,
+                  )),
+              HeightSizeBox(8),
+              KTextUtils(
+                  text:!isTaken? "Appointment canceled":"Appointment Booked Successfully",
+                  size: 18,
+                  color:!isTaken?Color(0xffe9b5b3): mainColor,
+                  fontWeight: FontWeight.bold,
+                  textDecoration: TextDecoration.none)
+            ],
+          ));
+      update();
+    }).catchError((onError) {
+      Get.snackbar("error", "$onError");
     });
   }
 

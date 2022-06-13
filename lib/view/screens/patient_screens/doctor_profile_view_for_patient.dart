@@ -61,9 +61,9 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                                           Get.back();
                                         },
                                         icon: Icon(
-                                          Icons.arrow_back_ios_outlined,
+                                          IconBroken.Arrow___Left_2,
                                           color: black,
-                                          size: Get.width * .07,
+                                          size: Get.width * .089,
                                         )),
                                   ],
                                 ),
@@ -83,17 +83,17 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                                   children: [
                                     GetBuilder(
                                       builder: (ChatRoomsController
-                                      chatRoomController) {
+                                          chatRoomController) {
                                         return IconButton(
                                             padding: EdgeInsets.zero,
                                             alignment: Alignment.topLeft,
                                             onPressed: () async {
                                               String cattRoomId =
-                                              await chatRoomController
-                                                  .getChatRoomIdByUser(
-                                                  chatRoomController
-                                                      .myUid,
-                                                  uid);
+                                                  await chatRoomController
+                                                      .getChatRoomIdByUser(
+                                                          chatRoomController
+                                                              .myUid,
+                                                          uid);
                                               chatRoomController
                                                   .createChatRoom(cattRoomId, {
                                                 "chatRoomId": cattRoomId,
@@ -102,10 +102,10 @@ class DoctorProfileViewForPatient extends StatelessWidget {
                                                   chatRoomController.myUid
                                                 ],
                                                 "lastMessageSendTs":
-                                                DateTime.now(),
+                                                    DateTime.now(),
                                                 'lastMessage': ' ',
                                                 'lastMessageSenderUid':
-                                                chatRoomController.myUid,
+                                                    chatRoomController.myUid,
                                               }).then((value) {
                                                 Get.toNamed(Routes.chatScreen,
                                                     arguments: [
@@ -160,7 +160,13 @@ class DoctorProfileViewForPatient extends StatelessWidget {
             onTap: () {
               controller.getDoctorAppointments(doctorId: uid).then((value) {
                 controller.addDaysList();
-             Get.toNamed(Routes.bookingDetailsScreen);
+                if (controller.appointmentsList.isNotEmpty) {
+                  Get.toNamed(Routes.bookingDetailsScreen,arguments: [uid]);
+                } else {
+                  Get.snackbar("no appointments",
+                      "there's no appointment exists for this doctor",
+                      backgroundColor: Color(0xffe9b5b3));
+                }
               }).catchError((onError) {
                 Get.snackbar("error", onError.toString());
               });
@@ -182,22 +188,22 @@ class DoctorProfileViewForPatient extends StatelessWidget {
               ),
               child: controller.isGettingAppointments.value
                   ? Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: Get.width * .1,
-                    vertical: Get.height * .028),
-                child: const LinearProgressIndicator(
-                  color: white,
-                ),
-              )
+                      padding: EdgeInsets.symmetric(
+                          horizontal: Get.width * .1,
+                          vertical: Get.height * .028),
+                      child: const LinearProgressIndicator(
+                        color: white,
+                      ),
+                    )
                   : const Center(
-                child: Text(
-                  "Book Now",
-                  style: TextStyle(
-                      fontSize: 22,
-                      color: white,
-                      fontWeight: FontWeight.w700),
-                ),
-              ),
+                      child: Text(
+                        "Book Now",
+                        style: TextStyle(
+                            fontSize: 22,
+                            color: white,
+                            fontWeight: FontWeight.w700),
+                      ),
+                    ),
             ),
           );
         }),
