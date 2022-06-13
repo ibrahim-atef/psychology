@@ -10,7 +10,7 @@ class BookingDetailsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Expanded(
-        child: ListView.builder(///مشكله بنت احبه هحلها بعدين سلام
+        child: ListView.builder(
           shrinkWrap: true,
           scrollDirection: Axis.vertical,
           itemBuilder: (context, index) {
