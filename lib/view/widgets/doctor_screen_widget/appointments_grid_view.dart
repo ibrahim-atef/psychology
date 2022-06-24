@@ -54,7 +54,8 @@ class AppointmentsGridView extends StatelessWidget {
                               position: index,
                               duration: const Duration(milliseconds: 1000),
                               child: SlideAnimation(
-                                horizontalOffset:index==0||index%2==0? -300:300,
+                                horizontalOffset:
+                                    index == 0 || index % 2 == 0 ? -300 : 300,
                                 child: FadeInAnimation(
                                   child: buildCard(
                                     doctorHomeController
@@ -87,7 +88,7 @@ class AppointmentsGridView extends StatelessWidget {
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      color: white,
+      color: !isTaken ? white : Color(0xffDFF6FF),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -125,7 +126,7 @@ class AppointmentsGridView extends StatelessWidget {
                   fontWeight: FontWeight.w900,
                   textDecoration: TextDecoration.none),
               KTextUtils(
-                  text: price +" EGP",
+                  text: price + " EGP",
                   size: Get.width * .045,
                   color: mainColor2,
                   fontWeight: FontWeight.w900,
