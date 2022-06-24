@@ -54,7 +54,7 @@ dependencies:
   random_string:
   firebase_messaging: ^11.4.0
   flutter_staggered_animations: ^1.0.0
-  agora_rtc_engine:
+  agora_rtc_engine: ^5.2.0
   connectivity_plus:
   voice_message_package:
   better_player:
