@@ -176,7 +176,7 @@ class DoctorHomeScreen extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.toNamed( Routes.addAppointmentScreen);
+            Get.toNamed(Routes.addAppointmentScreen);
             // Get.defaultDialog(
             //     titlePadding: EdgeInsets.zero,
             //     titleStyle: TextStyle(fontSize: 0),
