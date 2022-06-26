@@ -39,7 +39,7 @@ class SplashController extends GetxController {
 
   List<String> pageViewSubTitle = [
     "Welcome to Psychology",
-    "Welcome To Your Second HomeWelcome To Your Second HomeWelcomeme To Your Second Home",
-    "Welcome To Your Second Home",
+    "Find a Doctor",
+    "Make Video call",
   ];
 }

@@ -48,7 +48,7 @@ class PageViewImages extends StatelessWidget {
                                 horizontal: 20, vertical: 0),
                             child: Text(controller.pageViewSubTitle[index],
                                 style: TextStyle(
-                                    fontSize: 17, fontWeight: FontWeight.w700),
+                                    fontSize: 20, fontWeight: FontWeight.w700),
                                 textAlign: TextAlign.center,
                                 maxLines: 2),
                           ),
