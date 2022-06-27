@@ -201,7 +201,7 @@ class PatientUpdateProfile extends StatelessWidget {
                                         nameController.text,
                                         phoneController.text,
                                         emailController.text,
-                                        patientsCollectionKey,
+                                        Get.arguments[1],
                                      context )
                                       .then((value) {cc.updateUserEmail(
                                       emailController.text);

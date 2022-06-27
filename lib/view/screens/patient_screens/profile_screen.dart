@@ -7,6 +7,7 @@ import 'package:psychology/utils/size_config.dart';
 import 'package:psychology/view/screens/patient_screens/patient_update_profile.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
+import '../../../utils/my_string.dart';
 import '../../widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
 
 class PatientProfileScreen extends StatelessWidget {
@@ -72,7 +73,7 @@ class PatientProfileScreen extends StatelessWidget {
                   backColor: mainColor,
                   onPressed: () {
                     Get.to(() => PatientUpdateProfile(),
-                        arguments: [patientHomeScreenController.patientInfoModel.value]);
+                        arguments: [patientHomeScreenController.patientInfoModel.value,patientsCollectionKey]);
                   },
                   icon: Icons.edit,
                   iconColor: Colors.white,

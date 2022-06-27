@@ -1,52 +1,18 @@
-// import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
-// import 'package:psychology/controller/controllers/auth_controller.dart';
-// import 'package:psychology/view/screens/call_screens/answer_call/answer_call_wrap_layout.dart';
-//
-// class DoctorProfileScreen extends StatelessWidget {
-//   final authController = Get.put(AuthController());
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return AnswerCallWrapLayout(
-//       scaffold: Scaffold(
-//         body: Center(
-
-//           child: GetBuilder(
-//             builder: (AuthController authController) {
-//               return InkWell(
-//                 onTap: () {
-//                   authController.signOutFromApp();
-//                 },
-//                 child: Padding(
-//                   padding: const EdgeInsets.all(8.0),
-//                   child: Text("profile"),
-//                 ),
-//               );
-//             },
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:psychology/controller/controllers/auth_controller.dart';
-import 'package:psychology/controller/controllers/doctor_controller/doctor_home_controller.dart';
-import 'package:psychology/controller/controllers/patient_controller/patient_home_screen_controller.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/size_config.dart';
-import 'package:psychology/view/screens/patient_screens/patient_update_profile.dart';
 import 'package:psychology/view/widgets/utils_widgets/height_size_box.dart';
 import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 import '../../../controller/controllers/doctor_controller/doctor_main_controller.dart';
+import '../../../utils/my_string.dart';
 import '../../widgets/patient_screens_widgets/doctor_profile_view_for_patient_widgets/circule_image_avatar.dart';
+import '../patient_screens/patient_update_profile.dart';
 
 class DoctorProfileScreen extends StatelessWidget {
   DoctorProfileScreen({Key? key}) : super(key: key);
-  final authController = Get.put(AuthController());
-  final doctorMainController = Get.put(MainDoctorController());
+  final authController = Get.find<AuthController>();
 
   @override
   Widget build(BuildContext context) {
@@ -60,20 +26,21 @@ class DoctorProfileScreen extends StatelessWidget {
             const Spacer(
               flex: 2,
             ),
-            Obx(
-                  () {
+            GetBuilder(
+              builder: (MainDoctorController doctorMainController) {
                 if (doctorMainController.myData.value != null) {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CirculeImageAvatar(
-                        imageUrl:
-                        doctorMainController.myData.value!.profileUrl.toString(),
+                        imageUrl: doctorMainController.myData.value!.profileUrl
+                            .toString(),
                         width: SizeConfig.defaultSize! * 5,
                       ),
                       HeightSizeBox(SizeConfig.defaultSize! * .7),
                       KTextUtils(
-                          text: "${doctorMainController.myData.value!.displayName}",
+                          text:
+                              "${doctorMainController.myData.value!.displayName}",
                           size: 22,
                           color: darkGrey,
                           fontWeight: FontWeight.w700,
@@ -100,13 +67,17 @@ class DoctorProfileScreen extends StatelessWidget {
             const Spacer(
               flex: 2,
             ),
-            GetBuilder<MainDoctorController>(
-              builder: (_) {
+            GetBuilder(
+              builder: (MainDoctorController doctorMainController) {
                 return buildTextButtonIcon(
                   backColor: mainColor,
                   onPressed: () {
-                    // Get.to(() => PatientUpdateProfile(),
-                    //     arguments: [doctorMainController.myData.value]);
+                    doctorMainController.myData.value != null
+                        ? Get.to(() => PatientUpdateProfile(), arguments: [
+                            doctorMainController.myData.value,
+                            doctorsCollectionKey
+                          ])
+                        : null;
                   },
                   icon: Icons.edit,
                   iconColor: Colors.white,
@@ -251,4 +222,3 @@ class DoctorProfileScreen extends StatelessWidget {
     );
   }
 }
-
