@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:psychology/model/appointment_model.dart';
 import 'package:psychology/utils/constants.dart';
 import 'package:psychology/utils/styles.dart';
@@ -7,9 +8,9 @@ import 'package:psychology/view/widgets/utils_widgets/text_utils.dart';
 
 class AppointmentDetailsScreen extends StatelessWidget {
   AppointmentModel appointmentModel = Get.arguments[0];
-
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: Color(0xfff3f4fe),
       appBar: AppBar(
@@ -68,6 +69,7 @@ class AppointmentDetailsScreen extends StatelessWidget {
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold)),
                         Text(
+
                           "${appointmentModel.dayDate}",
                           style: TextStyle(
                               fontSize: 20,

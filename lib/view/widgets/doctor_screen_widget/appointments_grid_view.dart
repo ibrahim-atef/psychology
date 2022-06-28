@@ -61,21 +61,20 @@ class AppointmentsGridView extends StatelessWidget {
                                     index == 0 || index % 2 == 0 ? -300 : 300,
                                 child: FadeInAnimation(
                                   child: buildCard(
-                                    doctorHomeController
-                                        .currentDayAppointmentsList[index]
-                                        .startTime!,
-                                    doctorHomeController
-                                        .currentDayAppointmentsList[index]
-                                        .endTime!,
-                                    doctorHomeController
-                                        .currentDayAppointmentsList[index]
-                                        .price!,
-                                    doctorHomeController
-                                        .currentDayAppointmentsList[index]
-                                        .isTaken!,
                                       doctorHomeController
                                           .currentDayAppointmentsList[index]
-                                  ),
+                                          .startTime!,
+                                      doctorHomeController
+                                          .currentDayAppointmentsList[index]
+                                          .endTime!,
+                                      doctorHomeController
+                                          .currentDayAppointmentsList[index]
+                                          .price!,
+                                      doctorHomeController
+                                          .currentDayAppointmentsList[index]
+                                          .isTaken!,
+                                      doctorHomeController
+                                          .currentDayAppointmentsList[index]),
                                 ),
                               ),
                             );
@@ -89,8 +88,15 @@ class AppointmentsGridView extends StatelessWidget {
     );
   }
 
-  Widget buildCard(String from, String to, String price, bool isTaken,AppointmentModel appointmentModel) {
-    return InkWell(onTap: (){isTaken?Get.to(()=>AppointmentDetailsScreen(),arguments: [appointmentModel]):null;},
+  Widget buildCard(String from, String to, String price, bool isTaken,
+      AppointmentModel appointmentModel) {
+    return InkWell(
+      onTap: () {
+        isTaken
+            ? Get.to(() => AppointmentDetailsScreen(),
+                arguments: [appointmentModel])
+            : null;
+      },
       child: Card(
         elevation: 5,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
