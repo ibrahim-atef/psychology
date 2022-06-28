@@ -103,19 +103,19 @@ class AppointmentsGridView extends StatelessWidget {
               children: [
                 KTextUtils(
                     text: from,
-                    size: Get.width * .045,
+                    size: Get.width * .035,
                     color: mainColor2,
                     fontWeight: FontWeight.w900,
                     textDecoration: TextDecoration.none),
                 KTextUtils(
                     text: ":",
-                    size: Get.width * .045,
+                    size: Get.width * .035,
                     color: mainColor2,
                     fontWeight: FontWeight.w900,
                     textDecoration: TextDecoration.none),
                 KTextUtils(
                     text: to,
-                    size: Get.width * .045,
+                    size: Get.width * .035,
                     color: mainColor2,
                     fontWeight: FontWeight.w900,
                     textDecoration: TextDecoration.none),
