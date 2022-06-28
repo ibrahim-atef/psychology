@@ -100,6 +100,7 @@ class ChatRoomsController extends GetxController {
             .snapshots()
             .listen((event) {
             friendInfoModel.add(UserModel.fromMap(event));
+
             //update();
           })
         : FireStoreMethods()
@@ -111,4 +112,19 @@ class ChatRoomsController extends GetxController {
             //update();
           });
   }
+  getUserData(uid) async {
+    FireStoreMethods()
+        .patients
+        .doc(uid)
+        .snapshots()
+        .listen((event) {
+      if (event.exists) {
+        user.value = UserModel.fromMap(event);
+        update();
+      } else {
+        print("doctor Data not found0000");
+      }
+    });
+  }  final user = Rxn<UserModel>();
+
 }

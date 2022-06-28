@@ -22,7 +22,7 @@ class DoctorProfileViewForPatient extends StatelessWidget {
   String imageUrl = Get.arguments[1];
   String name = Get.arguments[2];
   String description = Get.arguments[3];
-  UserModel doctorInfo = Get.arguments[4];
+  UserModel doctorInfo   = Get.arguments[4];
   final controller = Get.find<PatientHomeScreenController>();
 
   @override
