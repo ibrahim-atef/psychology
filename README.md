@@ -1,5 +1,5 @@
 # psychology
-Graduation Project
+Graduation Project ⭐️
 
 ## Project Notes
 ![Apple iPhone 11 Pro Max Presentation](https://github.com/ibrahim-atef/movie/assets/86667626/0970a588-ecdd-4a93-9eb7-59dab0733fa0)
