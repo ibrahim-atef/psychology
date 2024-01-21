@@ -18,22 +18,12 @@ Welcome to the Psychology App, an innovative graduation project that merges psyc
 - Agora SDK
 - GetX State Management
 
-## Demo
-
-Explore the application's functionality through the provided demo. For a live demonstration, visit [Demo Link](insert_demo_link_here).
+ 
 
 ## GitHub Repository
 
-Access the project's source code and contribute to its development on GitHub: [GitHub Repository](insert_github_link_here)
+Access the project's source code and contribute to its development on GitHub: [GitHub Repository](https://github.com/ibrahim-atef/psychology)
 
-## Getting Started
-
-To get started with the project, follow these steps:
-
-1. Clone the repository: `git clone [repository_url]`
-2. Navigate to the project directory: `cd psychology_app`
-3. Install dependencies: `flutter pub get`
-4. Run the app: `flutter run`
 
 
 ## Project Notes
